@@ -1,6 +1,11 @@
 #include "vec2.h"
 
-bool operator==(const vec2 & lhs, const vec2 & rhs)
+vec2 operator+(const vec2 & lhs, const vec2 & rhs)
 {
-	return lhs.x = rhs.x && lhs.y == rhs.y;
+	return vec2{lhs.x + rhs.x, lhs.y + rhs.y};
+}
+
+bool operator==(const vec2 &lhs, const vec2 &rhs)
+{
+	return lhs.x == rhs.x && lhs.y == rhs.y;
 }
