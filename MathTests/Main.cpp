@@ -1,6 +1,7 @@
 #include <cassert>
 #include <cstdio>
 #include "Test.h"
+#include "vec2.h"
 #include <cmath>
 int main()
 {
