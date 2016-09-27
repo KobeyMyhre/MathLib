@@ -24,7 +24,7 @@ vec2 operator*(const vec2 &lhs, float rhs)
 {
 	return{ lhs.x * rhs, lhs.y * rhs };
 }
-vec2 operator*(const vec2 &rhs, float lhs)
+vec2 operator*( float lhs, const vec2 &rhs)
 {
 	return{ rhs.x * lhs, rhs.x *lhs };
 }
@@ -33,10 +33,7 @@ vec2 operator/(const vec2 &lhs, float rhs)
 {
 	return{ lhs.x / rhs, lhs.y / rhs };
 }
-vec2 operator/(const vec2 &rhs, float lhs)
-{
-	return{ rhs.x / lhs, rhs.x /lhs };
-}
+
 
 vec2 operator-(const vec2 & v)
 {
@@ -76,4 +73,9 @@ bool operator!=(const vec2 &lhs, const vec2 &rhs)
 float magnitude(const vec2 & v)
 {
 	return (sqrt((v.x*v.x) + (v.y * v.y)));
+}
+
+vec2 normal(const vec2 & v)
+{
+	return (v / (sqrt((v.x*v.x) + (v.y * v.y))));
 }
