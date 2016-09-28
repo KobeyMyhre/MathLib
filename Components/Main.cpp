@@ -33,8 +33,9 @@ void main()
 		vec2 incident = fromAngle(ang_vec) * 40;
 		float proj = dot(basis, incident);
 
-		sfw::drawLine();
-
+		sfw::drawLine(400,300, 400+basis.x,300+basis.y,WHITE);
+		sfw::drawLine(400, 300, 400 + incident.x, 300 + incident.y, WHITE);
+		sfw::drawLine(400, 300, 400 + proj, 300 , WHITE);
 
 		trans.debugDaw();
 	}
