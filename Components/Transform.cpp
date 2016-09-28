@@ -9,7 +9,7 @@ void Transform::setDirection(const vec2 & dir)
 {
 	facing = angle(dir);
 }
-
+ 
 void Transform::debugDaw()
 {
 	sfw::drawCircle(position.x, position.y, 12);
