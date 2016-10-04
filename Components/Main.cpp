@@ -4,131 +4,73 @@
 #include "flops.h"
 void main()
 {
-	sfw::initContext(1200,1200);
-	//Transform trans;
-	/*Transform trans(400, 300, 12, 12, 0);
+	float W = 1200, H = 1200;
+	sfw::initContext(W,H);
+	float steps = 100;
+	/*Transform player;
+	*/
 
-	Transform T = Transform();
-	trans.position = vec2{ 400,300 };
-	int i = int();
-	int j = int(4);
-	int k(4);
-	int l = { 4 };
-	int m = 4;
+	
 
-	Transform tl = Transform(400, 300);
-	Transform tn = { 400, 300 };
-	Transform tm(400, 300);
-	Transform tq{ 400,300 };
+	/*player.position = vec2{ 400,300 };
+	player.facing = deg2rad(45);
+	player.setDirection(.5f);
 
-	trans.position = vec2{ 400,300 };
-	trans.facing = deg2rad(45);
+	player.facing = deg2rad(45);
+	player.scale = vec2{ 35,15 };*/
 
 
-	trans.facing = deg2rad(45);
-	trans.scale = vec2{ 35,15 };
-	vec2 basis = { 40,0 };
-	float ang_vec = 0;*/
+	
 
+	/*vec2    start = { 200, 300 },
+		end = { 900, 800 },
+		mid = { 0,  1100 };*/
+	vec2 player = { 400, 400 };
+	vec2 playerVelcocity = { 0,0 };
+	float playerAngle = 1.f;
 	while (sfw::stepContext())
 	{
+		/*player.debugDaw();*/
+		sfw::drawCircle(player.x, player.y, 5.f);
+		player += playerVelcocity * sfw::getDeltaTime();
+		player += fromAngle(playerAngle) * sfw::getDeltaTime();
+	
 
-
-		for (int i = 0; i < 100; ++i)
+		/*if (playerVelcocity.x >= 15.f || playerVelcocity.x <= -15.f)
 		{
-			float x1 = i / 100.f;
-			float x2 = (i + 1) / 100.f;
-
-			float y1 = growFast(x1);
-			float y2 = growFast(x2);
-
-			x1 *= 400;
-			x2 *= 800;
-			y1 *= 400;
-			y2 *= 800;
-
-			sfw::drawLine(x1, y1, x2, y2);
-
-		
+			playerVelcocity.x = 15.f;
 		}
 
-		for (int i = 0; i < 100; ++i)
+		if (playerVelcocity.y >= 15.f || playerVelcocity.y <= -15.f)
 		{
-			float x1 = i / 100.f;
-			float x2 = (i + 1) / 100.f;
-
-			float y1 = growFaster(x1);
-			float y2 = growFaster(x2);
-
-			x1 *= 400;
-			x2 *= 800;
-			y1 *= 400;
-			y2 *= 800;
-
-			sfw::drawLine(x1, y1, x2, y2);
-
-
+			playerVelcocity.y = 15.f;
+		}*/
+		/*if (playerVelcocity.x >= -6.f)
+		{
+			playerVelcocity.x = -6.f;
 		}
-		for (int i = 0; i < 100; ++i)
+
+		if (playerVelcocity.y >= -6.f)
 		{
-			float x1 = 1 / 100.f;
-			float x2 = (i + 1) / 100.f;
+			playerVelcocity.y = -6.f;
+		}*/
 
-			float y1 = TriBS(x1);
-			float y2 = TriBS(x2);
 
-			x1 *= 800;
-			x2 *= 800;
-			y1 *= 800;
-			y2 *= 800;
+		if (sfw::getKey('S')) playerVelcocity.y -=  5.f;
+		if (sfw::getKey('W'))playerVelcocity.y +=  5.f ;
+		if (sfw::getKey('A')) playerVelcocity.x -=  5.f;
+		if (sfw::getKey('D')) playerVelcocity.x += 5.f;
 
-			sfw::drawLine(x1, y1, x2, y2);
+		if (player.x < 0) player.x = W;
+		else if (player.x > W) player.x = 0;
+		if (player.y < 0) player.y = H;
+		else if (player.y > H) player.y = 0;
 
 
 		}
-		for (int i = 0; i < 100; ++i)
-		{
-			float x1 = i / 100.f;
-			float x2 = (i + 1) / 100.f;
+	
 
-			float y1 = bounceflip(x1);
-			float y2 = bounceflip(x2);
-
-			x1 *= 800;
-			x2 *= 800;
-			y1 *= 800;
-			y2 *= 800;
-
-			sfw::drawLine(x1, y1, x2, y2);
-
-
-		}
-		for (int i = 0; i < 100; ++i)
-		{
-			float x1 = i / 100.f;
-			float x2 = (i + 1) / 100.f;
-
-			float y1 = parabolaflip(x1);
-			float y2 = parabolaflip(x2);
-
-			x1 *= 1200;
-			x2 *= 1200;
-			y1 *= 1200;
-			y2 *= 1200;
-
-			sfw::drawLine(x1, y1, x2, y2);
-
-
-		}
-		/*ang_vec += sfw::getDeltaTime();
-		vec2 incident = fromAngle(ang_vec) * 40;
-		float proj = dot(basis, incident);*/
-
-		/*sfw::drawLine(400,300, 400+basis.x,300+basis.y,WHITE);
-		sfw::drawLine(400, 300, 400 + incident.x, 300 + incident.y, WHITE);
-		sfw::drawLine(400, 300, 400 + proj, 300 , WHITE);*/
-
-		/*trans.debugDaw();*/
-	}
+	
+	
 	sfw::termContext();
 }

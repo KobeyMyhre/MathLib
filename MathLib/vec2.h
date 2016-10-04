@@ -37,8 +37,8 @@ float angle(const vec2 &v);
 
 vec2 fromAngle(float a);
 
-vec2 lerp(vec2 start, vec2 end, vec2 alpha);
-vec2 quadBezier(vec2 a_A, vec2 a_B, vec2 a_C, vec2 a_t);
-vec2 hermitspline(vec2 start, vec2 s_tan, vec2 end, vec2 e_tan, vec2 alpha);
-vec2 cardinalSpline(vec2 point0, vec2 point1, vec2 point2, vec2 a, vec2 t);
-vec2 catRomSpline(vec2 point0, vec2 point1, vec2 point2, vec2 t);
+vec2 lerp(const vec2 &start, const vec2 &end, float alpha);
+vec2 quadBezier(vec2 &start, vec2 &mid, vec2 &end, float alpha);
+vec2 hermitspline(vec2 &start, vec2 &s_tan, vec2 &end, vec2 &e_tan, float alpha);
+vec2 cardinalSpline(vec2 &start, vec2 &mid, vec2 &end, float tightness, float alpha);
+vec2 catRomSpline(vec2 &start, vec2 &mid, vec2 &end, float alpha);
