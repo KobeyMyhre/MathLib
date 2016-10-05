@@ -3,6 +3,8 @@
 #include "Transform.h"
 #include "flops.h"
 #include "Rigidbody.h"
+#include "SpaceshipLocomotion.h"
+#include "SpaceshipController.h"
 void main()
 {
 	float W = 400, H = 400;
@@ -34,19 +36,19 @@ void main()
 	playerTransform.scale = { 5,5 };
 	Rigidbody playerRigidbody;
 	
-
-
+	SpaceshipLocomotion playerLoco;
+	SpaceShipController Controls;
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
-		if (sfw::getKey('W')) playerRigidbody.velocity.y += 10.0f;
+		/*if (sfw::getKey('W')) playerRigidbody.velocity.y += 10.0f;
 		if (sfw::getKey('S')) playerRigidbody.velocity.y -= 10.0f;
 		if (sfw::getKey('A')) playerRigidbody.velocity.x -= 10.0f;
 		if (sfw::getKey('D')) playerRigidbody.velocity.x += 10.0f;
 		
 		if (sfw::getKey('Q')) playerRigidbody.angularVelocity += 1.0f;
-		if (sfw::getKey('E')) playerRigidbody.angularVelocity -= 1.0f;
+		if (sfw::getKey('E')) playerRigidbody.angularVelocity -= 1.0f;*/
 
 		playerRigidbody.integrate(playerTransform, deltaTime);
 
@@ -57,6 +59,10 @@ void main()
 		else if (playerTransform.position.x > W)playerTransform.position.x = 0;
 		if (playerTransform.position.y < 0) playerTransform.position.y = H;
 		else if (playerTransform.position.y > H) playerTransform.position.y = 0;
+
+		playerLoco.update(playerRigidbody, deltaTime);
+		Controls.update(playerLoco);
+
 
 
 		}

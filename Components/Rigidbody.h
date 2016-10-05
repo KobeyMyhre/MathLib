@@ -11,6 +11,11 @@ public:
 
 	float angularVelocity;
 	float angularAcceletartion;
+	
+	void addForce(const vec2 &force);
+	void addImpulse(const vec2 &impulse);
+
+	void addTorque(float torque);
 
 	vec2 acceleration;
 
