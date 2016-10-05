@@ -7,19 +7,21 @@ class SpaceshipLocomotion
 	
 	float Vertthrust;
 	float Horzthrust;
-
-	float maxThrust;
+	float stopAction;
 	
-
+	
+	float breakPower;
 	float turn;
 	float maxTurn;
 	float turnspeed;
 
 	float speed;
+	float maxSpeed;
 public:
 	SpaceshipLocomotion();
 
+	void doSTOP(float value);
 	void doThrust(float value, float value1);
 	void doTurn(float value);
-	void update(Rigidbody &rigidbody, float deltaTime);
+	void update(const Transform &trans, Rigidbody &rigidbody);
 };

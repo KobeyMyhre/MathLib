@@ -7,7 +7,7 @@
 #include "SpaceshipController.h"
 void main()
 {
-	float W = 400, H = 400;
+	float W = 800, H = 800;
 	sfw::initContext(W,H);
 	float steps = 100;
 	/*Transform player;
@@ -32,7 +32,7 @@ void main()
 	vec2 playerVelcocity = { 0,0 };
 	float playerAngle = 1.f;*/
 
-	Transform playerTransform(200,200);
+	Transform playerTransform(400,400);
 	playerTransform.scale = { 5,5 };
 	Rigidbody playerRigidbody;
 	
@@ -50,19 +50,20 @@ void main()
 		if (sfw::getKey('Q')) playerRigidbody.angularVelocity += 1.0f;
 		if (sfw::getKey('E')) playerRigidbody.angularVelocity -= 1.0f;*/
 
+		//playerRigidbody.integrate(playerTransform, deltaTime);
+
 		playerRigidbody.integrate(playerTransform, deltaTime);
-
-
 		playerTransform.debugDaw();
 
+		
 		if (playerTransform.position.x < 0) playerTransform.position.x = W;
 		else if (playerTransform.position.x > W)playerTransform.position.x = 0;
 		if (playerTransform.position.y < 0) playerTransform.position.y = H;
 		else if (playerTransform.position.y > H) playerTransform.position.y = 0;
 
-		playerLoco.update(playerRigidbody, deltaTime);
+		playerLoco.update(playerTransform, playerRigidbody);
 		Controls.update(playerLoco);
-
+		playerRigidbody.debugDraw(playerTransform);
 
 
 		}

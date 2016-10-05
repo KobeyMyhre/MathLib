@@ -4,5 +4,8 @@
 class SpaceShipController
 {
 public:
+	unsigned CTR_LEFT, CTR_RIGHT, CTR_FORWARD, CTR_BACKWARDS, CTR_BREAK;
+	SpaceShipController(unsigned CTR_LEFT = 'A', unsigned CTR_RIGHT = 'D', unsigned CTR_FORWARD = 'W', unsigned CTR_BACKWARDS = 'D', unsigned CTR_BREAK = ' ');
+	
 	void update(SpaceshipLocomotion &loco);
 };

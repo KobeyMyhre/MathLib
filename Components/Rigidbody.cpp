@@ -1,27 +1,55 @@
 #include "Rigidbody.h"
+#include "sfwdraw.h"
 Rigidbody::Rigidbody()
 {
+	drag = .25;
+	angularDrag = .3;
+	mass = 1;
+	force = vec2 { 0,0 };
+	impulse = vec2 { 0,0 };
+	torque = 0;
 	acceleration = vec2{ 0,0 };
 	velocity = vec2{ 0,0 };
+
 	angularVelocity = 0.0f;
 	angularAcceletartion = 0.f;
 }
-void Rigidbody::addForce(const vec2 & force)
+void Rigidbody::addForce(const vec2 & a_force)
 {
-	acceleration += force;
+	force += a_force;
 }
-void Rigidbody::addImpulse(const vec2 & impulse)
+void Rigidbody::addImpulse(const vec2 & a_impulse)
 {
-	velocity += impulse;
+	velocity += a_impulse;
 }
-void Rigidbody::addTorque(float torque)
+void Rigidbody::addTorque(float a_torque)
 {
-	angularAcceletartion += torque;
+	torque += a_torque;
 }
 void Rigidbody::integrate(Transform & trans, float deltaTime)
 {
-	velocity += acceleration * deltaTime;
+	acceleration	 = force / mass;
+	velocity		+= acceleration * deltaTime + impulse / mass;
+	trans.position	+= velocity * deltaTime;
+	force = impulse	= { 0,0 };
 
-	trans.position = trans.position + velocity * deltaTime;
-	trans.facing = trans.facing + angularVelocity * deltaTime;
+	force = -velocity*drag;
+	
+
+	angularAcceletartion = torque / mass;
+	angularVelocity		+= angularAcceletartion * deltaTime;
+	trans.facing		+= angularVelocity * deltaTime;
+	torque = 0;
+	torque = -angularDrag * angularDrag;
+}
+
+void Rigidbody::debugDraw(const Transform & trans)
+{
+	vec2 p = trans.position ;
+	vec2 v = p - velocity;
+	vec2 a = acceleration + p;
+	sfw::drawLine(p.x, p.y, v.x, v.y, BLACK);
+	sfw::drawCircle(v.x, v.y , 7, 3, RED);
+	/*sfw::drawCircle(v.x , v.y - 3 , 2, RED);*/
+	/*sfw::drawLine(p.x, p.y, v.x, v.y, YELLOW);*/
 }
