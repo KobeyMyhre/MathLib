@@ -5,6 +5,8 @@
 #include "vec3.h"
 #include "flops.h"
 #include <cmath>
+#include "mat2.h"
+#include "mat3.h"
 int main()
 {
 	/*assert(donothing(0) == 5);
@@ -81,6 +83,28 @@ int main()
 	assert(fequals(catRomSpline(15, 40, 21, 1), 21));
 
 	assert(fequals(1, .9999999f));
+
+	/////////////////////////////////////
+
+	mat2 m0 = { 0,0,0,0 };
+	mat2 mI = mat2Identity();
+	mat2 t0 = mat2{ 4,3,2,1 };
+	vec2 v0 = vec2{ 1,0 };
+
+	assert(m0 == m0);
+	assert(mI * 2 == 2 * mI);
+
+	assert(mI * v0 == v0);
+
+	assert(transpose(mI) == mI);
+
+	assert(t0*inverse(t0) == mI);
+
+	mat3 m1 = { 0,0,0,0 };
+	mat3 m2 = mat3Identity();
+
+
+
 
 	return 0;
 
