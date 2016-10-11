@@ -13,7 +13,9 @@ vec3 & mat3::operator[](unsigned idx)
 
 mat3 mat3Identity()
 {
-	return mat3{ 1,0,0,0,1,0,0,0,1 };
+	return mat3{ 1,0,0,
+				 0,1,0,
+				 0,0,1 };
 }
 
 bool operator==(const mat3 & A, const mat3 & B)
@@ -75,16 +77,18 @@ mat3 operator-(const mat3 & A, const mat3 & B)
 
 mat3 operator*(const mat3 & A, float B)
 {
-	return mat3{ A.m[0] * B, A.m[1] * B,
+	/*return mat3{ A.m[0] * B, A.m[1] * B,
 		A.m[2] * B, A.m[3] * B, A.m[4] * B, A.m[5] * B,
-		A.m[6] * B, A.m[7] * B , A.m[8] * B };
+		A.m[6] * B, A.m[7] * B , A.m[8] * B };*/
+	return A*B;
 }
 
 mat3 operator*(float A, const mat3 & B)
 {
-	return{ B.m[0] * A,  B.m[1] * A,
+	/*return{ B.m[0] * A,  B.m[1] * A,
 		B.m[2] * A,B.m[3] * A, B.m[4] * A,  B.m[5] * A,
-		B.m[6] * A,B.m[7] * A  ,B.m[8] * A };
+		B.m[6] * A,B.m[7] * A  ,B.m[8] * A };*/
+	return A*B;
 }
 
 mat3 operator*(const mat3 & A, const mat3 & B)
@@ -112,11 +116,12 @@ vec3 operator*(const mat3 & A, const vec3 & B)
 
 mat3 operator-(const mat3 & v)
 {
-	return mat3
-		{
+	return v*-1;
+	
+	/*	{
 		-v.m[0],-v.m[1],-v.m[2],-v.m[3]
 		- v.m[4],-v.m[5],-v.m[6],-v.m[7] ,-v.m[8]
-		};
+		};*/
 }
 
 mat3 inverse(const mat3 &D)
