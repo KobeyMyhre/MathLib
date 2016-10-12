@@ -36,6 +36,8 @@ bool operator!=(const mat2 & A, const mat2 & B)
 
 mat2 transpose(const mat2 & idx)
 {
+
+	
 	mat2 retval = idx;
 
 
@@ -93,10 +95,11 @@ mat2 inverse(const mat2 &D)
 {
 	mat2 temp;
 	temp.m[0] = temp.m[3];
-	temp.m[1] = -temp.m[1];
-	temp.m[2] = -temp.m[2];
+	temp.m[1] = -temp.m[2];
+	temp.m[2] = -temp.m[1];
 	temp.m[3] = temp.m[0];
 	return (1 / (determinate(D)) * temp);
+	/*return (1 / (determinate(D)) * transpose(D));*/
 }
 float determinate(const mat2 &D)
 {

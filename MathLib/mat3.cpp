@@ -1,6 +1,6 @@
 #include "mat3.h"
 #include "Flops.h"
-
+#include <cmath>
 vec3 mat3::operator[](unsigned idx) const
 {
 	return c[idx];
@@ -80,15 +80,15 @@ mat3 operator*(const mat3 & A, float B)
 	/*return mat3{ A.m[0] * B, A.m[1] * B,
 		A.m[2] * B, A.m[3] * B, A.m[4] * B, A.m[5] * B,
 		A.m[6] * B, A.m[7] * B , A.m[8] * B };*/
-	return A*B;
+	return B*A;
 }
 
 mat3 operator*(float A, const mat3 & B)
 {
-	/*return{ B.m[0] * A,  B.m[1] * A,
+	return{ B.m[0] * A,  B.m[1] * A,
 		B.m[2] * A,B.m[3] * A, B.m[4] * A,  B.m[5] * A,
-		B.m[6] * A,B.m[7] * A  ,B.m[8] * A };*/
-	return A*B;
+		B.m[6] * A,B.m[7] * A  ,B.m[8] * A };
+	
 }
 
 mat3 operator*(const mat3 & A, const mat3 & B)
@@ -113,6 +113,29 @@ vec3 operator*(const mat3 & A, const vec3 & B)
 				
 	};
 }
+
+mat3 scale(float w, float h)
+{
+	return mat3{ w, 0, 0,
+				 0, h, 0,
+				 0, 0, 1 };
+}
+
+mat3 translate(float x, float y)
+{
+	return mat3 { 1, 0, x,
+				  0, 1, y,
+				  0, 0, 1,};
+}
+
+mat3 rotation(float a)
+{
+	return mat3{ cos(a), sin(a), 0,
+				-sin(a), cos(a), 0,
+				0     , 0     , 1 };
+}
+
+
 
 mat3 operator-(const mat3 & v)
 {

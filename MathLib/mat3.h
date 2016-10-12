@@ -24,6 +24,10 @@ mat3 operator*(const mat3 &A, float B);
 mat3 operator*(float A, const mat3 &B);
 mat3 operator*(const mat3 &A, const mat3 &B);
 vec3 operator*(const mat3 &A, const vec3 &B);
+mat3 scale(float w, float h);
+mat3 translate(float x, float y);
+mat3 rotation(float a);
+
 
 float determinate(const mat3 &d);
 mat3 inverse(const mat3 &v);

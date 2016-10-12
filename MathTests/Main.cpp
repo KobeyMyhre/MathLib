@@ -103,8 +103,15 @@ int main()
 	mat3 m1 = { 0,0,0,0 };
 	mat3 m2 = mat3Identity();
 
+	assert(m2 *inverse(m2) == m2);
 
+	vec3 j = { 2,5,1 };
 
+	assert((scale(5, 1) * j == vec3{ -5,2,1 }));
+
+	assert((rotation(deg2rad(90)) * j == vec3{ 2,8,1 }));
+
+	assert((translate(0, 3)*j == vec3{ 2,8,1 }));
 
 	return 0;
 
