@@ -94,38 +94,40 @@ mat3 operator*(float A, const mat3 & B)
 mat3 operator*(const mat3 & A, const mat3 & B)
 {
 	return mat3{ ((A.m[0] * B.m[0]) + (A.m[3] * B.m[1]) + (A.m[6] * B.m[2])),
+				 ((A.m[1] * B.m[0]) + (A.m[4] * B.m[1]) + (A.m[7] * B.m[2])),
+				 ((A.m[2] * B.m[0]) + (A.m[5] * B.m[1]) + (A.m[8] * B.m[2])),
+
 				((A.m[0] * B.m[3]) + (A.m[3] * B.m[4]) + (A.m[6] * B.m[5])),
-				((A.m[0] * B.m[6]) + (A.m[3] * B.m[7]) + (A.m[6] * B.m[8])),
-		((A.m[1] * B.m[0]) + (A.m[4] * B.m[1]) + (A.m[7] * B.m[2])),
-		((A.m[1] * B.m[3]) + (A.m[4] * B.m[4]) + (A.m[7] * B.m[5])),
-		((A.m[1] * B.m[6]) + (A.m[4] * B.m[7]) + (A.m[7] * B.m[8])),
-			((A.m[2] * B.m[0]) + (A.m[5] * B.m[1]) + (A.m[8] * B.m[2])),
-			((A.m[2] * B.m[3]) + (A.m[5] * B.m[4]) + (A.m[8] * B.m[5])),
-			((A.m[2] * B.m[6]) + (A.m[5] * B.m[7]) + (A.m[8] * B.m[8])),
+				((A.m[1] * B.m[3]) + (A.m[4] * B.m[4]) + (A.m[7] * B.m[5])),
+				((A.m[2] * B.m[3]) + (A.m[5] * B.m[4]) + (A.m[8] * B.m[5])),
+		
+				((A.m[0] * B.m[6]) + (A.m[3] * B.m[7]) + (A.m[6] * B.m[8])),			
+				((A.m[1] * B.m[6]) + (A.m[4] * B.m[7]) + (A.m[7] * B.m[8])),						
+				((A.m[2] * B.m[6]) + (A.m[5] * B.m[7]) + (A.m[8] * B.m[8])),
 	};
 }
 
 vec3 operator*(const mat3 & A, const vec3 & B)
 {
-	return vec3{ ((A.m[0] * B.x) + (A.m[3] * B.x) + (A.m[6] * B.z)),
-		((A.m[1] * B.x) + (A.m[4] * B.x) + (A.m[7] * B.z)),
-			((A.m[2] * B.x) + (A.m[5] * B.x) + (A.m[8] * B.z)),
+	return vec3{ ((A.m[0] * B.x) + (A.m[3] * B.y) + (A.m[6] * B.z)),
+				 ((A.m[1] * B.x) + (A.m[4] * B.y) + (A.m[7] * B.z)),
+				 ((A.m[2] * B.x) + (A.m[5] * B.y) + (A.m[8] * B.z)),
 				
 	};
 }
 
 mat3 scale(float w, float h)
 {
-	return mat3{ w, 0, 0,
+	return {     w, 0, 0,
 				 0, h, 0,
-				 0, 0, 1 };
+				 0, 0, 1     };
 }
 
 mat3 translate(float x, float y)
 {
-	return mat3 { 1, 0, x,
-				  0, 1, y,
-				  0, 0, 1,};
+	return mat3 { 1, 0, 0,
+				  0, 1, 0,
+				  x, y, 1,};
 }
 
 mat3 rotation(float a)
@@ -150,7 +152,13 @@ mat3 operator-(const mat3 & v)
 mat3 inverse(const mat3 &D)
 {
 	
-	return (1 / (determinate(D)) * transpose(D));
+	mat3 retval = D;
+
+	retval[0] = cross(D[1], D[2]);
+	retval[1] = cross(D[2], D[0]);
+	retval[2] = cross(D[0], D[1]);
+
+	return 1 / determinate(D) * transpose(retval);
 }
 float determinate(const mat3 &D)
 {

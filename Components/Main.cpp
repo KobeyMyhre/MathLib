@@ -15,12 +15,12 @@ void main()
 
 	
 
-	/*player.position = vec2{ 400,300 };
+	/*player.m_position = vec2{ 400,300 };
 	player.facing = deg2rad(45);
 	player.setDirection(.5f);
 
 	player.facing = deg2rad(45);
-	player.scale = vec2{ 35,15 };*/
+	player.m_scale = vec2{ 35,15 };*/
 
 
 	
@@ -33,7 +33,7 @@ void main()
 	float playerAngle = 1.f;*/
 
 	Transform playerTransform(400,400);
-	playerTransform.scale = { 5,5 };
+	playerTransform.m_scale = { 5,5 };
 	Rigidbody playerRigidbody;
 	
 	SpaceshipLocomotion playerLoco;
@@ -56,10 +56,10 @@ void main()
 		playerTransform.debugDaw();
 
 		
-		if (playerTransform.position.x < 0) playerTransform.position.x = W;
-		else if (playerTransform.position.x > W)playerTransform.position.x = 0;
-		if (playerTransform.position.y < 0) playerTransform.position.y = H;
-		else if (playerTransform.position.y > H) playerTransform.position.y = 0;
+		if (playerTransform.m_position.x < 0) playerTransform.m_position.x = W;
+		else if (playerTransform.m_position.x > W)playerTransform.m_position.x = 0;
+		if (playerTransform.m_position.y < 0) playerTransform.m_position.y = H;
+		else if (playerTransform.m_position.y > H) playerTransform.m_position.y = 0;
 
 		playerLoco.update(playerTransform, playerRigidbody);
 		Controls.update(playerLoco);

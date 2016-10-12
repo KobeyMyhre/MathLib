@@ -3,22 +3,22 @@
 
 /*Transform::Transform()
 {
-	position.x = 0;
-	position.y = 0;
+	m_position.x = 0;
+	m_position.y = 0;
 
-	scale.x = 28;
-	scale.y = 8;
-	facing = 0;
+	m_scale.x = 28;
+	m_scale.y = 8;
+	m_facing = 0;
 }*/
-Transform::Transform(float x, float y, float w, float h, float a) : position{ x,y }, scale{ w,h }, facing{a}
+Transform::Transform(float x, float y, float w, float h, float a) : m_position{ x,y }, m_scale{ w,h }, m_facing{a}
 {
-	position.x = x;
-	position.y = y;
+	m_position.x = x;
+	m_position.y = y;
 
-	scale.x = w;
-	scale.y = h;
+	m_scale.x = w;
+	m_scale.y = h;
 
-	facing = a;
+	m_facing = a;
 }
 vec2 Transform::getUp() const
 {
@@ -26,36 +26,56 @@ vec2 Transform::getUp() const
 }
 vec2 Transform::getDirection() const
 {
-	return fromAngle(facing);
+	return fromAngle(m_facing);
 }
 
 void Transform::setDirection(const vec2 & dir)
 {
-	facing = angle(dir);
+	m_facing = angle(dir);
+}
+
+mat3 Transform::getLocalTransform() const
+{
+	mat3 S = scale(m_scale.x, m_scale.y);
+
+	mat3 T = translate(m_position.x, m_position.y);
+
+	mat3 R = rotation(m_facing);
+
+	return  T * S * R;
 }
  
-void Transform::debugDaw() const
+void Transform::debugDaw(const mat3 &T) const
 {
-	sfw::drawCircle(position.x, position.y, 12, 3, BLACK);
-	sfw::drawCircle(position.x, position.y , 6, 1, RED);
-
-
-	vec2 dirEnd = position + getDirection() * scale.x * 2;
-	/*vec2 upEnd = position - perp(getDirection()) * scale.x * 2 ;*/
-
 	
-	sfw::drawLine(position.x, position.y, dirEnd.x, dirEnd.y, RED);
-	//sfw::drawLine(position.x, position.y, upEnd.x, upEnd.y, RED);
 
-	//vec2 ipEnd = position + perp(getDirection()) * scale.x;
+	mat3 l = T * getLocalTransform();
+	vec3 pos = l[2];
 
-	/*sfw::drawLine(position.x , position.y, dirEnd.x, dirEnd.y, BLACK);
+	vec3 right = pos + l * vec3{ 1, 0, 0 };
+	/*vec3 up = l * vec3{ 0,4,1 };*/
 
-	sfw::drawLine(position.x, position.y, upEnd.x, upEnd.y,BLACK);*/
+	vec2 dirEnd = m_position + getDirection() * m_scale.x * 4;
+	/*vec2 upEnd = m_position - perp(getDirection()) * m_scale.x * 4 ;*/
 
-	/*sfw::drawLine(position.x, position.y, derEnd.x, derEnd.y, WHITE);*/
+	sfw::drawCircle(pos.x, pos.y, 12, 3, BLACK);
+	sfw::drawCircle(pos.x, pos.y, 6, 1, RED);
 
-	/*sfw::drawLine(position.x, position.y, ipEnd.x, ipEnd.y, BLACK);*/
+	sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
+	//sfw::drawLine(m_position.x, m_position.y, up.x, up.y, GREEN);
+
+	/*sfw::drawLine(m_position.x, m_position.y, dirEnd.x, dirEnd.y, RED);*/
+	/*sfw::drawLine(m_position.x, m_position.y, upEnd.x, upEnd.y, RED);*/
+
+	/*vec2 ipEnd = m_position + perp(getDirection()) * m_scale.x;
+
+	sfw::drawLine(m_position.x , m_position.y, dirEnd.x, dirEnd.y, BLACK);
+
+	sfw::drawLine(m_position.x, m_position.y, upEnd.x, upEnd.y,BLACK);
+
+	sfw::drawLine(m_position.x, m_position.y, dirEnd.x, dirEnd.y, WHITE);
+
+	sfw::drawLine(m_position.x, m_position.y, ipEnd.x, ipEnd.y, BLACK);*/
 
 	
 }

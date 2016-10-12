@@ -86,6 +86,7 @@ vec3 cross(const vec3 & lhs, const vec3 & rhs)
 {
 	return  vec3{ lhs.y*rhs.z - lhs.z*rhs.y, lhs.z* rhs.x - lhs.x* rhs.z, lhs.x*rhs.y - lhs.y*rhs.x };
 }
+
 float vec3::operator[](unsigned idx) const
 {
 	return v[idx];
@@ -94,4 +95,9 @@ float vec3::operator[](unsigned idx) const
 float & vec3::operator[](unsigned idx)
 {
 	return v[idx];
+}
+
+float dot(const vec3 & lhs, const vec3 & rhs)
+{
+    return lhs.x*rhs.x + lhs.y*rhs.y + lhs.z*rhs.z;
 }

@@ -5,7 +5,7 @@
 #include "math.h"
 bool fequals(float lhs, float rhs)
 {
-	if ( fabs(lhs - rhs) < .00001 )
+	if ( fabs(lhs - rhs) < .00001f )
 	{
 		return true;
 	}

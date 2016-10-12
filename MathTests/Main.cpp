@@ -7,6 +7,7 @@
 #include <cmath>
 #include "mat2.h"
 #include "mat3.h"
+
 int main()
 {
 	/*assert(donothing(0) == 5);
@@ -86,7 +87,7 @@ int main()
 
 	/////////////////////////////////////
 
-	mat2 m0 = { 0,0,0,0 };
+	mat2 m0 = mat2{ 0,0,0,0 };
 	mat2 mI = mat2Identity();
 	mat2 t0 = mat2{ 4,3,2,1 };
 	vec2 v0 = vec2{ 1,0 };
@@ -98,20 +99,25 @@ int main()
 
 	assert(transpose(mI) == mI);
 
+	//assert(inverse(mI) == mI);
 	assert(t0*inverse(t0) == mI);
 
-	mat3 m1 = { 0,0,0,0 };
+	mat3 m1 = { 1,2,3,4,5,6,7,0,9 };
 	mat3 m2 = mat3Identity();
 
 	assert(m2 *inverse(m2) == m2);
 
 	vec3 j = { 2,5,1 };
+	vec3 s = scale(5, 1) * j;
+	assert((scale(5, 1) * j == vec3{ 10,5,1 }));
 
-	assert((scale(5, 1) * j == vec3{ -5,2,1 }));
-
-	assert((rotation(deg2rad(90)) * j == vec3{ 2,8,1 }));
+	assert((rotation(deg2rad(90)) * j == vec3{ -5,2,1 }));
 
 	assert((translate(0, 3)*j == vec3{ 2,8,1 }));
+
+	assert((translate(4, 3) * j)* (scale(2, 1) * j)* (rotation(deg2rad(90) * j)) == mat3{0, 2, 4,
+																						-1, 0, 3, 
+																						 0, 0, 1});
 
 	return 0;
 

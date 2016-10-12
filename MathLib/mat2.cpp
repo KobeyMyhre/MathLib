@@ -93,13 +93,16 @@ mat2 operator-(const mat2 & v)
 
 mat2 inverse(const mat2 &D)
 {
-	mat2 temp;
+	/*mat2 temp;
 	temp.m[0] = temp.m[3];
 	temp.m[1] = -temp.m[2];
 	temp.m[2] = -temp.m[1];
 	temp.m[3] = temp.m[0];
-	return (1 / (determinate(D)) * temp);
+	return (1 / determinate(D) * temp);*/
 	/*return (1 / (determinate(D)) * transpose(D));*/
+	return (1 / (determinate(D)) * mat2 { D.m[3], -D.m[1], -D.m[2], D.m[0] });
+	//mat2 g = { D.m[3], -D.m[2], -D.m[1], D.m[0] };
+	//return 1 / determinate(D) * g;
 }
 float determinate(const mat2 &D)
 {
