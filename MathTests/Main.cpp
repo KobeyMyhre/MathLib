@@ -115,9 +115,12 @@ int main()
 
 	assert((translate(0, 3)*j == vec3{ 2,8,1 }));
 
-	assert((translate(4, 3) * j)* (scale(2, 1) * j)* (rotation(deg2rad(90) * j)) == mat3{0, 2, 4,
-																						-1, 0, 3, 
-																						 0, 0, 1});
+	/*assert((translate(4, 3) * j)* (scale(2, 1) * j)* (rotation(deg2rad(90) * j)) == mat3{0, 2, 4,
+																			-1, 0, 3, 0, 0, 1})*/
+
+
+	assert((rotation(deg2rad(-90)) * translate(10, 0) * rotation(deg2rad(45)) *  translate(4, 0) *  rotation(deg2rad(45)) * translate(6, 4) *  translate(-6, 0) * vec3 { 0, 0, 1 } == vec3{ 2 * sqrtf(2), -6 -2 * sqrtf(2), 1 }));
+
 
 	return 0;
 

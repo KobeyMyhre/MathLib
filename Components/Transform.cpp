@@ -53,7 +53,8 @@ void Transform::debugDaw(const mat3 &T) const
 	vec3 pos = l[2];
 
 	vec3 right = pos + l * vec3{ 1, 0, 0 };
-	/*vec3 up = l * vec3{ 0,4,1 };*/
+	vec3 up = l * vec3{ -1,4,1 };
+	vec3 down = l * vec3{ -1,-4,1 };
 
 	vec2 dirEnd = m_position + getDirection() * m_scale.x * 4;
 	/*vec2 upEnd = m_position - perp(getDirection()) * m_scale.x * 4 ;*/
@@ -61,8 +62,11 @@ void Transform::debugDaw(const mat3 &T) const
 	sfw::drawCircle(pos.x, pos.y, 12, 3, BLACK);
 	sfw::drawCircle(pos.x, pos.y, 6, 1, RED);
 
-	sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
-	//sfw::drawLine(m_position.x, m_position.y, up.x, up.y, GREEN);
+	sfw::drawLine(pos.x, pos.y , right.x , right.y , RED);
+	sfw::drawLine(m_position.x, m_position.y, up.x, up.y, RED);
+	sfw::drawLine(m_position.x  ,m_position.y , down.x , down.y , RED);
+
+
 
 	/*sfw::drawLine(m_position.x, m_position.y, dirEnd.x, dirEnd.y, RED);*/
 	/*sfw::drawLine(m_position.x, m_position.y, upEnd.x, upEnd.y, RED);*/
