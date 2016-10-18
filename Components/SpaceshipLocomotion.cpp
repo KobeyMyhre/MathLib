@@ -1,6 +1,7 @@
 #include "SpaceshipLocomotion.h"
 #include "sfwdraw.h"
 #include "Rigidbody.h"
+#include "Transform.h"
 SpaceshipLocomotion::SpaceshipLocomotion()
 {
 	Vertthrust = 0.f;
@@ -43,3 +44,5 @@ void SpaceshipLocomotion::update(const Transform &trans, Rigidbody & rigidbody)
 	Vertthrust = 0;
 	
 }
+
+

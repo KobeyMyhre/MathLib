@@ -1,11 +1,24 @@
 #pragma once
 #include "SpaceshipLocomotion.h"
 
-class SpaceShipController
+//class SpaceShipController
+//{
+//public:
+//	unsigned CTR_LEFT, CTR_RIGHT, CTR_FORWARD, CTR_BACKWARDS, CTR_BREAK;
+//	SpaceShipController(unsigned CTR_LEFT = 'A', unsigned CTR_RIGHT = 'D', unsigned CTR_FORWARD = 'W', unsigned CTR_BACKWARDS = 'D', unsigned CTR_BREAK = ' ');
+//	
+//	void update(SpaceshipLocomotion &loco);
+//};
+
+
+class SpaceshipController
 {
 public:
-	unsigned CTR_LEFT, CTR_RIGHT, CTR_FORWARD, CTR_BACKWARDS, CTR_BREAK;
-	SpaceShipController(unsigned CTR_LEFT = 'A', unsigned CTR_RIGHT = 'D', unsigned CTR_FORWARD = 'W', unsigned CTR_BACKWARDS = 'D', unsigned CTR_BREAK = ' ');
-	
+	unsigned keyup, keydown, keyLeft, keyright, keystop;
+
+	SpaceshipController(int keyup, int Keydown, int Keyleft, int Keyright, int stop);
+
+
+
 	void update(SpaceshipLocomotion &loco);
 };

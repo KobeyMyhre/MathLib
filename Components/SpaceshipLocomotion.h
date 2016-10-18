@@ -24,4 +24,6 @@ public:
 	void doThrust(float value, float value1);
 	void doTurn(float value);
 	void update(const Transform &trans, Rigidbody &rigidbody);
+	
+
 };

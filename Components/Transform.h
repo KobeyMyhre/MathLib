@@ -10,10 +10,13 @@ public:
 	vec2 m_scale;
 	float m_facing;
 
+	Transform *m_parent;
+
 	vec2 getUp() const;
 	vec2 getDirection() const;
 	void setDirection(const vec2 &dir);
 
+	mat3 getGlobalTransform() const;
 	mat3 getLocalTransform() const;
 
 	void debugDaw(const mat3 &T = mat3Identity()) const;

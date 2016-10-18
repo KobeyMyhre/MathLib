@@ -1,26 +1,27 @@
 #include "SpaceshipController.h"
 #include "sfwdraw.h"
 
-SpaceShipController::SpaceShipController(unsigned a_CTR_LEFT, unsigned a_CTR_RIGHT, unsigned a_CTR_FORWARD, unsigned a_CTR_BACKWARDS, unsigned a_CTR_BREAK)
+SpaceshipController::SpaceshipController(int up, int down, int left, int right, int stop)
 {
-	CTR_LEFT = a_CTR_LEFT;
-	CTR_RIGHT = a_CTR_RIGHT;
-	CTR_FORWARD= a_CTR_FORWARD;
-	CTR_BACKWARDS = a_CTR_BACKWARDS;
-	CTR_BREAK = a_CTR_BREAK;
+	keyup = up;
+	keydown = down;
+	keyLeft = left;
+	keyright = right;
+	keystop = stop;
+
 }
 
-void SpaceShipController::update(SpaceshipLocomotion & loco)
+void SpaceshipController::update(SpaceshipLocomotion & loco)
 {
 	float vInput = 0.f;
-	vInput -= sfw::getKey('D');
-	vInput += sfw::getKey('A');
+	vInput -= sfw::getKey(keyright);
+	vInput += sfw::getKey(keyLeft);
 	
 	float hInput = 0.f;
-	hInput -= sfw::getKey('S');
-	hInput += sfw::getKey('W');
+	hInput -= sfw::getKey(keyup);
+	hInput += sfw::getKey(keydown);
 	
-	float bInput = sfw::getKey(' ');
+	float bInput = sfw::getKey(keystop);
 
 	loco.doThrust(hInput, vInput);
 	loco.doSTOP(bInput);

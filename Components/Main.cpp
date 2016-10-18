@@ -10,48 +10,49 @@ void main()
 	float W = 800, H = 800;
 	sfw::initContext(W,H);
 	float steps = 100;
-	/*Transform player;
-	*/
-
 	
+	Transform Head(200, 200);
+	Transform Joint1(25, 0);
+	Transform Joint2(25, 0);
+	Transform Joint3(25, 0);
 
-	/*player.m_position = vec2{ 400,300 };
-	player.facing = deg2rad(45);
-	player.setDirection(.5f);
+	Joint1.m_parent = &Head;
+	Joint2.m_parent = &Joint1;
+	Joint3.m_parent = &Joint2;
 
-	player.facing = deg2rad(45);
-	player.m_scale = vec2{ 35,15 };*/
-
-
+	Rigidbody headRigidbody;
+	SpaceshipLocomotion headLoco;
+	SpaceshipController headController (' ', ' ', '1', '3', 'B');
 	
-
-	/*vec2    start = { 200, 300 },
-		end = { 900, 800 },
-		mid = { 0,  1100 };*/
-	/*vec2 player = { 400, 400 };
-	vec2 playerVelcocity = { 0,0 };
-	float playerAngle = 1.f;*/
-
+	Rigidbody Joint1Rigidbody;
+	SpaceshipLocomotion Joint1Loco;
+	Rigidbody Joint2Rigidbody;
+	SpaceshipLocomotion Joint2Loco;
+	Rigidbody Joint3Rigidbody;
+	SpaceshipLocomotion Joint3Loco;
+	SpaceshipController Joint1Controller (' ', ' ', 'E', 'Q', ' ');
+	SpaceshipController Joint2Controller(' ', ' ', 'D', 'A', 'B');
+	SpaceshipController Joint3Controller(' ', ' ', 'C', 'Z', 'B');
+	/*
+	
+	----------SPACESHIP--------
 	Transform playerTransform(400,400);
+	Transform ST1(-1, 4);
+	Transform ST2(-1, -4);
+	ST1.m_parent = &playerTransform;
+	ST2.m_parent = &playerTransform;
+
 	playerTransform.m_scale = { 5,5 };
 	Rigidbody playerRigidbody;
 	
 	SpaceshipLocomotion playerLoco;
-	SpaceShipController Controls;
+	SpaceShipController Controls('W' ,'S', 'D', 'A', ' ');*/
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
-		/*if (sfw::getKey('W')) playerRigidbody.velocity.y += 10.0f;
-		if (sfw::getKey('S')) playerRigidbody.velocity.y -= 10.0f;
-		if (sfw::getKey('A')) playerRigidbody.velocity.x -= 10.0f;
-		if (sfw::getKey('D')) playerRigidbody.velocity.x += 10.0f;
-		
-		if (sfw::getKey('Q')) playerRigidbody.angularVelocity += 1.0f;
-		if (sfw::getKey('E')) playerRigidbody.angularVelocity -= 1.0f;*/
-
-		//playerRigidbody.integrate(playerTransform, deltaTime);
-
+		/*
+		// ----------SPACESHIP----------
 		playerRigidbody.integrate(playerTransform, deltaTime);
 		playerTransform.debugDaw();
 
@@ -65,6 +66,46 @@ void main()
 		Controls.update(playerLoco);
 		playerRigidbody.debugDraw(playerTransform);
 
+		ST1.debugDaw();
+		ST2.debugDaw();*/
+
+		Joint1.debugDaw();
+		Joint2.debugDaw();
+		Joint3.debugDaw();
+		Head.debugDaw();
+
+
+		headRigidbody.integrate(Head, deltaTime);
+		headLoco.update(Head, headRigidbody);
+		headController.update(headLoco);
+		headRigidbody.debugDraw(Head);
+
+		Joint1Rigidbody.integrate(Joint1, deltaTime);
+		Joint1Loco.update(Joint1, Joint1Rigidbody);
+		Joint1Rigidbody.debugDraw(Joint1);
+
+		Joint2Rigidbody.integrate(Joint2, deltaTime);
+		Joint2Loco.update(Joint2, Joint2Rigidbody);
+		Joint2Rigidbody.debugDraw(Joint2);
+
+		Joint3Rigidbody.integrate(Joint3, deltaTime);
+		Joint3Loco.update(Joint3, Joint3Rigidbody);
+		Joint3Rigidbody.debugDraw(Joint3);
+
+
+		Joint1Controller.update(Joint1Loco);
+		Joint2Controller.update(Joint2Loco);
+		Joint3Controller.update(Joint3Loco);
+
+		if (Head.m_position.x < 0) Head.m_position.x = W;
+		else if (Head.m_position.x > W)Head.m_position.x = 0;
+		if (Head.m_position.y < 0) Head.m_position.y = H;
+		else if (Head.m_position.y > H) Head.m_position.y = 0;
+
+		if (Head.m_position.x < 0) Head.m_position.x = W;
+		else if (Head.m_position.x > W)Head.m_position.x = 0;
+		if (Head.m_position.y < 0) Head.m_position.y = H;
+		else if (Head.m_position.y > H) Head.m_position.y = 0;
 
 		}
 	

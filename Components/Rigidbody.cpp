@@ -48,8 +48,11 @@ void Rigidbody::debugDraw(const Transform & trans)
 	vec2 p = trans.m_position ;
 	vec2 v = p - -(velocity);
 	vec2 a = acceleration + p;
+	
+
+
+	/*-------SPACESHIP-------
 	sfw::drawLine(p.x, p.y, v.x, v.y, BLACK);
-	sfw::drawCircle(v.x, v.y , 7, 3, RED);
-	/*sfw::drawCircle(v.x , v.y - 3 , 2, RED);*/
-	/*sfw::drawLine(p.x, p.y, v.x, v.y, YELLOW);*/
+	sfw::drawCircle(v.x, v.y, 5, 3,GREEN);*/
+	
 }
