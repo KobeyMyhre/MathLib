@@ -29,6 +29,26 @@ void Transform::setDirection(const vec2 & dir)
 	m_facing = angle(dir);
 }
 
+vec2 Transform::getGlobalPosition() const
+{
+	return getGlobalTransform()[2].xy;
+}
+
+vec2 Transform::getGlobalright() const
+{
+	return getGlobalTransform()[0].xy;
+}
+
+vec2 Transform::getGlobalUp() const
+{
+	return getGlobalTransform()[1].xy;
+}
+
+float Transform::getGlobalAngle() const
+{
+	return angle(getGlobalright());
+}
+
 mat3 Transform::getGlobalTransform() const
 {
 	if (m_parent == nullptr)
@@ -59,19 +79,19 @@ void Transform::debugDaw(const mat3 &T) const
 
 	mat3 l = T * getGlobalTransform();
 	vec3 pos = l[2];
-	vec3 parentpos = m_parent ? m_parent->getGlobalTransform()[2] : pos;
+	vec3 parentpos = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 	
 	
 	// ---------SPACESHIP---------
 	vec3 up = l * vec3{ -1,4,1 };
 	vec3 down = l * vec3{ -1,-4,1 };
-	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
+	sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);
 	/*sfw::drawCircle(pos.x, pos.y, 6, 1, GREEN); 
 	sfw::drawLine(pos.x, pos.y, up.x, up.y , GREEN); 
 	sfw::drawLine(pos.x  , pos.y , down.x , down.y , GREEN);*/ 
 	//sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, BLACK);
 
-	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
+	sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);
 	
 
 
@@ -91,7 +111,7 @@ void Transform::debugDrawShip(const mat3 & T) const
 {
 	mat3 l = T * getGlobalTransform();
 	vec3 pos = l[2];
-	vec3 parentpos = m_parent ? m_parent->getGlobalTransform()[2] : pos;
+	vec3 parentpos = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 
 
 	// ---------SPACESHIP---------
@@ -101,7 +121,7 @@ void Transform::debugDrawShip(const mat3 & T) const
 	sfw::drawCircle(pos.x, pos.y, 6, 1, GREEN);
 	sfw::drawLine(pos.x, pos.y, up.x, up.y, GREEN);
 	sfw::drawLine(pos.x, pos.y, down.x, down.y, GREEN);
-	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, BLACK);
+	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, CYAN);
 
 	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
 	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, CYAN);

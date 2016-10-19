@@ -7,6 +7,7 @@
 #include "SpaceshipController.h"
 #include "PlanetaryMotor.h"
 #include "Tail.h"
+#include "PlanetaryRenderer.h"
 
 void main()
 {
@@ -16,47 +17,48 @@ void main()
 
 	Transform NunTransform;
 	NunTransform.m_position = vec2{ 75, 100 };
-	
+	NunTransform.m_scale = vec2{ 10,10 };
 	Rigidbody NunRbody;
+	NunRbody.angularDrag = 1.f;
 	PlanetaryMotor NunMotor;
-	NunMotor.m_roatationSpeed = .001;
-	NunMotor.m_maxroatSpeed = .002;
+	NunMotor.m_roatationSpeed = 1.f;
+	PlanetaryRenderer NunRender(WHITE, 12);
 	
 	
 	Transform NlutoTransform;
 	NlutoTransform.m_position = vec2{ 100, 75 };
 	NlutoTransform.m_parent = &NunTransform;
 	Rigidbody NlutoRbody;
+	NlutoRbody.angularDrag = 1.f;
 	PlanetaryMotor NlutoMotor;
-	NlutoMotor.m_roatationSpeed = .001;
-	NlutoMotor.m_maxroatSpeed = .002;
+	NlutoMotor.m_roatationSpeed = 1.f;
+	PlanetaryRenderer NlutoRender(RED, 8);
 	
 
 	Transform sunTransform;
 	sunTransform.m_position = vec2{ 400, 400 };
 	Rigidbody sunRbody;
+	sunRbody.angularDrag = 1.f;
 	PlanetaryMotor sunMotor;
-	sunMotor.m_roatationSpeed = .005;
-	sunMotor.m_maxroatSpeed = .01;
+	sunMotor.m_roatationSpeed = 1.f;
+	PlanetaryRenderer sunRender(YELLOW, 25);
 
 	Transform plutoTransform;
 	plutoTransform.m_position = vec2{ 50, 0 };
 	plutoTransform.m_parent = &sunTransform;
 	Rigidbody plutoRbody;
+	plutoRbody.angularDrag = 1.f;
 	PlanetaryMotor plutoMotor;
-	plutoMotor.m_roatationSpeed = .002;
-	plutoMotor.m_maxroatSpeed = .003;
+	plutoMotor.m_roatationSpeed = 1.f;
+	PlanetaryRenderer plutoRender(CYAN,15);
 	
 	Transform plutoMoonTransform;
 	plutoMoonTransform.m_position = vec2{ 25, 0 };
 	plutoMoonTransform.m_parent = &plutoTransform;
 	NunTransform.m_parent = &plutoMoonTransform;
+	PlanetaryRenderer plutoMoonRender(GREEN, 6);
 
-	plutoMoonTransform.m_color = CYAN;
-	sunTransform.m_color = RED;
-	 NlutoTransform.m_color = GREEN;
-	 NunTransform.m_color = WHITE;
-	 plutoTransform.m_color = YELLOW;
+	
 	/*--------Tails---------
 	Transform Head(200, 200);
 	Transform Joint1(25, 0);
@@ -97,6 +99,7 @@ void main()
 	
 	/*----------SPACESHIP--------*/
 	Transform playerTransform(400,400);
+	//playerTransform.m_scale = vec2{ 1,1 };	// TODO; remove me
 	Transform ST1(-1, 4);
 	Transform ST2(-1, -4);
 	
@@ -111,43 +114,72 @@ void main()
 	
 	SpaceshipLocomotion playerLoco;
 	SpaceshipController Controls('W','S', 'A', 'D', ' ');
+
+	Transform cameraPosition;
+	
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
 		
 		// ----------SPACESHIP----------
-		playerRigidbody.integrate(playerTransform, deltaTime);
-		playerTransform.debugDrawShip();
+		
+		
 
 		
-		if (playerTransform.m_position.x < 0) playerTransform.m_position.x = W;
+		/*if (playerTransform.m_position.x < 0) playerTransform.m_position.x = W;
 		else if (playerTransform.m_position.x > W)playerTransform.m_position.x = 0;
 		if (playerTransform.m_position.y < 0) playerTransform.m_position.y = H;
-		else if (playerTransform.m_position.y > H) playerTransform.m_position.y = 0;
+		else if (playerTransform.m_position.y > H) playerTransform.m_position.y = 0;*/
 
+		
+		
+		
+		// UPDATE
 		playerLoco.update(playerTransform, playerRigidbody);
 		Controls.update(playerLoco);
-		playerRigidbody.debugDraw(playerTransform);
-		
-		
-		ST1.debugDrawShip();
-		ST2.debugDrawShip();
-		
 		sunMotor.update(sunRbody);
-		sunRbody.integrate(sunTransform,deltaTime );
-		sunTransform.debugDaw();
 		plutoMotor.update(plutoRbody);
-		plutoRbody.integrate(plutoTransform, deltaTime);
-		plutoTransform.debugDaw();
-		plutoMoonTransform.debugDaw();
-
 		NunMotor.update(NunRbody);
-		NunRbody.integrate(NunTransform, deltaTime);
-		NunTransform.debugDaw();
 		NlutoMotor.update(NlutoRbody);
+
+		// Integrate
+		plutoRbody.integrate(plutoTransform, deltaTime);
+		sunRbody.integrate(sunTransform,deltaTime );
+		NunRbody.integrate(NunTransform, deltaTime);
 		NlutoRbody.integrate(NlutoTransform, deltaTime);
-		NlutoTransform.debugDaw();
+		playerRigidbody.integrate(playerTransform, deltaTime);
+
+		// DRAW
+		
+
+		vec2 gp = playerTransform.getGlobalPosition();
+
+		cameraPosition.m_position = lerp(cameraPosition.m_position, playerTransform.getGlobalPosition(), sfw::getDeltaTime()*10);
+
+		mat3 proj = translate(400, 400) * scale(1, 1);
+		mat3 view = inverse(cameraPosition.getGlobalTransform());
+
+		mat3 camera = proj * view;
+
+		
+		
+		sunRender.draw(sunTransform, camera);
+		plutoRender.draw(plutoTransform, camera);
+		plutoMoonRender.draw(plutoMoonTransform, camera);
+		NunRender.draw(NunTransform,  camera);
+		NlutoRender.draw(NlutoTransform, camera);
+
+		playerRigidbody.debugDraw(playerTransform, camera);
+		playerTransform.debugDrawShip(camera);
+		ST1.debugDrawShip(camera);
+		ST2.debugDrawShip(camera);
+
+		
+		
+		
+		
+		
 		
 		/*---------Tail Function------
 		Tail1.debugDaw();

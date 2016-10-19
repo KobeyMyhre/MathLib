@@ -20,9 +20,9 @@ public:
 	void addImpulse(const vec2 &a_impulse);
 	
 	void addTorque(float a_torque);
-
+	
 	vec2 acceleration;
 
 	void integrate(Transform &trans, float deltaTime);
-	void debugDraw(const Transform &trans);
+	void debugDraw(const Transform &trans, const mat3 &T = mat3Identity());
 };

@@ -58,7 +58,7 @@ mat3 transpose(const mat3 & idx)
 	temp.m[7] = idx.m[5];
 	temp.m[8] = idx.m[8];
 
-	return idx;
+	return temp;
 }
 
 mat3 operator+(const mat3 & A, const mat3 & B)
@@ -152,7 +152,7 @@ mat3 operator-(const mat3 & v)
 mat3 inverse(const mat3 &D)
 {
 	
-	mat3 retval = D;
+	mat3 retval;
 
 	retval[0] = cross(D[1], D[2]);
 	retval[1] = cross(D[2], D[0]);

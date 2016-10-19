@@ -4,9 +4,10 @@ void PlanetaryMotor::update(Rigidbody & planetRbody)
 {
 	
 	planetRbody.addTorque(m_roatationSpeed);
-	if (m_roatationSpeed >= m_maxroatSpeed)
-	{
-		m_roatationSpeed = m_maxroatSpeed;
-	}
+	//if (m_roatationSpeed <= m_maxroatSpeed)
+	//{
+	//	m_roatationSpeed = m_maxroatSpeed;
+	//	planetRbody.torque = .1;
+	//}
 	
 }

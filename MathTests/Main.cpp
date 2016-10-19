@@ -121,6 +121,8 @@ int main()
 
 	assert((rotation(deg2rad(-90)) * translate(10, 0) * rotation(deg2rad(45)) *  translate(4, 0) *  rotation(deg2rad(45)) * translate(6, 4) *  translate(-6, 0) * vec3 { 0, 0, 1 } == vec3{ 2 * sqrtf(2), -6 -2 * sqrtf(2), 1 }));
 
+	assert(mat3Identity() * mat3Identity() == mat3Identity());
+	assert(mat3Identity() * translate(1,1) != mat3Identity());
 
 	return 0;
 
