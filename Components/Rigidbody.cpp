@@ -51,8 +51,8 @@ void Rigidbody::debugDraw(const Transform & trans)
 	
 
 
-	/*-------SPACESHIP-------
+	/*-------SPACESHIP-------*/
 	sfw::drawLine(p.x, p.y, v.x, v.y, BLACK);
-	sfw::drawCircle(v.x, v.y, 5, 3,GREEN);*/
+	sfw::drawCircle(v.x, v.y, 5, 3,GREEN);
 	
 }

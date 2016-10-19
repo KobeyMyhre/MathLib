@@ -2,13 +2,15 @@
 #include "sfwdraw.h"
 #include "Rigidbody.h"
 
-Transform::Transform(float x, float y, float w, float h, float a) : m_position{ x,y }, m_scale{ w,h }, m_facing{a}
+Transform::Transform(float x, float y, float w, float h, float a, unsigned c) : m_position{ x,y }, m_scale{ w,h }, m_facing{ a }, m_color{c}
 {
 	m_position.x = x;
 	m_position.y = y;
 
 	m_scale.x = w;
 	m_scale.y = h;
+
+	m_color = c;
 
 	m_facing = a;
 	m_parent = nullptr;
@@ -45,6 +47,11 @@ mat3 Transform::getLocalTransform() const
 
 	return  T  * R * S;
 }
+
+
+	
+	
+
  
 void Transform::debugDaw(const mat3 &T) const
 {
@@ -56,16 +63,19 @@ void Transform::debugDaw(const mat3 &T) const
 	
 	
 	// ---------SPACESHIP---------
-	/*vec3 up = l * vec3{ -1,4,1 };
+	vec3 up = l * vec3{ -1,4,1 };
 	vec3 down = l * vec3{ -1,-4,1 };
 	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
-	sfw::drawCircle(pos.x, pos.y, 6, 1, GREEN); 
+	/*sfw::drawCircle(pos.x, pos.y, 6, 1, GREEN); 
 	sfw::drawLine(pos.x, pos.y, up.x, up.y , GREEN); 
-	sfw::drawLine(pos.x  , pos.y , down.x , down.y , GREEN); 
-	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, BLACK);*/
+	sfw::drawLine(pos.x  , pos.y , down.x , down.y , GREEN);*/ 
+	//sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, BLACK);
 
 	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
-	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, CYAN); 
+	
+
+
+
 	
 	
 
@@ -75,4 +85,24 @@ void Transform::debugDaw(const mat3 &T) const
 	
 
 	
+}
+
+void Transform::debugDrawShip(const mat3 & T) const
+{
+	mat3 l = T * getGlobalTransform();
+	vec3 pos = l[2];
+	vec3 parentpos = m_parent ? m_parent->getGlobalTransform()[2] : pos;
+
+
+	// ---------SPACESHIP---------
+	vec3 up = l * vec3{ -1,4,1 };
+	vec3 down = l * vec3{ -1,-4,1 };
+	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
+	sfw::drawCircle(pos.x, pos.y, 6, 1, GREEN);
+	sfw::drawLine(pos.x, pos.y, up.x, up.y, GREEN);
+	sfw::drawLine(pos.x, pos.y, down.x, down.y, GREEN);
+	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, BLACK);
+
+	sfw::drawCircle(pos.x, pos.y, 8, 3, BLACK);
+	sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, CYAN);
 }
