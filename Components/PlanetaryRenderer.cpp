@@ -9,7 +9,7 @@ PlanetaryRenderer::PlanetaryRenderer(unsigned r_color, float r_size)
 
 void PlanetaryRenderer::draw(Transform & planeTrans, const mat3 &T)
 {
-	mat3 glob = planeTrans.getGlobalTransform();
+	mat3 glob = T * planeTrans.getGlobalTransform();
 
 	vec2 pos = glob[2].xy;
 

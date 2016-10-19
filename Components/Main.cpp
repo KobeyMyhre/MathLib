@@ -98,7 +98,7 @@ void main()
 	Tail4.m_parent = &Tail3;*/
 	
 	/*----------SPACESHIP--------*/
-	Transform playerTransform(400,400);
+	Transform playerTransform(200,200);
 	//playerTransform.m_scale = vec2{ 1,1 };	// TODO; remove me
 	Transform ST1(-1, 4);
 	Transform ST2(-1, -4);
