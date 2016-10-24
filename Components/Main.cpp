@@ -8,32 +8,13 @@
 #include "PlanetaryMotor.h"
 #include "Tail.h"
 #include "PlanetaryRenderer.h"
+#include "ShipRenderer.h"
 
 void main()
 {
 	float W = 800, H = 800;
 	sfw::initContext(W, H);
 	float steps = 100;
-
-	Transform NunTransform;
-	NunTransform.m_position = vec2{ 75, 100 };
-	NunTransform.m_scale = vec2{ 10,10 };
-	Rigidbody NunRbody;
-	NunRbody.angularDrag = 1.f;
-	PlanetaryMotor NunMotor;
-	NunMotor.m_roatationSpeed = 1.f;
-	PlanetaryRenderer NunRender(WHITE, 12);
-	
-	
-	Transform NlutoTransform;
-	NlutoTransform.m_position = vec2{ 100, 75 };
-	NlutoTransform.m_parent = &NunTransform;
-	Rigidbody NlutoRbody;
-	NlutoRbody.angularDrag = 1.f;
-	PlanetaryMotor NlutoMotor;
-	NlutoMotor.m_roatationSpeed = 1.f;
-	PlanetaryRenderer NlutoRender(RED, 8);
-	
 
 	Transform sunTransform;
 	sunTransform.m_position = vec2{ 400, 400 };
@@ -43,8 +24,30 @@ void main()
 	sunMotor.m_roatationSpeed = 1.f;
 	PlanetaryRenderer sunRender(YELLOW, 25);
 
+	Transform NunTransform;
+	NunTransform.m_position = vec2{ -150, -150 };
+	NunTransform.m_scale = vec2{ 10,10 };
+	Rigidbody NunRbody;
+	NunRbody.angularDrag = 1.f;
+	PlanetaryMotor NunMotor;
+	NunMotor.m_roatationSpeed = 1.f;
+	NunTransform.m_parent = &sunTransform;
+	PlanetaryRenderer NunRender(WHITE, 2);
+	
+	
+	Transform NlutoTransform;
+	NlutoTransform.m_position = vec2{ 5, 5 };
+	NlutoTransform.m_parent = &NunTransform;
+	Rigidbody NlutoRbody;
+	NlutoRbody.angularDrag = 1.f;
+	PlanetaryMotor NlutoMotor;
+	NlutoMotor.m_roatationSpeed = 1.f;
+	PlanetaryRenderer NlutoRender(RED, 1);
+	
+
+
 	Transform plutoTransform;
-	plutoTransform.m_position = vec2{ 50, 0 };
+	plutoTransform.m_position = vec2{ -150, 50 };
 	plutoTransform.m_parent = &sunTransform;
 	Rigidbody plutoRbody;
 	plutoRbody.angularDrag = 1.f;
@@ -55,9 +58,27 @@ void main()
 	Transform plutoMoonTransform;
 	plutoMoonTransform.m_position = vec2{ 25, 0 };
 	plutoMoonTransform.m_parent = &plutoTransform;
-	NunTransform.m_parent = &plutoMoonTransform;
+	
 	PlanetaryRenderer plutoMoonRender(GREEN, 6);
 
+	Transform clutoTransform;
+	clutoTransform.m_position = vec2{ 150, 150 };
+	clutoTransform.m_parent = &sunTransform;
+	Rigidbody clutoRbody;
+	clutoRbody.angularDrag = 1.f;
+	PlanetaryMotor clutoMotor;
+	clutoMotor.m_roatationSpeed = 1.f;
+	PlanetaryRenderer clutoRender(YELLOW, 15);
+
+	Transform clutoMoonTransform;
+	clutoMoonTransform.m_position = vec2{ 33, 0 };
+	clutoMoonTransform.m_parent = &clutoTransform;
+	PlanetaryRenderer clutoMoonRender(YELLOW, 6);
+
+	Transform clutoMoon2Transform;
+	clutoMoon2Transform.m_position = vec2{ 33, 15 };
+	clutoMoon2Transform.m_parent = &clutoTransform;
+	PlanetaryRenderer clutoMoon2Render(YELLOW, 6);
 	
 	/*--------Tails---------
 	Transform Head(200, 200);
@@ -111,7 +132,10 @@ void main()
 	playerTransform.m_scale = { 5,5 };
 	Rigidbody playerRigidbody;
 	
+	ShipRenderer SpaceShip;
 	
+
+
 	SpaceshipLocomotion playerLoco;
 	SpaceshipController Controls('W','S', 'A', 'D', ' ');
 
@@ -142,6 +166,7 @@ void main()
 		plutoMotor.update(plutoRbody);
 		NunMotor.update(NunRbody);
 		NlutoMotor.update(NlutoRbody);
+		clutoMotor.update(clutoRbody);
 
 		// Integrate
 		plutoRbody.integrate(plutoTransform, deltaTime);
@@ -149,7 +174,8 @@ void main()
 		NunRbody.integrate(NunTransform, deltaTime);
 		NlutoRbody.integrate(NlutoTransform, deltaTime);
 		playerRigidbody.integrate(playerTransform, deltaTime);
-
+		clutoRbody.integrate(clutoTransform, deltaTime);
+		
 		// DRAW
 		
 
@@ -169,11 +195,15 @@ void main()
 		plutoMoonRender.draw(plutoMoonTransform, camera);
 		NunRender.draw(NunTransform,  camera);
 		NlutoRender.draw(NlutoTransform, camera);
+		clutoRender.draw(clutoTransform, camera);
+		clutoMoonRender.draw(clutoMoonTransform, camera);
+		clutoMoon2Render.draw(clutoMoon2Transform, camera);
 
-		playerRigidbody.debugDraw(playerTransform, camera);
-		playerTransform.debugDrawShip(camera);
-		ST1.debugDrawShip(camera);
-		ST2.debugDrawShip(camera);
+		SpaceShip.draw(playerTransform, camera);
+		/*playerRigidbody.debugDraw(playerTransform, camera);
+		playerTransform.debugDrawShip(camera);*/
+		/*ST1.debugDrawShip(camera);
+		ST2.debugDrawShip(camera);*/
 
 		
 		
