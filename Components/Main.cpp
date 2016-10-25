@@ -189,7 +189,7 @@ void main()
 		mat3 camera = proj * view;
 
 		
-		
+		sunTransform.debugDaw(camera);
 		sunRender.draw(sunTransform, camera);
 		plutoRender.draw(plutoTransform, camera);
 		plutoMoonRender.draw(plutoMoonTransform, camera);

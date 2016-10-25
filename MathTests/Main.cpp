@@ -7,6 +7,7 @@
 #include <cmath>
 #include "mat2.h"
 #include "mat3.h"
+#include "shapes.h"
 
 int main()
 {
@@ -123,6 +124,27 @@ int main()
 
 	assert(mat3Identity() * mat3Identity() == mat3Identity());
 	assert(mat3Identity() * translate(1,1) != mat3Identity());
+
+
+
+
+	circle c = { 0,0,5 };
+
+	assert((translate(4, 0) * c == circle{ 4,0,5 }));
+
+	circle result = scale(2, 1) * c;
+
+	assert((scale(2, 1) * c == circle{ 0,0,10 }));
+
+	assert((rotation(45) * c == circle{ 0,0,5 }));
+
+	AABB testA = { 1,2,3,4 };
+
+	vec2 temp = testA.min();
+	vec2 temp2 = testA.max();
+	assert((testA.min() == vec2{ -2,-2 }));
+	assert((testA.max() == vec2{ 4,6 }));
+
 
 	return 0;
 

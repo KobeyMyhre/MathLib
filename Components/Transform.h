@@ -1,6 +1,8 @@
 #pragma once
 #include "vec2.h"
 #include "mat3.h"
+#include "shapes.h"
+
 class Transform
 {
 public:
@@ -28,7 +30,7 @@ public:
 	mat3 getLocalTransform() const;
 
 	
-
+	
 	void debugDaw(const mat3 &T = mat3Identity()) const;
 	void debugDrawShip(const mat3 &T = mat3Identity()) const;
 };

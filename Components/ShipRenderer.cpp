@@ -9,39 +9,52 @@ ShipRenderer::ShipRenderer()
 void ShipRenderer::draw(Transform & ship, const mat3 & T)
 {
 	mat3 glob = T * ship.getGlobalTransform();
-	vec3 F = glob * vec3{-8,0,1};
-	vec3 L = glob * vec3{0,-4,1};
-	vec3 R = glob * vec3{ 0, 4,1};
+	vec3 F = glob * vec3{0,-8,1}; // Left-side
+	vec3 F1 = glob * vec3{0,8,1 }; // Right-side
 
-	vec3 P1 = glob * vec3{ 0,-2,1 };
-	vec3 P2 = glob * vec3{ 0, 2,1 };
-	vec3 P3 = glob * vec3{ 14,0,1 };
+	vec3 L1 = glob * vec3{ 0,-4,1 }; // Visor
+	vec3 L2 = glob * vec3{ 0,4,1 }; // 
+	vec3 L3 = glob * vec3{ 0.5,-4,1 }; // Visor
+	vec3 L4 = glob * vec3{ 0.5,4,1 }; //
 
-	vec3 H1 = glob * vec3{ -4,-1,1 };
-	vec3 H2 = glob * vec3{ -4,1,1 };
-	vec3 H3 = glob * vec3{ -5,1.5,1 }; //R
-	vec3 H4 = glob * vec3{ -5,-1.5,1 }; //L
+	vec3 F2 = glob * vec3{ -10,-5,1 }; //Tips
+	vec3 F3 = glob * vec3{ -10,5,1 }; // Tips
+
+	vec3 F4 = glob * vec3{ 3,-11,1 }; // Side
+	vec3 F5 = glob * vec3{ 3,11,1 }; // Side
+
+	vec3 F6 = glob * vec3{ 7,-9,1 }; // Back
+	vec3 F7 = glob * vec3{ 7, 9,1 }; // Back
+
+	vec3 F8 = glob * vec3{ 2,-8,1 }; // Left-side
+	vec3 F9 = glob * vec3{ 2,8,1 }; // Right-side
+
 
 	vec3 C1 = glob * vec3{ 1,-3,1 };
 	vec3 C2 = glob * vec3{ 1, 3,1 };
 
-	sfw::drawLine(F.x, F.y, H3.x, H3.y, GREEN);
-	sfw::drawLine(F.x, F.y, H4.x, H4.y, GREEN);
-	sfw::drawLine(R.x, R.y, H3.x, H3.y, BLACK);
-	sfw::drawLine(L.x, L.y, H4.x, H4.y, BLACK);
 
-	sfw::drawLine(L.x, L.y, P1.x, P1.y, BLACK);
-	sfw::drawLine(R.x, R.y, P2.x, P2.y, BLACK);
-	sfw::drawLine(P1.x, P1.y, P3.x, P3.y, BLACK);
-	sfw::drawLine(P2.x, P2.y, P3.x, P3.y, BLACK);
+	sfw::drawLine(F.x, F.y, L1.x, L1.y, BLACK);
+	sfw::drawLine(F1.x, F1.y, L2.x, L2.y, BLACK);
+	sfw::drawLine(L2.x, L2.y, L1.x, L1.y, CYAN);
+	
+	sfw::drawLine(L4.x, L4.y, L3.x, L3.y, CYAN);
 
-	sfw::drawLine(H1.x, H1.y, H2.x, H2.y, GREEN);
-	sfw::drawLine(H1.x, H1.y, H4.x, H4.y, GREEN);
-	sfw::drawLine(H2.x, H2.y, H3.x, H3.y, GREEN);
+	sfw::drawLine(F1.x, F1.y, F3.x, F3.y, BLACK);
+	sfw::drawLine(F.x, F.y, F2.x, F2.y, BLACK);
+	sfw::drawLine(F2.x, F2.y, F4.x, F4.y, BLACK);
+	sfw::drawLine(F3.x, F3.y, F5.x, F5.y, BLACK);
+	sfw::drawLine(F4.x, F4.y, F6.x, F6.y, BLACK);
+	sfw::drawLine(F5.x, F5.y, F7.x, F7.y, BLACK);
+	sfw::drawLine(F6.x, F6.y, F8.x, F8.y, BLACK);
+	sfw::drawLine(F7.x, F7.y, F9.x, F9.y, BLACK);
+	sfw::drawLine(F8.x, F8.y, F9.x, F9.y, BLACK);
+
+	
 	
 
-	sfw::drawCircle(C1.x, C1.y, 2, 4, RED);
-	sfw::drawCircle(C2.x, C2.y, 2, 4, RED);
+	/*sfw::drawCircle(C1.x, C1.y, 2, 4, RED);
+	sfw::drawCircle(C2.x, C2.y, 2, 4, RED);*/
 }
 
 

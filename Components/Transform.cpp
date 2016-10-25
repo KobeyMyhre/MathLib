@@ -1,6 +1,7 @@
 #include "Transform.h"
 #include "sfwdraw.h"
 #include "Rigidbody.h"
+#include "shapeDraw.h"
 
 Transform::Transform(float x, float y, float w, float h, float a, unsigned c) : m_position{ x,y }, m_scale{ w,h }, m_facing{ a }, m_color{c}
 {
@@ -93,8 +94,8 @@ void Transform::debugDaw(const mat3 &T) const
 
 	sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);
 	
-
-
+	drawCircle(l * circle{ 0,0,30 }, MAGENTA);
+	drawAABB(l * AABB{ 0,0,10,10 }, CYAN);
 
 	
 	
