@@ -8,6 +8,7 @@
 #include "mat2.h"
 #include "mat3.h"
 #include "shapes.h"
+#include "Collision.h"
 
 int main()
 {
@@ -145,6 +146,11 @@ int main()
 	assert((testA.min() == vec2{ -2,-2 }));
 	assert((testA.max() == vec2{ 4,6 }));
 
+	assert(collisionDetection1D(0, 2, 1, 3).result == true);
+	assert(collisionDetection1D(0, 2, 1, 3).penetrationDepth == 1);
+
+	assert(collisionDetection1D(0, 2, 1, 3).collisionNormal == 1);
+	assert(collisionDetection1D(1, 3, 0, 2).collisionNormal == -1);
 
 	return 0;
 

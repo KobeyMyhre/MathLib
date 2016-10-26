@@ -1,5 +1,6 @@
 #include "ShipRenderer.h"
 #include "sfwdraw.h"
+#include "shapeDraw.h"
 ShipRenderer::ShipRenderer()
 {
 	
@@ -9,7 +10,7 @@ ShipRenderer::ShipRenderer()
 void ShipRenderer::draw(Transform & ship, const mat3 & T)
 {
 	mat3 glob = T * ship.getGlobalTransform();
-	vec3 F = glob * vec3{0,-8,1}; // Left-side
+	vec3 F =  glob * vec3{0,-8,1}; // Left-side
 	vec3 F1 = glob * vec3{0,8,1 }; // Right-side
 
 	vec3 L1 = glob * vec3{ 0,-4,1 }; // Visor
@@ -34,6 +35,7 @@ void ShipRenderer::draw(Transform & ship, const mat3 & T)
 	vec3 C2 = glob * vec3{ 1, 3,1 };
 
 
+
 	sfw::drawLine(F.x, F.y, L1.x, L1.y, BLACK);
 	sfw::drawLine(F1.x, F1.y, L2.x, L2.y, BLACK);
 	sfw::drawLine(L2.x, L2.y, L1.x, L1.y, CYAN);
@@ -50,11 +52,23 @@ void ShipRenderer::draw(Transform & ship, const mat3 & T)
 	sfw::drawLine(F7.x, F7.y, F9.x, F9.y, BLACK);
 	sfw::drawLine(F8.x, F8.y, F9.x, F9.y, BLACK);
 
-	
-	
+	////////////
+	//// Draw the non-aligned rectangle
+
+	/*vec3 A = glob * vec3{-12,-12, 1};
+	vec3 B = glob * vec3{-12, 12, 1 };
+	vec3 C = glob * vec3{ 12, 12, 1 };
+	vec3 D = glob * vec3{ 12, -12, 1 };
+
+	sfw::drawLine(A.x, A.y, B.x, B.y, BLACK);
+	sfw::drawLine(C.x, C.y, B.x, B.y, BLACK);
+	sfw::drawLine(C.x, C.y, D.x, D.y, BLACK);
+	sfw::drawLine(A.x, A.y, D.x, D.y, BLACK);*/
+
+	drawCircle((glob * circle{ 0,0,12 }), MAGENTA);
+	drawAABB((glob * AABB{ 0,0,6,6 }), CYAN);
 
 	/*sfw::drawCircle(C1.x, C1.y, 2, 4, RED);
 	sfw::drawCircle(C2.x, C2.y, 2, 4, RED);*/
 }
-
 

@@ -1,5 +1,6 @@
 #include "PlanetaryRenderer.h"
 #include "sfwdraw.h"
+#include "shapeDraw.h"
 
 PlanetaryRenderer::PlanetaryRenderer(unsigned r_color, float r_size)
 {
@@ -19,4 +20,6 @@ void PlanetaryRenderer::draw(Transform & planeTrans, const mat3 &T)
 	float rad = xRad > yRad ? xRad : yRad;
 
 	sfw::drawCircle(pos.x, pos.y, rad, 3, color);
+	drawCircle((glob * circle{ 0,0,size }), BLACK);
+	drawAABB((glob * AABB{ 0,0,size /2,size / 2 }), CYAN);
 }

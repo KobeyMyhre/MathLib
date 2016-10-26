@@ -200,6 +200,7 @@ void main()
 		clutoMoon2Render.draw(clutoMoon2Transform, camera);
 
 		SpaceShip.draw(playerTransform, camera);
+		playerTransform.debugDaw(camera);
 		/*playerRigidbody.debugDraw(playerTransform, camera);
 		playerTransform.debugDrawShip(camera);*/
 		/*ST1.debugDrawShip(camera);

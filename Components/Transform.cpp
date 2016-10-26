@@ -86,16 +86,15 @@ void Transform::debugDaw(const mat3 &T) const
 	// ---------SPACESHIP---------
 	vec3 up = l * vec3{ -1,4,1 };
 	vec3 down = l * vec3{ -1,-4,1 };
-	sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);
+	/*sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);*/
 	/*sfw::drawCircle(pos.x, pos.y, 6, 1, GREEN); 
 	sfw::drawLine(pos.x, pos.y, up.x, up.y , GREEN); 
 	sfw::drawLine(pos.x  , pos.y , down.x , down.y , GREEN);*/ 
 	//sfw::drawLine(parentpos.x, parentpos.y, pos.x, pos.y, BLACK);
 
-	sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);
+	/*sfw::drawCircle(pos.x, pos.y, 8, 3, m_color);*/
 	
-	drawCircle(l * circle{ 0,0,30 }, MAGENTA);
-	drawAABB(l * AABB{ 0,0,10,10 }, CYAN);
+	
 
 	
 	
