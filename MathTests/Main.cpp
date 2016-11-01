@@ -158,6 +158,26 @@ int main()
 	assert(boxCollision(A, B).penetrationDepth == 2);
 	assert((boxCollision(A, B).collisionNormal == vec2{ 1,0 }));
 
+	AABB As = { 0,0,1,1 };
+	AABB Bs = { 0,10,1,1 };
+
+	assert(fequals(boxCollisionSwept(As, vec2{ 0,1}, Bs, vec2{ 0,-1 }).entryTime, 4));
+
+	assert(fequals(boxCollisionSwept(As, vec2{ 0,-1 }, Bs, vec2{ 0,1 }).exitTime, -4));
+
+
+	AABB Bp = { 0,0,4,4 };
+
+	plane P1 = { 0,0 ,0,1 };
+	plane P2 = { 0,-10,0,1 };
+	plane P3 = { 0,10 ,0,1 };
+	plane P4 = { vec2{6,6}, normal(vec2{-1,1}) };
+
+	assert(PlaneBoxCollision(P1, Bp).result());
+	assert(!PlaneBoxCollision(P2, Bp).result());
+	assert(PlaneBoxCollision(P3, Bp).result());
+	assert(PlaneBoxCollision(P4, Bp).result());
+
 	return 0;
 
 }

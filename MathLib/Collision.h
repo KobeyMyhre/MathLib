@@ -31,15 +31,26 @@ struct CollisionData
 	
 	
 	float MTV() const;
-	vec2 result() const;
+	bool result() const;
 };
 
 CollisionData boxCollision(const AABB &A,
 						    const AABB &B);
 
+struct CollisionDataSwept
+{
+	float entryTime, exitTime;
+	vec2 collisionNormal;
 
+	bool result() const;
+};
 
+CollisionDataSwept boxCollisionSwept(const AABB &A, const vec2 &dA, const AABB &B ,const vec2 &dB);
+bool operator==(const AABB &A, const AABB &B);
 
+CollisionData PlaneBoxCollision(const plane &P, const AABB &B);
+
+CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const vec2 & pA, const AABB & B, const vec2 & bA);
 
 
 

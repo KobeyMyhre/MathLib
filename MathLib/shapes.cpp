@@ -1,6 +1,7 @@
 #include "shapes.h"
 #include "mat3.h"]
 #include "math.h"
+#include "Collision.h"
 circle operator*(const mat3 & T, const circle & C)
 {
 	circle retval;
@@ -136,6 +137,17 @@ AABB operator*(const mat3 & T, const AABB & B)
 	
 }
 
+bool operator==(const AABB & A, const AABB & B)
+{
+	return false;
+}
+
+
+
+
+
+
+
 vec2 AABB::min() const
 {
 	return pos - he;
@@ -144,4 +156,16 @@ vec2 AABB::min() const
 vec2 AABB::max() const
 {
 	return pos + he;
+}
+plane operator*(const mat3 & T, const plane & P)
+{
+	plane retval;
+	retval.pos = (T * vec3{ P.pos.x, P.pos.y, 1 }).xy;
+	retval.dir = normal(T * vec3{ P.dir.x,P.dir.y, 0 }).xy;
+	return retval;
+}
+
+bool operator==(const plane & A, const plane & B)
+{
+	return A.pos == B.pos && A.dir == B.dir;
 }

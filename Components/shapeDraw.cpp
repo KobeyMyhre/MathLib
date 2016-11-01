@@ -27,3 +27,20 @@ void drawAABB(const AABB & B, unsigned color)
 	sfw::drawLine(p1.x, p1.y, p4.x, p4.y, color);*/
 	
 }
+
+void drawPlane(const plane & A, unsigned color)
+{
+
+	vec2 L = -perp(A.dir);
+	vec2 R = -perp(L);
+
+	sfw::drawCircle(A.pos.x, A.pos.y, 6, 6, color);
+	sfw::drawLine(A.pos.x, A.pos.y, (A.dir.x * 60 + A.pos.x)  , (A.dir.y * 60 + A.pos.y) , color);
+	sfw::drawLine(A.pos.x, A.pos.y, (L.x * 30 + A.pos.x), (L.y * 30 + A.pos.y), color);
+	sfw::drawLine(A.pos.x, A.pos.y, (R.x * 60 + A.pos.x), (R.y * 60 + A.pos.y), color);
+	/*sfw::drawLine(A.pos.x, A.pos.y, ( A.pos.x - A.dir.x * 60) , ( A.pos.y - A.dir.y * 60 ) , color);*/
+	//sfw::drawLine(A.pos.x, A.pos.y, Q.x , Q.y , color);
+	//sfw::drawLine(A.pos.x, A.dir.y, A.dir.x, A.pos.y, color);
+	//sfw::drawLine(A.dir.x, A.dir.y, A.pos.y, A.pos.x, color);
+	//sfw::drawLine(A.pos.x, A.pos.y, A.dir.x, A.dir.y, color);
+}
