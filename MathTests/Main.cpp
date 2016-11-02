@@ -172,12 +172,16 @@ int main()
 	plane P2 = { 0,-10,0,1 };
 	plane P3 = { 0,10 ,0,1 };
 	plane P4 = { vec2{6,6}, normal(vec2{-1,1}) };
+	plane p6 = { 10,0,-1,0 };
 
 	assert(PlaneBoxCollision(P1, Bp).result());
 	assert(!PlaneBoxCollision(P2, Bp).result());
 	assert(PlaneBoxCollision(P3, Bp).result());
 	assert(PlaneBoxCollision(P4, Bp).result());
 
+	
+
+	assert(fequals(SweptPlaneBoxCollision(p6, Bp, vec2{ 1,0 }).entryTime, 6.f));
 	return 0;
 
 }

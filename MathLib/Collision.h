@@ -50,7 +50,7 @@ bool operator==(const AABB &A, const AABB &B);
 
 CollisionData PlaneBoxCollision(const plane &P, const AABB &B);
 
-CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const vec2 & pA, const AABB & B, const vec2 & bA);
+CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const AABB & B, const vec2 & bA);
 
 
 

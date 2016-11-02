@@ -149,7 +149,7 @@ CollisionDataSwept boxCollisionSwept(const AABB & A, const vec2 & dA, const AABB
 	return retval;
 }
 
-CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const vec2 & pA, const AABB & B, const vec2 & bA)
+CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const AABB & B, const vec2 & bA)
 {
 	CollisionDataSwept retval;
 
@@ -162,7 +162,7 @@ CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const vec2 & pA, cons
 
 	float PMAX = dot(P.dir, P.pos);
 
-	float Pvel = dot(P.dir, pA);
+	
 	float Bvel = dot(P.dir, bA);
 
 	float FTR = dot(P.dir, TR);
@@ -173,8 +173,8 @@ CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const vec2 & pA, cons
 	float AMin = fminf(fminf(FTR, FTL), fminf(FBR, FBL));
 	float AMax = fmaxf(fmaxf(FTR, FTL), fmaxf(FBR, FBL));
 
-	retval.entryTime = (AMin - PMAX) / (Bvel- Pvel);
-	retval.exitTime = (AMax - PMAX) / (Bvel - Pvel);
+	retval.entryTime = (AMin - PMAX) / (0 - Bvel);
+	retval.exitTime = (AMax - PMAX) / (0 - Bvel);
 
 	retval.collisionNormal = P.dir;
 	//retval.collisionNormal = copysignf(1, retval.entryTime - retval.exitTime);
