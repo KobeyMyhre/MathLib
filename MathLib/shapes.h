@@ -28,19 +28,25 @@ struct plane
 };
 plane  operator*(const mat3 & T, const plane  &C);
 bool operator==(const plane &A, const plane &B);
+
 struct ray 
 {
 
 };
+ray  operator*(const mat3 &T, const ray  &B);
 
 struct hull
 {
+	
+	vec2 vertices[16];
+	vec2 normals[16];
+	unsigned int size;
 
-
+	//assume a CW winding order
+	//evalutate each normal 
+	hull(const vec2 *vertices, unsigned vsize);
+	hull() ;
 };
 
-
-
-
-ray  operator*(const mat3 &T, const ray  &B);
 hull operator*(const mat3 & T, const hull &C);
+bool operator==(const hull &A, const hull &B);

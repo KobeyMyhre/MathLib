@@ -169,3 +169,55 @@ bool operator==(const plane & A, const plane & B)
 {
 	return A.pos == B.pos && A.dir == B.dir;
 }
+
+
+hull operator*(const mat3 & T, const hull & C)
+{
+	hull retval ;
+
+
+
+	retval.size = C.size;
+	for (int i = 0; i < C.size; i++)
+	{
+		retval.normals[i] = (T * vec3 { C.normals[i].x  ,C.normals[i].y  , 0 }).xy;
+		retval.vertices[i] = (T * vec3{ C.vertices[i].x  ,C.vertices[i].y  , 1 }).xy;
+		// fuck parrots 
+		// you fucking poo poo brain idiot
+		// magic the gathering sucks dick
+	}
+
+	return retval;
+}
+
+bool operator==(const hull & A, const hull & B)
+{
+	return A.vertices == B.vertices && A.normals == B.normals;
+}
+
+hull::hull(const vec2 * a_vertices, unsigned vsize)
+{
+	
+	
+	size = vsize;
+	for (int i = 0; i < vsize ; i++)
+	{
+		vertices[i] = a_vertices[i];
+		vec2 ToPerp = a_vertices[i] - a_vertices[i + 1];
+		if (i >= vsize - 1)
+		{
+			 ToPerp = (a_vertices[i] - a_vertices[0]);
+		}
+		vec2 AbsToPerp = normal(ToPerp);    /*{ abs(ToPerp.x), abs(ToPerp.y) };*/
+		vec2 finalPerp = perp(AbsToPerp);
+		normals[i] = finalPerp;
+		
+	}
+	
+	
+}
+
+hull::hull()
+{
+
+}

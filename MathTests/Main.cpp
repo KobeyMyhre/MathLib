@@ -182,6 +182,21 @@ int main()
 	
 
 	assert(fequals(SweptPlaneBoxCollision(p6, Bp, vec2{ 1,0 }).entryTime, 6.f));
+
+	vec2 verts[] = { {0,1},{1,1}, {1,0}, {0,0} };
+
+	hull myhull(verts, 4);
+	assert((myhull.normals[0] == vec2{ 0,1 }));
+	assert((myhull.normals[1] == vec2{ 1,0 })); 
+	assert((myhull.normals[2] == vec2{ 0,-1 }));
+	assert((myhull.normals[3] == vec2{ -1,0 }));
+
+	hull thull = translate(1, 0) * myhull;
+	assert((thull.vertices[0] == vec2{ 1,1 }));
+	assert((thull.vertices[1] == vec2{ 2,1 }));
+	assert((thull.vertices[2] == vec2{ 2,0 }));
+	assert((thull.vertices[3] == vec2{ 1,0 }));
+
 	return 0;
 
 }
