@@ -196,10 +196,10 @@ CollisionData hullCollision(const hull &A, const hull &B)
 	float aPerpVertB[16];
 	
 
-	float aAmini = INT_MAX;
-	float aBmini = INT_MAX;
-	float aAmaxi = INT_MIN;
-	float aBmaxi = INT_MIN;
+	float aAmini = INFINITY;
+	float aBmini = INFINITY;
+	float aAmaxi = -INFINITY;
+	float aBmaxi = -INFINITY;
 	float aPlaceholder1;
 	float aPlaceholder2;
 
@@ -212,10 +212,10 @@ CollisionData hullCollision(const hull &A, const hull &B)
 
 	float bPerpVertA[16];
 	float bPerpVertB[16];
-	float bAmini = INT_MAX;
-	float bBmini = INT_MAX;
-	float bAmaxi = INT_MIN;
-	float bBmaxi = INT_MIN;
+	float bAmini = INFINITY;
+	float bBmini = INFINITY;
+	float bAmaxi = -INFINITY;
+	float bBmaxi = -INFINITY;
 
 
 	for (int j = 0; j < A.size; j++)
@@ -229,15 +229,15 @@ CollisionData hullCollision(const hull &A, const hull &B)
 		}
 		for (int i = 0; i < B.size; i++)
 		{
-			aPerpVertB[i] = dot(B.vertices[i], B.normals[j]);
+			aPerpVertB[i] = dot(B.vertices[i], A.normals[j]);
 			aBmini = fminf(aBmini, aPerpVertB[i]);
 			aBmaxi = fmaxf(aBmaxi, aPerpVertB[i]);
 		}
 	
 
 		
-			aPlaceholder1 = aAmaxi - aBmini;
-			aPlaceholder2 = aBmaxi - aAmini;
+			aPlaceholder1 = aAmaxi - aBmini;	//R
+			aPlaceholder2 = aBmaxi - aAmini;	//L
 			aPD = fminf(aPlaceholder1, aPlaceholder2);
 			aCN = copysignf(1, aPlaceholder2 - aPlaceholder1);
 
@@ -255,7 +255,7 @@ CollisionData hullCollision(const hull &A, const hull &B)
 
 		for (int i = 0; i < A.size; i++)
 		{
-			bPerpVertA[i] = dot(A.vertices[i], A.normals[j]);
+			bPerpVertA[i] = dot(A.vertices[i], B.normals[j]);
 			bAmini = fminf(bAmini, bPerpVertA[i]);
 			bAmaxi = fmaxf(bAmaxi, bPerpVertA[i]);
 		}
@@ -280,6 +280,71 @@ CollisionData hullCollision(const hull &A, const hull &B)
 	}
 	return retval;
 }
+
+//CollisionDataSwept SweptHullCollision(const hull & A, const hull & B, const vec2 & dA, const vec2 & dB)
+//{
+//	CollisionDataSwept retval;
+//
+//	/*retval.penetrationDepth = INFINITY;*/
+//
+//
+//	
+//
+//	
+//
+//	A.vertices[A.size];
+//	B.vertices[B.size];
+//	
+//
+//	float bAmini = INFINITY;
+//	float bBmini = INFINITY;
+//	float bAmaxi = -INFINITY;
+//	float bBmaxi = -INFINITY;
+//	float aAmini = INFINITY;
+//	float aBmini = INFINITY;
+//	float aAmaxi = -INFINITY;
+//	float aBmaxi = -INFINITY;
+//	
+//
+//
+//		//if (magnitude(dA) == 0 && magnitude(dB) == 0)
+//		//{
+//		//	hullCollision(A, B);
+//
+//
+//		//}
+//		// for each axis
+//			// Find the min, max, and velocity projected along that axis for each object
+//
+//			// if (aVel - bVel == 0)
+//				// find penetration depth instead
+//
+//			// if depth < 0 : return infinity for entry time
+//
+//		{
+//			float aVel = dot(A.normals[A.size], dA);
+//			float bVel = dot(B.normals[B.size], dB);
+//
+//			float HATZ = (aAmini - aBmaxi) / (bVel - aVel);
+//			float BOOTZ = (aBmini - aAmaxi) / (aVel - bVel);
+//			if (HATZ > BOOTZ)
+//			{
+//				retval.entryTime = BOOTZ;
+//				retval.exitTime = HATZ;
+//			}
+//			else
+//			{
+//				retval.entryTime = HATZ;
+//				retval.exitTime = BOOTZ;
+//			}
+//			retval.collisionNormal = A.normals[A.size];
+//		}
+//		
+//		
+//	
+//	}
+//	return retval;
+//}
 
 CollisionData PlaneBoxCollision(const plane & P, const AABB & B)
 {

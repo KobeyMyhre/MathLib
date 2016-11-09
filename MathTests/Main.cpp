@@ -200,7 +200,7 @@ int main()
 	assert((thull.vertices[3] == vec2{ 1,0 }));
 
 	assert(fequals(hullCollision(myhull, otherhull).penetrationDepth, 0));
-	assert(fequals(hullCollision(myhull, thull).penetrationDepth, -1));
+	assert(fequals(hullCollision(otherhull, thull).penetrationDepth, -1));
 
 	return 0;
 
