@@ -52,7 +52,7 @@ CollisionData PlaneBoxCollision(const plane &P, const AABB &B);
 
 CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const AABB & B, const vec2 & bA);
 
-
+CollisionData hullCollision(const hull &A, const hull &B);
 
 
 

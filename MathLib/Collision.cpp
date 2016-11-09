@@ -182,6 +182,105 @@ CollisionDataSwept SweptPlaneBoxCollision(const plane & P, const AABB & B, const
 	return retval;
 }
 
+CollisionData hullCollision(const hull &A, const hull &B)
+{
+	CollisionData retval;
+
+	retval.penetrationDepth = INFINITY;
+
+	A.vertices[A.size];
+	B.vertices[B.size];
+	float aPD;
+	float aCN;
+	float aPerpVertA[16];
+	float aPerpVertB[16];
+	
+
+	float aAmini = INT_MAX;
+	float aBmini = INT_MAX;
+	float aAmaxi = INT_MIN;
+	float aBmaxi = INT_MIN;
+	float aPlaceholder1;
+	float aPlaceholder2;
+
+	float bPlaceholder1;
+	float bPlaceholder2;
+
+	
+	float bPD;
+	float bCN;
+
+	float bPerpVertA[16];
+	float bPerpVertB[16];
+	float bAmini = INT_MAX;
+	float bBmini = INT_MAX;
+	float bAmaxi = INT_MIN;
+	float bBmaxi = INT_MIN;
+
+
+	for (int j = 0; j < A.size; j++)
+	{
+
+		for (int i = 0; i < A.size; i++)
+		{
+			aPerpVertA[i] = dot(A.vertices[i], A.normals[j]);
+			aAmini = fminf(aAmini, aPerpVertA[i]);
+			aAmaxi = fmaxf(aAmaxi, aPerpVertA[i]);
+		}
+		for (int i = 0; i < B.size; i++)
+		{
+			aPerpVertB[i] = dot(B.vertices[i], B.normals[j]);
+			aBmini = fminf(aBmini, aPerpVertB[i]);
+			aBmaxi = fmaxf(aBmaxi, aPerpVertB[i]);
+		}
+	
+
+		
+			aPlaceholder1 = aAmaxi - aBmini;
+			aPlaceholder2 = aBmaxi - aAmini;
+			aPD = fminf(aPlaceholder1, aPlaceholder2);
+			aCN = copysignf(1, aPlaceholder2 - aPlaceholder1);
+
+		
+
+		if (aPD < retval.penetrationDepth)
+		{
+			retval.penetrationDepth = aPD;
+			retval.collisionNormal = aCN * A.normals[j];
+		}
+
+	}
+	for (int j = 0; j < B.size; j++)
+	{
+
+		for (int i = 0; i < A.size; i++)
+		{
+			bPerpVertA[i] = dot(A.vertices[i], A.normals[j]);
+			bAmini = fminf(bAmini, bPerpVertA[i]);
+			bAmaxi = fmaxf(bAmaxi, bPerpVertA[i]);
+		}
+		for (int i = 0; i < B.size; i++)
+		{
+			bPerpVertB[i] = dot(B.vertices[i], B.normals[j]);
+			bBmini = fminf(bBmini, bPerpVertB[i]);
+			bBmaxi = fmaxf(bBmaxi, bPerpVertB[i]);
+		}
+		
+		bPlaceholder1 = bAmaxi - bBmini;
+		bPlaceholder2 = bBmaxi - bAmini;
+		bPD = fminf(bPlaceholder1, bPlaceholder2);
+		bCN = copysignf(1, bPlaceholder2 - bPlaceholder1);
+			
+		
+		if (bPD < retval.penetrationDepth)
+		{
+			retval.penetrationDepth = bPD;
+			retval.collisionNormal = bCN * B.normals[j];
+		}
+	}
+	return retval;
+}
+
 CollisionData PlaneBoxCollision(const plane & P, const AABB & B)
 {
 	CollisionData retval;
