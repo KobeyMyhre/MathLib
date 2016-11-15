@@ -9,6 +9,8 @@
 #include "Tail.h"
 #include "PlanetaryRenderer.h"
 #include "ShipRenderer.h"
+#include "Collider.h"
+#include <iostream>
 
 void main()
 {
@@ -124,14 +126,26 @@ void main()
 	Transform ST1(-1, 4);
 	Transform ST2(-1, -4);
 	
-	
+	vec2 hullVrts[] = { {-10 , 5 },
+						{ 3,11 },
+						
+						{7,9},
+						{7, -9},
+						
+						{3, -11},
+						{-10, -5} };
+	Collider playerCollider(hullVrts, 6);
+
+	Transform occluderTransform(0, 0);
+	occluderTransform.m_scale = vec2{ 8,8 };
+	Collider occluderCollider(hullVrts,6);
 	
 	ST1.m_parent = &playerTransform;
 	ST2.m_parent = &playerTransform;
 
 	playerTransform.m_scale = { 5,5 };
 	Rigidbody playerRigidbody;
-	
+	Rigidbody occluderRigidbody;
 	ShipRenderer SpaceShip;
 	
 
@@ -156,8 +170,27 @@ void main()
 		if (playerTransform.m_position.y < 0) playerTransform.m_position.y = H;
 		else if (playerTransform.m_position.y > H) playerTransform.m_position.y = 0;*/
 
-		
-		
+		CollisionData results = ColliderCollision(playerTransform, playerCollider, occluderTransform, occluderCollider);
+	
+
+		StaticResolution(playerTransform, playerRigidbody, playerCollider, occluderTransform, occluderCollider);
+		DynamicResolution(playerTransform, playerRigidbody, playerCollider, occluderTransform, occluderRigidbody, occluderCollider,1.5);
+
+
+
+
+		/*if (results.penetrationDepth >= 0)
+		{
+			vec2 mtv = results.penetrationDepth * results.collisionNormal;
+
+			vec3 mtv3 = { mtv.x,mtv.y, 1 };
+			
+			mtv3 = inverse(playerTransform.getGlobalTransform()) * mtv3;
+
+			mtv = mtv3.xy;
+			playerTransform.m_position += mtv;
+
+		}*/
 		
 		// UPDATE
 		playerLoco.update(playerTransform, playerRigidbody);
@@ -175,6 +208,7 @@ void main()
 		NlutoRbody.integrate(NlutoTransform, deltaTime);
 		playerRigidbody.integrate(playerTransform, deltaTime);
 		clutoRbody.integrate(clutoTransform, deltaTime);
+		occluderRigidbody.integrate(occluderTransform, deltaTime);
 		
 		// DRAW
 		
@@ -200,7 +234,9 @@ void main()
 		clutoMoon2Render.draw(clutoMoon2Transform, camera);
 
 		SpaceShip.draw(playerTransform, camera);
-		playerTransform.debugDaw(camera);
+		/*playerTransform.debugDaw(camera);*/
+		playerCollider.debugDraw(camera, playerTransform);
+		occluderCollider.debugDraw(camera, occluderTransform);
 		/*playerRigidbody.debugDraw(playerTransform, camera);
 		playerTransform.debugDrawShip(camera);*/
 		/*ST1.debugDrawShip(camera);

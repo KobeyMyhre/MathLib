@@ -118,6 +118,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PlanetaryMotor.cpp" />
     <ClCompile Include="PlanetaryRenderer.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="shapeDraw.h" />
     <ClInclude Include="PlanetaryMotor.h" />
     <ClInclude Include="PlanetaryRenderer.h" />
@@ -139,6 +141,10 @@
     <ClInclude Include="SpaceshipLocomotion.h" />
     <ClInclude Include="Tail.h" />
     <ClInclude Include="Transform.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\Debug\sfw.lib" />
+    <Library Include="..\Release\sfw.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

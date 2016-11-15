@@ -44,3 +44,17 @@ void drawPlane(const plane & A, unsigned color)
 	//sfw::drawLine(A.dir.x, A.dir.y, A.pos.y, A.pos.x, color);
 	//sfw::drawLine(A.pos.x, A.pos.y, A.dir.x, A.dir.y, color);
 }
+
+void drawHull(const hull & h, unsigned color)
+{
+	for (int i = 0; i < h.size; i++)
+	{
+		sfw::drawLine(h.vertices[i].x, h.vertices[i].y, h.vertices[(i + 1) % h.size].x, h.vertices[(i + 1) % h.size].y, color);
+		if (i >= h.size - 1)
+		{
+			sfw::drawLine(h.vertices[i].x, h.vertices[i].y, h.vertices[0].x, h.vertices[0].y, color);
+		}
+	}
+
+
+}

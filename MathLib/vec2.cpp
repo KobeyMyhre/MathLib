@@ -27,7 +27,7 @@ vec2 operator*(const vec2 &lhs, float rhs)
 }
 vec2 operator*( float lhs, const vec2 &rhs)
 {
-	return{ rhs.x * lhs, rhs.x *lhs };
+	return{ rhs.x * lhs, rhs.y *lhs };
 }
 
 vec2 operator/(const vec2 &lhs, float rhs)
@@ -165,6 +165,16 @@ vec2 max(const vec2 & a, const vec2 & b)
 		a.y > b.y ? a.y : b.y
 
 	};
+}
+
+vec2 project(const vec2 & I,const vec2 & N)
+{
+	return dot(I, normal(N)) * normal(N);
+}
+
+vec2 reflect(const vec2 & I, const vec2 & N)
+{
+	return I - 2 * project(I,N);
 }
 
 float vec2::operator[](unsigned idx) const

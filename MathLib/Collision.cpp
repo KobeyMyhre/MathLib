@@ -196,10 +196,7 @@ CollisionData hullCollision(const hull &A, const hull &B)
 	float aPerpVertB[16];
 	
 
-	float aAmini = INFINITY;
-	float aBmini = INFINITY;
-	float aAmaxi = -INFINITY;
-	float aBmaxi = -INFINITY;
+
 	float aPlaceholder1;
 	float aPlaceholder2;
 
@@ -212,14 +209,15 @@ CollisionData hullCollision(const hull &A, const hull &B)
 
 	float bPerpVertA[16];
 	float bPerpVertB[16];
-	float bAmini = INFINITY;
-	float bBmini = INFINITY;
-	float bAmaxi = -INFINITY;
-	float bBmaxi = -INFINITY;
+
 
 
 	for (int j = 0; j < A.size; j++)
 	{
+		float aAmini = INFINITY;
+		float aBmini = INFINITY;
+		float aAmaxi = -INFINITY;
+		float aBmaxi = -INFINITY;
 
 		for (int i = 0; i < A.size; i++)
 		{
@@ -252,6 +250,10 @@ CollisionData hullCollision(const hull &A, const hull &B)
 	}
 	for (int j = 0; j < B.size; j++)
 	{
+		float bAmini = INFINITY;
+		float bBmini = INFINITY;
+		float bAmaxi = -INFINITY;
+		float bBmaxi = -INFINITY;
 
 		for (int i = 0; i < A.size; i++)
 		{

@@ -180,8 +180,8 @@ hull operator*(const mat3 & T, const hull & C)
 	retval.size = C.size;
 	for (int i = 0; i < C.size; i++)
 	{
-		retval.normals[i] = (T * vec3 { C.normals[i].x  ,C.normals[i].y  , 0 }).xy;
-		retval.vertices[i] = (T * vec3{ C.vertices[i].x  ,C.vertices[i].y  , 1 }).xy;
+		retval.normals[i]  = normal((T * vec3 { C.normals[i].x  ,C.normals[i].y  , 0 }).xy);
+		retval.vertices[i] = (T * vec3{ C.vertices[i].x  ,C.vertices[i].y , 1 }).xy;
 		// fuck parrots 
 		// you fucking poo poo brain idiot
 		// magic the gathering sucks dick
@@ -200,18 +200,18 @@ hull::hull(const vec2 * a_vertices, unsigned vsize)
 	
 	
 	size = vsize;
-	for (int i = 0; i < vsize ; i++)
+	for (int i = 0; i < vsize && i < 16 ; i++)
 	{
 		vertices[i] = a_vertices[i];
-		vec2 ToPerp = a_vertices[i] - a_vertices[i + 1];
-		if (i >= vsize - 1)
+		vec2 ToPerp = a_vertices[i] - a_vertices[(i + 1) % size];
+
+		/*if (i >= vsize - 1)
 		{
 			 ToPerp = (a_vertices[i] - a_vertices[0]);
-		}
+		}*/
 		vec2 AbsToPerp = normal(ToPerp);    /*{ abs(ToPerp.x), abs(ToPerp.y) };*/
 		vec2 finalPerp = perp(AbsToPerp);
-		normals[i] = finalPerp;
-		
+		normals[i] = finalPerp;		
 	}
 	
 	
