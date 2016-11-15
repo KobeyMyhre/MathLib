@@ -69,7 +69,7 @@ CollisionData ColliderCollision(const Transform &AT, const Collider  &AC, const 
 	
 }
 
-CollisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC)
+CollisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
 {
 	CollisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)
@@ -78,7 +78,7 @@ CollisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & 
 		vec2 MTV = results.penetrationDepth * results.collisionNormal;
 		AT.m_position -= MTV;
 
-		AR.velocity = reflect(AR.velocity, results.collisionNormal);
+		AR.velocity = reflect(AR.velocity, results.collisionNormal) * bounciness;
 
 	}
 	return results;
