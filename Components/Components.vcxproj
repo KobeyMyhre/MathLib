@@ -118,10 +118,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
+    <ClCompile Include="ColliderObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="objectCollision.cpp" />
     <ClCompile Include="PlanetaryMotor.cpp" />
     <ClCompile Include="PlanetaryRenderer.cpp" />
+    <ClCompile Include="PlayerShip.cpp" />
     <ClCompile Include="Rigidbody.cpp" />
     <ClCompile Include="shapeDraw.cpp" />
     <ClCompile Include="ShipRenderer.cpp" />
@@ -131,7 +136,12 @@
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
+    <ClInclude Include="ColliderObject.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="objectCollision.h" />
+    <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="shapeDraw.h" />
     <ClInclude Include="PlanetaryMotor.h" />
     <ClInclude Include="PlanetaryRenderer.h" />

@@ -11,6 +11,7 @@
 #include "ShipRenderer.h"
 #include "Collider.h"
 #include <iostream>
+#include "GameState.h"
 
 void main()
 {
@@ -18,149 +19,94 @@ void main()
 	sfw::initContext(W, H);
 	float steps = 100;
 
-	Transform sunTransform;
-	sunTransform.m_position = vec2{ 400, 400 };
-	Rigidbody sunRbody;
-	sunRbody.angularDrag = 1.f;
-	PlanetaryMotor sunMotor;
-	sunMotor.m_roatationSpeed = 1.f;
-	PlanetaryRenderer sunRender(YELLOW, 25);
-
-	Transform NunTransform;
-	NunTransform.m_position = vec2{ -150, -150 };
-	NunTransform.m_scale = vec2{ 10,10 };
-	Rigidbody NunRbody;
-	NunRbody.angularDrag = 1.f;
-	PlanetaryMotor NunMotor;
-	NunMotor.m_roatationSpeed = 1.f;
-	NunTransform.m_parent = &sunTransform;
-	PlanetaryRenderer NunRender(WHITE, 2);
 	
 	
-	Transform NlutoTransform;
-	NlutoTransform.m_position = vec2{ 5, 5 };
-	NlutoTransform.m_parent = &NunTransform;
-	Rigidbody NlutoRbody;
-	NlutoRbody.angularDrag = 1.f;
-	PlanetaryMotor NlutoMotor;
-	NlutoMotor.m_roatationSpeed = 1.f;
-	PlanetaryRenderer NlutoRender(RED, 1);
+	GameState game;
+	game.play();
 	
 
-
-	Transform plutoTransform;
-	plutoTransform.m_position = vec2{ -150, 50 };
-	plutoTransform.m_parent = &sunTransform;
-	Rigidbody plutoRbody;
-	plutoRbody.angularDrag = 1.f;
-	PlanetaryMotor plutoMotor;
-	plutoMotor.m_roatationSpeed = 1.f;
-	PlanetaryRenderer plutoRender(CYAN,15);
-	
-	Transform plutoMoonTransform;
-	plutoMoonTransform.m_position = vec2{ 25, 0 };
-	plutoMoonTransform.m_parent = &plutoTransform;
-	
-	PlanetaryRenderer plutoMoonRender(GREEN, 6);
-
-	Transform clutoTransform;
-	clutoTransform.m_position = vec2{ 150, 150 };
-	clutoTransform.m_parent = &sunTransform;
-	Rigidbody clutoRbody;
-	clutoRbody.angularDrag = 1.f;
-	PlanetaryMotor clutoMotor;
-	clutoMotor.m_roatationSpeed = 1.f;
-	PlanetaryRenderer clutoRender(YELLOW, 15);
-
-	Transform clutoMoonTransform;
-	clutoMoonTransform.m_position = vec2{ 33, 0 };
-	clutoMoonTransform.m_parent = &clutoTransform;
-	PlanetaryRenderer clutoMoonRender(YELLOW, 6);
-
-	Transform clutoMoon2Transform;
-	clutoMoon2Transform.m_position = vec2{ 33, 15 };
-	clutoMoon2Transform.m_parent = &clutoTransform;
-	PlanetaryRenderer clutoMoon2Render(YELLOW, 6);
-	
-	/*--------Tails---------
-	Transform Head(200, 200);
-	Transform Joint1(25, 0);
-	Transform Joint2(25, 0);
-	Transform Joint3(25, 0);
-	Joint1.m_parent = &Head;
-	Joint2.m_parent = &Joint1;
-	Joint3.m_parent = &Joint2;
-	Rigidbody headRigidbody;
-	SpaceshipLocomotion headLoco;
-	SpaceshipController headController (' ', ' ', '1', '3', 'B');
-	Rigidbody Joint1Rigidbody;
-	SpaceshipLocomotion Joint1Loco;
-	Rigidbody Joint2Rigidbody;
-	SpaceshipLocomotion Joint2Loco;
-	Rigidbody Joint3Rigidbody;
-	SpaceshipLocomotion Joint3Loco;
-	SpaceshipController Joint1Controller (' ', ' ', 'E', 'Q', ' ');
-	SpaceshipController Joint2Controller(' ', ' ', 'D', 'A', 'B');
-	SpaceshipController Joint3Controller(' ', ' ', 'C', 'Z', 'B');*/
-	/* ---------Tail function---------
-	Transform Tail1(5, 0);
-	Transform Tail2(5, 0);
-	Transform Tail3(5, 0);
-	Transform Tail4(5, 0);
-	Rigidbody Tail1R;
-	Rigidbody Tail2R;
-	Rigidbody Tail3R;
-	Rigidbody Tail4R;
-	Tail tail1;
-	Tail tail2;
-	Tail tail3;
-	Tail tail4;
-	Tail1.m_parent = &playerTransform;
-	Tail2.m_parent = &Tail1;
-	Tail3.m_parent = &Tail2;
-	Tail4.m_parent = &Tail3;*/
-	
-	/*----------SPACESHIP--------*/
-	Transform playerTransform(200,200);
-	//playerTransform.m_scale = vec2{ 1,1 };	// TODO; remove me
-	Transform ST1(-1, 4);
-	Transform ST2(-1, -4);
-	
-	vec2 hullVrts[] = { {-10 , 5 },
-						{ 3,11 },
-						
-						{7,9},
-						{7, -9},
-						
-						{3, -11},
-						{-10, -5} };
-	Collider playerCollider(hullVrts, 6);
-
-	Transform occluderTransform(0, 0);
-	occluderTransform.m_scale = vec2{ 8,8 };
-	Collider occluderCollider(hullVrts,6);
-	
-	ST1.m_parent = &playerTransform;
-	ST2.m_parent = &playerTransform;
-
-	playerTransform.m_scale = { 5,5 };
-	Rigidbody playerRigidbody;
-	Rigidbody occluderRigidbody;
-	ShipRenderer SpaceShip;
-	
-
-
-	SpaceshipLocomotion playerLoco;
-	SpaceshipController Controls('W','S', 'A', 'D', ' ');
-
-	Transform cameraPosition;
-	
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
-		
-		// ----------SPACESHIP----------
+		game.update(deltaTime);
+		game.draw();
+	
+		}
+	
+
+	
+	
+	sfw::termContext();
+}
+
+
+
+	//Transform sunTransform;
+	//sunTransform.m_position = vec2{ 400, 400 };
+	//Rigidbody sunRbody;
+	//sunRbody.angularDrag = 1.f;
+	//PlanetaryMotor sunMotor;
+	//sunMotor.m_roatationSpeed = 1.f;
+	//PlanetaryRenderer sunRender(YELLOW, 75);
+
+	//Transform NunTransform;
+	//NunTransform.m_position = vec2{ -150, -150 };
+	//NunTransform.m_scale = vec2{ 10,10 };
+	//Rigidbody NunRbody;
+	//NunRbody.angularDrag = 1.f;
+	//PlanetaryMotor NunMotor;
+	//NunMotor.m_roatationSpeed = 1.f;
+	//NunTransform.m_parent = &sunTransform;
+	//PlanetaryRenderer NunRender(WHITE, 67);
+	//
+	//
+	//Transform NlutoTransform;
+	//NlutoTransform.m_position = vec2{ 5, 5 };
+	//NlutoTransform.m_parent = &NunTransform;
+	//Rigidbody NlutoRbody;
+	//NlutoRbody.angularDrag = 1.f;
+	//PlanetaryMotor NlutoMotor;
+	//NlutoMotor.m_roatationSpeed = 1.f;
+	//PlanetaryRenderer NlutoRender(RED, 37);
+	//
+
+
+	//Transform plutoTransform;
+	//plutoTransform.m_position = vec2{ -150, 50 };
+	//plutoTransform.m_parent = &sunTransform;
+	//Rigidbody plutoRbody;
+	//plutoRbody.angularDrag = 1.f;
+	//PlanetaryMotor plutoMotor;
+	//plutoMotor.m_roatationSpeed = 1.f;
+	//PlanetaryRenderer plutoRender(CYAN,60);
+	//
+	//Transform plutoMoonTransform;
+	//plutoMoonTransform.m_position = vec2{ 25, 0 };
+	//plutoMoonTransform.m_parent = &plutoTransform;
+	//
+	//PlanetaryRenderer plutoMoonRender(GREEN, 30);
+
+	//Transform clutoTransform;
+	//clutoTransform.m_position = vec2{ 150, 150 };
+	//clutoTransform.m_parent = &sunTransform;
+	//Rigidbody clutoRbody;
+	//clutoRbody.angularDrag = 1.f;
+	//PlanetaryMotor clutoMotor;
+	//clutoMotor.m_roatationSpeed = 1.f;
+	//PlanetaryRenderer clutoRender(YELLOW, 50);
+
+	//Transform clutoMoonTransform;
+	//clutoMoonTransform.m_position = vec2{ 33, 0 };
+	//clutoMoonTransform.m_parent = &clutoTransform;
+	//PlanetaryRenderer clutoMoonRender(YELLOW, 20);
+
+	//Transform clutoMoon2Transform;
+	//clutoMoon2Transform.m_position = vec2{ 33, 15 };
+	//clutoMoon2Transform.m_parent = &clutoTransform;
+	//PlanetaryRenderer clutoMoon2Render(YELLOW, 20);
+	//
+	// ----------SPACESHIP----------
 		
 		
 
@@ -170,11 +116,11 @@ void main()
 		if (playerTransform.m_position.y < 0) playerTransform.m_position.y = H;
 		else if (playerTransform.m_position.y > H) playerTransform.m_position.y = 0;*/
 
-		CollisionData results = ColliderCollision(playerTransform, playerCollider, occluderTransform, occluderCollider);
+		//CollisionData results = ColliderCollision(playerTransform, playerCollider, occluderTransform, occluderCollider);
 	
 
-		StaticResolution(playerTransform, playerRigidbody, playerCollider, occluderTransform, occluderCollider);
-		DynamicResolution(playerTransform, playerRigidbody, playerCollider, occluderTransform, occluderRigidbody, occluderCollider,1.5);
+		//StaticResolution(playerTransform, playerRigidbody, playerCollider, occluderTransform, occluderCollider);
+		//DynamicResolution(playerTransform, playerRigidbody, playerCollider, occluderTransform, occluderRigidbody, occluderCollider,1.5);
 
 
 
@@ -193,54 +139,54 @@ void main()
 		}*/
 		
 		// UPDATE
-		playerLoco.update(playerTransform, playerRigidbody);
-		Controls.update(playerLoco);
-		sunMotor.update(sunRbody);
-		plutoMotor.update(plutoRbody);
-		NunMotor.update(NunRbody);
-		NlutoMotor.update(NlutoRbody);
-		clutoMotor.update(clutoRbody);
+		/*playerLoco.update(playerTransform, playerRigidbody);
+		Controls.update(playerLoco);*/
+		//sunMotor.update(sunRbody);
+		//plutoMotor.update(plutoRbody);
+		//NunMotor.update(NunRbody);
+		//NlutoMotor.update(NlutoRbody);
+		//clutoMotor.update(clutoRbody);
 
-		// Integrate
-		plutoRbody.integrate(plutoTransform, deltaTime);
-		sunRbody.integrate(sunTransform,deltaTime );
-		NunRbody.integrate(NunTransform, deltaTime);
-		NlutoRbody.integrate(NlutoTransform, deltaTime);
-		playerRigidbody.integrate(playerTransform, deltaTime);
-		clutoRbody.integrate(clutoTransform, deltaTime);
-		occluderRigidbody.integrate(occluderTransform, deltaTime);
-		
+		//// Integrate
+		//plutoRbody.integrate(plutoTransform, deltaTime);
+		//sunRbody.integrate(sunTransform,deltaTime );
+		//NunRbody.integrate(NunTransform, deltaTime);
+		//NlutoRbody.integrate(NlutoTransform, deltaTime);
+		///*playerRigidbody.integrate(playerTransform, deltaTime);*/
+		//clutoRbody.integrate(clutoTransform, deltaTime);
+		//occluderRigidbody.integrate(occluderTransform, deltaTime);
+		//
 		// DRAW
 		
 
-		vec2 gp = playerTransform.getGlobalPosition();
+	/*	vec2 gp = playerTransform.getGlobalPosition();
 
 		cameraPosition.m_position = lerp(cameraPosition.m_position, playerTransform.getGlobalPosition(), sfw::getDeltaTime()*10);
 
 		mat3 proj = translate(400, 400) * scale(1, 1);
 		mat3 view = inverse(cameraPosition.getGlobalTransform());
 
-		mat3 camera = proj * view;
+		mat3 camera = proj * view;*/
 
 		
-		sunTransform.debugDaw(camera);
-		sunRender.draw(sunTransform, camera);
-		plutoRender.draw(plutoTransform, camera);
-		plutoMoonRender.draw(plutoMoonTransform, camera);
-		NunRender.draw(NunTransform,  camera);
-		NlutoRender.draw(NlutoTransform, camera);
-		clutoRender.draw(clutoTransform, camera);
-		clutoMoonRender.draw(clutoMoonTransform, camera);
-		clutoMoon2Render.draw(clutoMoon2Transform, camera);
+		//sunTransform.debugDaw(camera);
+		//sunRender.draw(sunTransform, camera);
+		//plutoRender.draw(plutoTransform, camera);
+		//plutoMoonRender.draw(plutoMoonTransform, camera);
+		//NunRender.draw(NunTransform,  camera);
+		//NlutoRender.draw(NlutoTransform, camera);
+		//clutoRender.draw(clutoTransform, camera);
+		//clutoMoonRender.draw(clutoMoonTransform, camera);
+		//clutoMoon2Render.draw(clutoMoon2Transform, camera);
 
-		SpaceShip.draw(playerTransform, camera);
-		/*playerTransform.debugDaw(camera);*/
-		playerCollider.debugDraw(camera, playerTransform);
-		occluderCollider.debugDraw(camera, occluderTransform);
-		/*playerRigidbody.debugDraw(playerTransform, camera);
-		playerTransform.debugDrawShip(camera);*/
-		/*ST1.debugDrawShip(camera);
-		ST2.debugDrawShip(camera);*/
+		////SpaceShip.draw(playerTransform, camera);
+		///*playerTransform.debugDaw(camera);*/
+		//playerCollider.debugDraw(camera, playerTransform);
+		//occluderCollider.debugDraw(camera, occluderTransform);
+		///*playerRigidbody.debugDraw(playerTransform, camera);
+		//playerTransform.debugDrawShip(camera);*/
+		///*ST1.debugDrawShip(camera);
+		//ST2.debugDrawShip(camera);*/
 
 		
 		
@@ -295,10 +241,75 @@ void main()
 		if (Head.m_position.y < 0) Head.m_position.y = H;
 		else if (Head.m_position.y > H) Head.m_position.y = 0;
 */
-		}
+/*--------Tails---------
+	Transform Head(200, 200);
+	Transform Joint1(25, 0);
+	Transform Joint2(25, 0);
+	Transform Joint3(25, 0);
+	Joint1.m_parent = &Head;
+	Joint2.m_parent = &Joint1;
+	Joint3.m_parent = &Joint2;
+	Rigidbody headRigidbody;
+	SpaceshipLocomotion headLoco;
+	SpaceshipController headController (' ', ' ', '1', '3', 'B');
+	Rigidbody Joint1Rigidbody;
+	SpaceshipLocomotion Joint1Loco;
+	Rigidbody Joint2Rigidbody;
+	SpaceshipLocomotion Joint2Loco;
+	Rigidbody Joint3Rigidbody;
+	SpaceshipLocomotion Joint3Loco;
+	SpaceshipController Joint1Controller (' ', ' ', 'E', 'Q', ' ');
+	SpaceshipController Joint2Controller(' ', ' ', 'D', 'A', 'B');
+	SpaceshipController Joint3Controller(' ', ' ', 'C', 'Z', 'B');*/
+	/* ---------Tail function---------
+	Transform Tail1(5, 0);
+	Transform Tail2(5, 0);
+	Transform Tail3(5, 0);
+	Transform Tail4(5, 0);
+	Rigidbody Tail1R;
+	Rigidbody Tail2R;
+	Rigidbody Tail3R;
+	Rigidbody Tail4R;
+	Tail tail1;
+	Tail tail2;
+	Tail tail3;
+	Tail tail4;
+	Tail1.m_parent = &playerTransform;
+	Tail2.m_parent = &Tail1;
+	Tail3.m_parent = &Tail2;
+	Tail4.m_parent = &Tail3;*/
 	
+	///*----------SPACESHIP--------*/
+	//Transform playerTransform(200,200);
+	////playerTransform.m_scale = vec2{ 1,1 };	// TODO; remove me
+	//Transform ST1(-1, 4);
+	//Transform ST2(-1, -4);
+	//
+	//vec2 hullVrts[] = { {-10 , 5 },
+	//					{ 3,11 },
+	//					
+	//					{7,9},
+	//					{7, -9},
+	//					
+	//					{3, -11},
+	//					{-10, -5} };
+	//Collider playerCollider(hullVrts, 6);
 
-	
-	
-	sfw::termContext();
-}
+	//Transform occluderTransform(0, 0);
+	//occluderTransform.m_scale = vec2{ 8,8 };
+	//Collider occluderCollider(hullVrts,6);
+	//
+	//ST1.m_parent = &playerTransform;
+	//ST2.m_parent = &playerTransform;
+
+	//playerTransform.m_scale = { 5,5 };
+	//Rigidbody playerRigidbody;
+	//Rigidbody occluderRigidbody;
+	//ShipRenderer SpaceShip;
+	//
+
+
+	//SpaceshipLocomotion playerLoco;
+	//SpaceshipController Controls('W','S', 'A', 'D', ' ');
+
+	//Transform cameraPosition;

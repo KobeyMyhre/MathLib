@@ -283,6 +283,8 @@ CollisionData hullCollision(const hull &A, const hull &B)
 	return retval;
 }
 
+
+
 //CollisionDataSwept SweptHullCollision(const hull & A, const hull & B, const vec2 & dA, const vec2 & dB)
 //{
 //	CollisionDataSwept retval;
@@ -399,3 +401,20 @@ bool CollisionDataSwept::result() const
 {
 	return false;
 }
+CollisionData HullCollisionGroup(const hull A[], unsigned asize,
+	const hull B[], unsigned bsize)
+{
+	CollisionData retval;
+
+	retval.penetrationDepth = INFINITY;
+	for (int i = 0; i < asize; ++i)
+		for (int j = 0; j < bsize; ++j)
+		{
+			CollisionData temp = hullCollision(A[i], B[j]);
+			if (temp.penetrationDepth < retval.penetrationDepth);
+			retval = temp;
+
+		}
+	return retval;
+}
+	

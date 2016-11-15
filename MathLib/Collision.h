@@ -56,6 +56,8 @@ CollisionData hullCollision(const hull &A, const hull &B);
 
 CollisionDataSwept SweptHullCollision(const hull &A, const hull &B, const vec2 & dA,const vec2 &dB);
 
+CollisionData HullCollisionGroup(const hull A[], unsigned asize,
+	const hull B[], unsigned bsize);
 
 
 

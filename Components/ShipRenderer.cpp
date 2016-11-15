@@ -65,9 +65,9 @@ void ShipRenderer::draw(Transform & ship, const mat3 & T)
 	sfw::drawLine(C.x, C.y, D.x, D.y, BLACK);
 	sfw::drawLine(A.x, A.y, D.x, D.y, BLACK);*/
 
-	drawCircle((glob * circle{ 0,0,12 }), MAGENTA);
+	/*drawCircle((glob * circle{ 0,0,12 }), MAGENTA);
 	drawAABB((glob * AABB{ 0,0,6,6 }), CYAN);
-	drawPlane((glob * plane{ 0,0, 0,1 }), WHITE);
+	drawPlane((glob * plane{ 0,0, 0,1 }), WHITE);*/
 
 	/*sfw::drawCircle(C1.x, C1.y, 2, 4, RED);
 	sfw::drawCircle(C2.x, C2.y, 2, 4, RED);*/

@@ -3,6 +3,9 @@
 #include "sfwdraw.h"
 #include "ShipRenderer.h"
 #include <cmath>
+Collider::Collider()
+{
+}
 Collider::Collider(const vec2 * verts, int size) : Hull(verts,size)
 {
 
@@ -52,6 +55,12 @@ void Collider::debugDraw(const mat3 & T, const Transform & trans)
 	//drawAABB((glob * AABB{ 0,0,6,6 }), WHITE);
 	drawAABB(glob * box, 0x888888ff);
 	drawHull(glob * Hull, 0x888888ff);
+}
+
+void Collider::debugDrawHull(const mat3 & T, const Transform & trans,unsigned color)
+{
+	mat3 glob = T * trans.getGlobalTransform();
+	drawHull(glob * Hull, color);
 }
 
 CollisionData ColliderCollision(const Transform &AT, const Collider  &AC, const Transform &BT, const Collider &BC)
