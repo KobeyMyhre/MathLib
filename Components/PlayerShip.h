@@ -18,6 +18,7 @@ public:
 	SpaceshipLocomotion spaceshiplocomotion;
 	ShipRenderer shiprender;
 	PlayerShip();
+	
 
 	void update(float deltaTime, class GameState &gs);
 	void draw(const mat3 &camera);

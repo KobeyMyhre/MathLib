@@ -13,10 +13,12 @@ void GameState::play()
 		d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
 	}
 
+	track.time = 37.f;
+
 	player.transform.m_position = vec2{ 200,200 };
 	player.transform.m_facing = -1.57;
-	lapline.transform.m_position = vec2{ 600,0 };
-	
+	lapline[0].transform.m_position = vec2{ 600,0 };
+	lapline[1].transform.m_position = vec2{ 1000,0 };
 
 
 
@@ -98,19 +100,29 @@ void GameState::play()
 	blocks[39].transform.m_position = vec2{ 940,-630 };
 	blocks[40].transform.m_position = vec2{ 450,0 }; //leftside
 	blocks[41].transform.m_position = vec2{ 940,-498 };
-	blocks[42].transform.m_position = vec2{ 1520,-500 };
+	blocks[42].transform.m_position = vec2{ 1520,-150 };
 	blocks[43].transform.m_position = vec2{ 1520,0 };
 	blocks[44].transform.m_position = vec2{ 500,500 }; // rightside
-	blocks[45].transform.m_position = vec2{ 700,500 }; // rightside
-	blocks[46].transform.m_position = vec2{ 1470,57 };
+	blocks[45].transform.m_position = vec2{ 1000,500 }; // rightside
+	blocks[46].transform.m_position = vec2{ 1208,373 };
+
+	// fix doubled-up blocks for timer
 }
 
 void GameState::update(float deltaTime)
 {
+	/*if (track.time < 0)
+	{
+		sfw::termContext();
+	}*/
 	player.update(deltaTime, *this);
 	camera.update(deltaTime, *this);
-	playerLapCollision(player, lapline);
 
+	
+	track.time -= deltaTime;
+
+	playerLapCollision(  player, lapline[0], lapline[1],track );
+	
 
 	for (int i = 0; i < BlocksNum; i++)
 	{
@@ -118,7 +130,7 @@ void GameState::update(float deltaTime)
 	}
 	for (int i = 0; i < BlocksNum; i++)
 	{
-		playerObjectCollision(player, blocks[i]);
+		playerObjectCollision(player, blocks[i], track);
 	}
 	/*for (int i = 0; i < 2; i++)
 		for(int j = 0; j < 2; j++)
@@ -132,9 +144,10 @@ void GameState::draw()
 	mat3 cam = camera.getCameraMatrix();
 	
 	player.draw(cam);
-	lapline.draw(cam);
+	lapline[0].draw(cam);
+	lapline[1].draw(cam);
 
-	drawScore(d, laps, 0);
+	drawScore(d, track.laps, track.time);
 	for (int i = 0; i < BlocksNum; i++)
 	{
 		blocks[i].draw(cam);

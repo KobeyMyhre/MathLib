@@ -2,8 +2,8 @@
 #include "sfwdraw.h"
 Rigidbody::Rigidbody()
 {
-	drag = .25;
-	angularDrag = .3;
+	drag = .4;
+	angularDrag = .6;
 	mass = 1;
 	force = vec2 { 0,0 };
 	impulse = vec2 { 0,0 };

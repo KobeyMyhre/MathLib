@@ -6,6 +6,7 @@
 #include "Laps.h"
 #include "GameState.h"
 #include "LapLine.h"
+#include <iostream>
 Collider::Collider()
 {
 }
@@ -81,7 +82,7 @@ CollisionData ColliderCollision(const Transform &AT, const Collider  &AC, const 
 	
 }
 
-CollisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+CollisionData StaticResolution( Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
 {
 	CollisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)
@@ -95,21 +96,58 @@ CollisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & 
 	}
 	return results;
 }
-CollisionData LapResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+CollisionData StaticResolutionWithTime(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
 {
-
-	// have second lapline
-	// check if lapline collision one passed, bool = true
-	// check if 2nd lapline collision passed , bool = true, laps ++, bools set =false
 	CollisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)
 	{
+		T.time -= 3.f;
+		vec2 MTV = results.penetrationDepth * results.collisionNormal;
+		AT.m_position -= MTV;
+
+		AR.velocity = reflect(AR.velocity, results.collisionNormal) * bounciness;
+
+	}
+	return results;
+}
+CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX)
+{
+	
+	
+	
+	// have second lapline
+	// check if lapline collision one passed, bool = true
+	// check if 2nd lapline collision passed , bool = truew, laps ++, bools set =false
+	CollisionData results = ColliderCollision(AT, AC, BTX, BCX);
+	
+	
+	if (results.penetrationDepth >= 0)
+	{
+		T.m_lap = true;
 		
-		 GameState::laps += 1;
+		
+		
+	}
+	
+	CollisionData results1 = ColliderCollision(AT, AC, BT, BC);
+	if (results1.penetrationDepth >= 0 && T.m_lap == true)
+	{
+		
+			
+			if(T.m_lap == true )
+			{
+				T.laps++;
+				T.time = 36.f;
+				T.m_lap = false;
+				
+			}
+
+		
+		
 
 	}
 	
-	return results;
+	return results,results1;
 }
 
 CollisionData DynamicResolution(Transform & AT, Rigidbody & AR, const Collider & AC, Transform & BT, Rigidbody & BR, const Collider & BC, float bounciness)

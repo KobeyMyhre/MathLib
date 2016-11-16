@@ -1,12 +1,13 @@
 #include "objectCollision.h"
 #include "LapLine.h"
-void playerObjectCollision(PlayerShip & player, ColliderObj &CO)
+void playerObjectCollision(PlayerShip & player, ColliderObj &CO, Track &T)
 {
-	StaticResolution(player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
+	//StaticResolution(player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
+	StaticResolutionWithTime(T,player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
 }
-void playerLapCollision(PlayerShip & player, LapLine &LL)
+void playerLapCollision(PlayerShip & player, LapLine &LL, LapLine &L2, Track &T)
 {
-	LapResolution(player.transform, player.rigidbody, player.collider, LL.transform, LL.collider, 1);
+	LapResolution(T, player.transform, player.rigidbody, player.collider, LL.transform, LL.collider, L2.transform, L2.collider);
 }
 
 void ObjectCollision(ColliderObj & as1, ColliderObj & as2)

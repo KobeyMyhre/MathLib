@@ -12,7 +12,8 @@ public:
 	vec2 m_scale;
 	float m_facing;
 	unsigned m_color;
-
+	bool m_lap = false;
+	float time;
 	Transform *m_parent;
 
 	

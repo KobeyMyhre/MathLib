@@ -122,6 +122,9 @@
     <ClInclude Include="LapLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TrackManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="..\Debug\sfw.lib">
