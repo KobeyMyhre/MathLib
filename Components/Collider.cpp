@@ -3,6 +3,9 @@
 #include "sfwdraw.h"
 #include "ShipRenderer.h"
 #include <cmath>
+#include "Laps.h"
+#include "GameState.h"
+#include "LapLine.h"
 Collider::Collider()
 {
 }
@@ -90,6 +93,22 @@ CollisionData StaticResolution(Transform & AT, Rigidbody & AR, const Collider & 
 		AR.velocity = reflect(AR.velocity, results.collisionNormal) * bounciness;
 
 	}
+	return results;
+}
+CollisionData LapResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+{
+
+	// have second lapline
+	// check if lapline collision one passed, bool = true
+	// check if 2nd lapline collision passed , bool = true, laps ++, bools set =false
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0)
+	{
+		
+		 GameState::laps += 1;
+
+	}
+	
 	return results;
 }
 

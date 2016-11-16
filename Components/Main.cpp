@@ -19,7 +19,7 @@ void main()
 	sfw::initContext(W, H);
 	float steps = 100;
 
-	
+
 	
 	GameState game;
 	game.play();

@@ -122,6 +122,8 @@
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderObject.cpp" />
     <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="LapLine.cpp" />
+    <ClCompile Include="Laps.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="objectCollision.cpp" />
     <ClCompile Include="PlanetaryMotor.cpp" />
@@ -140,6 +142,8 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderObject.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="LapLine.h" />
+    <ClInclude Include="Laps.h" />
     <ClInclude Include="objectCollision.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="shapeDraw.h" />

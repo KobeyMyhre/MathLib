@@ -30,6 +30,12 @@ vec2 operator*( float lhs, const vec2 &rhs)
 	return{ rhs.x * lhs, rhs.y *lhs };
 }
 
+vec2 & operator*=(vec2 & lhs, float rhs)
+{
+		return lhs = lhs * rhs;
+	
+}
+
 vec2 operator/(const vec2 &lhs, float rhs)
 {
 	return{ lhs.x / rhs, lhs.y / rhs };

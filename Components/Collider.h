@@ -19,5 +19,5 @@ public:
 CollisionData ColliderCollision(const Transform &AT, const Collider &AC, const Transform &BT, const Collider &BC);
 
 CollisionData StaticResolution( Transform &AT, Rigidbody &AR, const Collider &AC, const Transform &BT, const Collider &BC, float bounciness);
-
+CollisionData LapResolution(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness);
 CollisionData DynamicResolution(Transform &AT, Rigidbody &AR, const Collider &AC,  Transform &BT, Rigidbody &BR, const Collider &BC, float bounciness = 1);

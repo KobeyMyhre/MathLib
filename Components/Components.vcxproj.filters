@@ -63,6 +63,12 @@
     <ClCompile Include="objectCollision.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Laps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LapLine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -108,6 +114,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="objectCollision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Laps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LapLine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
