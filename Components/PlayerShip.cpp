@@ -42,7 +42,24 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 void PlayerShip::draw(const mat3 &camera)
 {
 	transform.debugDaw(camera);
-	/*collider.debugDraw(camera, transform);*/
+	//collider.debugDraw(camera, transform);
 	shiprender.draw(transform, camera);
+
+	
 	/*rigidbody.debugDraw(transform, camera);*/
+}
+
+void PlayerShip::drawEffect2(const mat3 & camera)
+{
+	shiprender.drawEffect2(transform, camera);
+}
+
+void PlayerShip::drawEffect1(const mat3 & camera)
+{
+	shiprender.drawEffect1(transform, camera);
+}
+
+void PlayerShip::drawEffect0(const mat3 & camera)
+{
+	shiprender.drawEffect0(transform, camera);
 }

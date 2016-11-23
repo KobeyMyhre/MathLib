@@ -1,9 +1,10 @@
 #include "objectCollision.h"
 #include "LapLine.h"
+#include "PickUps.h"
 void playerObjectCollision(PlayerShip & player, ColliderObj &CO, Track &T)
 {
 	//StaticResolution(player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
-	StaticResolutionWithTime(T,player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
+	StaticResolutionWithEffect(T,player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
 }
 void playerLapCollision(PlayerShip & player, LapLine &LL, LapLine &L2, Track &T)
 {
@@ -16,4 +17,21 @@ void ObjectCollision(ColliderObj & as1, ColliderObj & as2)
 		return;
 
 	DynamicResolution(as1.transform, as1.rigidbody, as1.collider, as2.transform, as2.rigidbody, as2.collider);
+}
+
+void playerPickUpCollision(PlayerShip & player, PickUps & CO, Track & T)
+{
+	StaticResolutionForPickUps( T , player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
+}
+void playerPickUpCollision2(PlayerShip & player, PickUps & CO, Track & T)
+{
+	StaticResolutionForPickUps2(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
+}
+void playerPickUpCollision3(PlayerShip & player, PickUps & CO, Track & T)
+{
+	StaticResolutionForPickUps3(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
+}
+void playerPickUpCollision4(PlayerShip & player, PickUps & CO, Track & T)
+{
+	StaticResolutionForPickUps4(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
 }

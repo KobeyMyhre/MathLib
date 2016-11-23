@@ -15,6 +15,7 @@ public:
 	bool m_lap = false;
 	float time;
 	Transform *m_parent;
+	
 
 	
 
@@ -32,6 +33,9 @@ public:
 
 	
 	
+	
 	void debugDaw(const mat3 &T = mat3Identity()) const;
+	void debugDrawGoX(const mat3 &T = mat3Identity()) const;
 	void debugDrawShip(const mat3 &T = mat3Identity()) const;
+	void debugDrawEffect(const mat3 &T = mat3Identity()) const;
 };

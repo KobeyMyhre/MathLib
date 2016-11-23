@@ -7,6 +7,7 @@
 #include "GameState.h"
 #include "LapLine.h"
 #include <iostream>
+#include "PickUps.h"
 Collider::Collider()
 {
 }
@@ -96,18 +97,65 @@ CollisionData StaticResolution( Transform & AT, Rigidbody & AR, const Collider &
 	}
 	return results;
 }
-CollisionData StaticResolutionWithTime(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+CollisionData StaticResolutionForPickUps(Track &T, Transform & AT, SpaceshipLocomotion &AS, const Collider & AC,  Transform & BT, const Collider & BC, float bounciness)
 {
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0 && T.PickedUp == false)
+	{
+		AS.speed += 100;
+		T.PickedUp = true;
+	}
+	return results;
+}
+CollisionData StaticResolutionForPickUps2(Track &T, Transform & AT, SpaceshipLocomotion &AS, const Collider & AC, Transform & BT, const Collider & BC, float bounciness)
+{
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0 && T.PickedUp2 == false)
+	{
+		AS.speed += 100;
+		T.PickedUp2 = true;
+	}
+	return results;
+}
+CollisionData StaticResolutionForPickUps3(Track &T, Transform & AT, SpaceshipLocomotion &AS, const Collider & AC, Transform & BT, const Collider & BC, float bounciness)
+{
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0 && T.PickedUp3 == false)
+	{
+		AS.speed += 100;
+		T.PickedUp3 = true;
+	}
+	return results;
+}
+CollisionData StaticResolutionForPickUps4(Track &T, Transform & AT, SpaceshipLocomotion &AS, const Collider & AC, Transform & BT, const Collider & BC, float bounciness)
+{
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0 && T.PickedUp4 == false)
+	{
+		AS.speed += 100;
+		T.PickedUp4 = true;
+	}
+	return results;
+}
+CollisionData StaticResolutionWithEffect(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+{
+	
+
+
 	CollisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)
 	{
-		T.time -= 3.f;
+		
 		vec2 MTV = results.penetrationDepth * results.collisionNormal;
 		AT.m_position -= MTV;
-
 		AR.velocity = reflect(AR.velocity, results.collisionNormal) * bounciness;
+		T.Effect = true;
+
 
 	}
+	
+
+	
 	return results;
 }
 CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX)
@@ -136,10 +184,22 @@ CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Coll
 			
 			if(T.m_lap == true )
 			{
+				if (T.laps == 0)
+					T.time += 20.f;
+				if (T.laps == 1)
+					T.time += 17.f;
+				if (T.laps == 2)
+					T.time += 14.f;
+				if (T.laps == 3)
+					T.time += 11.f;
+
 				T.laps++;
-				T.time = 36.f;
-				T.m_lap = false;
 				
+				T.m_lap = false;
+				T.PickedUp = false;
+				T.PickedUp2 = false;
+				T.PickedUp3 = false;
+				T.PickedUp4 = false;
 			}
 
 		

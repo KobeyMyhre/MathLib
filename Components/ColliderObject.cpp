@@ -19,11 +19,12 @@ ColliderObj::ColliderObj()
 void ColliderObj::update(float deltaTime, GameState & gs)
 {
 	rigidbody.integrate(transform, deltaTime);
+	
 }
 
 void ColliderObj::draw(const mat3 & camera)
 {
 	transform.debugDaw(camera);
-	collider.debugDrawHull(camera, transform, MAGENTA);
+	collider.debugDrawHull(camera, transform, GREEN);
 	/*rigidbody.debugDraw(transform, camera);*/
 }

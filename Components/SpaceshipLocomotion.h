@@ -3,7 +3,7 @@
 
 class SpaceshipLocomotion
 {
-
+public:
 	
 	float Vertthrust;
 	float Horzthrust;
@@ -15,11 +15,11 @@ class SpaceshipLocomotion
 	float maxTurn;
 	float turnspeed;
 
-	float speed;
+	
 	float maxSpeed;
-public:
-	SpaceshipLocomotion();
 
+	SpaceshipLocomotion();
+	float speed;
 	void doSTOP(float value);
 	void doThrust(float value, float value1);
 	void doTurn(float value);

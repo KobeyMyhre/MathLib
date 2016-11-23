@@ -15,5 +15,5 @@ void LapLine::update(float deltaTime, GameState & gs)
 void LapLine::draw(const mat3 & camera)
 {
 	transform.debugDaw(camera);
-	collider.debugDrawHull(camera, transform, GREEN);
+	collider.debugDrawHull(camera, transform, BLACK);
 }

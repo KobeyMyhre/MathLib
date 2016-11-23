@@ -10,5 +10,7 @@ public:
 	ShipRenderer();
 
 	void draw(Transform & planeTrans, const mat3 &T);
-	
+	void drawEffect0(Transform & planeTrans, const mat3 &T);
+	void drawEffect1(Transform & planeTrans, const mat3 &T);
+	void drawEffect2(Transform & planeTrans, const mat3 &T);
 };

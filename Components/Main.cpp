@@ -12,35 +12,78 @@
 #include "Collider.h"
 #include <iostream>
 #include "GameState.h"
+#include "MenuState.h"
+#include "Depart.h"
+#include "Option.h"
+#include "TrackManager.h"
 
 void main()
 {
 	float W = 800, H = 800;
 	sfw::initContext(W, H);
 	float steps = 100;
+	int	d = sfw::loadTextureMap("./res/fontmap.png", 16, 16);
 
 
-	
 	GameState game;
-	game.play();
 	
+	depart depart;
+	option option;
+
+
+	depart.init(d);
+	option.init(d);
+
+
+
+	MenuState state = Enter_Option;
+
+	game.play();
+
 
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
+		switch (state)
+		{
 
-		game.update(deltaTime);
-		game.draw();
-	
+		case Enter_Option:
+			option.play();
+		case Option:
+			option.step();
+			option.draw();
+			state = option.next();
+			break;
+		case Enter_Depart:
+			depart.play(game.w);
+		case Depart:
+			depart.step();
+			depart.draw();
+			state = depart.next();
+			break;
+
+
+		case Enter_Game:
+			//gs.isGameOver();
+			game.play();
+		case Game:
+			game.update(deltaTime);
+			game.draw();
+			state = game.nextAppState();
+
+
+			/*game.update(deltaTime);
+			game.draw();*/
+
 		}
-	
 
-	
-	
-	sfw::termContext();
+
+
+
+		//sfw::termContext();
+	}
+
 }
-
-
 
 	//Transform sunTransform;
 	//sunTransform.m_position = vec2{ 400, 400 };

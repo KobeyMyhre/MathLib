@@ -69,6 +69,18 @@
     <ClCompile Include="LapLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PickUps.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Depart.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TrackManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Transform.h">
@@ -123,6 +135,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TrackManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PickUps.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Depart.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -22,5 +22,7 @@ public:
 
 	void update(float deltaTime, class GameState &gs);
 	void draw(const mat3 &camera);
-
+	void drawEffect0(const mat3 &camera);
+	void drawEffect1(const mat3 &camera);
+	void drawEffect2(const mat3 &camera);
 };

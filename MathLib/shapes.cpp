@@ -46,6 +46,8 @@ AABB operator*(const mat3 & T, const AABB & B)
 	float greatestY;
 	float smallestY;
 
+	
+
 	if (ta.x <= tb.x && ta.x <= tc.x && ta.x <= td.x)
 	{
 		smallestX = ta.x;

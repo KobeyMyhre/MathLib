@@ -68,16 +68,21 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>MathLib;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(SolutionDir)MathLib\;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>%(SolutionDir)MathLib\;C:\Users\kobey.myhre\Documents\Visual Studio 2015\Projects\MathLib\MathLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>&amp;(SolutionDir)$(Configuartion)\;C:\Users\kobey.myhre\Documents\Visual Studio 2015\Projects\MathLib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)$(Configuration)\;C:\Users\kobey.myhre\Documents\Visual Studio 2015\Projects\MathLib\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>MathLib.lib;sfw.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -86,6 +91,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>MathLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -121,11 +127,14 @@
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="ColliderObject.cpp" />
+    <ClCompile Include="Depart.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="LapLine.cpp" />
     <ClCompile Include="Laps.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="objectCollision.cpp" />
+    <ClCompile Include="Option.cpp" />
+    <ClCompile Include="PickUps.cpp" />
     <ClCompile Include="PlanetaryMotor.cpp" />
     <ClCompile Include="PlanetaryRenderer.cpp" />
     <ClCompile Include="PlayerShip.cpp" />
@@ -135,16 +144,21 @@
     <ClCompile Include="SpaceshipController.cpp" />
     <ClCompile Include="SpaceshipLocomotion.cpp" />
     <ClCompile Include="Tail.cpp" />
+    <ClCompile Include="TrackManager.cpp" />
     <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderObject.h" />
+    <ClInclude Include="Depart.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="LapLine.h" />
     <ClInclude Include="Laps.h" />
+    <ClInclude Include="MenuState.h" />
     <ClInclude Include="objectCollision.h" />
+    <ClInclude Include="Option.h" />
+    <ClInclude Include="PickUps.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="shapeDraw.h" />
     <ClInclude Include="PlanetaryMotor.h" />
