@@ -32,13 +32,6 @@ void GameState::play()
 	
 	movement = false;
 	
-
-
-	
-
-
-	
-
 	Red = false;
 	Yellow = true;
 	Green = true;
@@ -183,13 +176,14 @@ void GameState::update(float deltaTime)
 	}
 		
 
+	
 	if (movement == true)
 	{
 		player.rigidbody.mass = 1;
+
 		player.update(deltaTime, *this);
-
 	}
-
+	
 	
 
 	
