@@ -13,7 +13,9 @@ void option::play()
 
 void option::draw()
 {
-	sfw::drawString(d, "Press Enter to Start a New Game", 100, 100, 20, 20, 0, 0, WHITE);
+	sfw::drawString(d, "Please Enter Credit Card Information To Continue", 50, 500, 15, 15, 0, 0, GREEN);
+	sfw::drawString(d, "XXXX-XXXX-XXXX-XXXX", 100, 475, 20, 20, 0, 0, BLACK);
+	sfw::drawString(d, "[ENTER]", 400, 200, 20, 20, 0, 0, GREEN);
 	//sfw::drawString(d, "Press I to View Controlls", 100, 300, 20, 20, 0, 0, WHITE);
 }
 

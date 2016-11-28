@@ -17,7 +17,7 @@ void GameState::play()
 	}
 	GameOver = false;
 	track.laps = 0;
-	track.time = 34.f;
+	track.time = 40.f;
 	track.GoTime = 6.f;
 	
 	
@@ -172,7 +172,7 @@ void GameState::update(float deltaTime)
 	if (track.GoTime < 0)
 	{
 		movement = true;
-	
+		
 	}
 		
 

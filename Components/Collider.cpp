@@ -185,11 +185,11 @@ CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Coll
 			if(T.m_lap == true )
 			{
 				if (T.laps == 0)
-					T.time += 20.f;
-				if (T.laps == 1)
 					T.time += 17.f;
-				if (T.laps == 2)
+				if (T.laps == 1)
 					T.time += 14.f;
+				if (T.laps == 2)
+					T.time += 11.f;
 				if (T.laps == 3)
 					T.time += 11.f;
 
