@@ -4,7 +4,7 @@
 #include "Laps.h"
 #include "LapLine.h"
 #include <stdlib.h>
-
+#include <iostream>
 int GameState::laps = 0;
 
 
@@ -17,11 +17,23 @@ void GameState::play()
 	}
 	GameOver = false;
 	track.laps = 0;
-	track.time = 46.f;
-	track.GoTime = 0.f;
+	track.time = INFINITY; // 46.f
+	track.GoTime = 0.f; // 6.f
+	
+	
+	
 
-	
-	
+	whirlpool[0].transform.m_position = vec2{ 50,1700 };
+	whirlpool[0].transform.m_scale = vec2{ 25,25 };
+	whirlpool[1].transform.m_position = vec2{ 1800,700 };
+	whirlpool[1].transform.m_scale = vec2{ 25,25 };
+	whirlpool[2].transform.m_position = vec2{ 1200,-700 };
+	whirlpool[2].transform.m_scale = vec2{ 25,25 };
+	whirlpool[3].transform.m_position = vec2{ -1300,2200 };
+	whirlpool[3].transform.m_scale = vec2{ 25,25 };
+	whirlpool[4].transform.m_position = vec2{ -400,4000 };
+	whirlpool[4].transform.m_scale = vec2{ 25,25 };
+
 	player.spaceshiplocomotion.speed = 850.f;
 	player.transform.m_position = vec2{ 250,200 };
 	player.transform.m_facing = -1.57f;
@@ -53,14 +65,18 @@ void GameState::play()
 
 	speedboost[0].transform.m_position = vec2{ 250,2400 };
 	speedboost[1].transform.m_position = vec2{ 850,1700 };
-	
+	speedboost[2].transform.m_position = vec2{ -1530,2500 };
+	speedboost[3].transform.m_position = vec2{ -1520,3350 };
+
 
 	speedboost[0].transform.m_facing = -1.57f;
 	speedboost[1].transform.m_facing = -1.57f;
+	speedboost[2].transform.m_facing = -1.57f;
+	speedboost[3].transform.m_facing = -1.57f;
 	
 
 
-	pickups[0].transform.m_position = vec2{ -200,2150 };
+	pickups[0].transform.m_position = vec2{ -200,2350 };
 	pickups[1].transform.m_position = vec2{ 1300,2150 };
 	pickups[2].transform.m_position = vec2{ 1550,-800 };
 	pickups[3].transform.m_position = vec2{ 350,1750 };
@@ -70,7 +86,7 @@ void GameState::play()
 	blocks[6].transform.m_facing = .7;
 	blocks[7].transform.m_facing = .7;
 	blocks[8].transform.m_facing = .7;
-	blocks[9].transform.m_facing = -.57;
+	blocks[9].transform.m_facing = 1.57;
 	blocks[10].transform.m_facing = -.57;
 	blocks[12].transform.m_facing = -1.57;
 	blocks[13].transform.m_facing = -1.57;
@@ -99,6 +115,11 @@ void GameState::play()
 	blocks[43].transform.m_facing = -1.57;
 	blocks[44].transform.m_facing = -1.57;
 	blocks[45].transform.m_facing = -1.57;
+	blocks[46].transform.m_facing = 1.57;
+	blocks[48].transform.m_facing = -1.57;
+	blocks[49].transform.m_facing = 1.57;
+	blocks[50].transform.m_facing = -1.57;
+	blocks[53].transform.m_facing = 1.57;
 
 	blocks[0].transform.m_position = vec2{ -50,0 }; //leftside
 	blocks[1].transform.m_position = vec2{ 0,0 };
@@ -111,10 +132,12 @@ void GameState::play()
 	blocks[7].transform.m_position = vec2{ -372,1385 }; // L
 	blocks[8].transform.m_position = vec2{ 175,1390 }; // R
 	blocks[9].transform.m_position = vec2{ -694,1770 }; // L
+	blocks[9].transform.m_scale = vec2{ 10,20 }; // L
 	blocks[10].transform.m_position = vec2{ -170,1780 }; // R
 	blocks[10].transform.m_scale = vec2{ 10,9 };
-	blocks[11].transform.m_position = vec2{ -434,2170 }; 
-	blocks[12].transform.m_position = vec2{ -404,2670 }; //L
+	blocks[11].transform.m_position = vec2{ -434,2120 }; 
+	blocks[11].transform.m_scale = vec2{ 10,34 };
+	blocks[12].transform.m_position = vec2{ -404,2200 }; //L
 	blocks[13].transform.m_position = vec2{ 70,2180 }; // Rdww
 	blocks[14].transform.m_position = vec2{ 104,2670 };
 	blocks[15].transform.m_position = vec2{ 570,2180 }; // R
@@ -155,12 +178,38 @@ void GameState::play()
 	blocks[44].transform.m_position = vec2{ 1104,3170 }; // L
 	blocks[44].transform.m_scale = vec2{ 10,20 };
 	blocks[45].transform.m_position = vec2{ 1604,2770 }; //
+	
+
+	blocks[46].transform.m_position = vec2{ -400,2150 };
+	blocks[47].transform.m_position = vec2{ -1700,1800 };
+	blocks[46].transform.m_scale = vec2{ 10,15 };
+	blocks[47].transform.m_scale = vec2{ 10,35 };
+	blocks[48].transform.m_position = vec2{ -1650,2650 };
+	blocks[48].transform.m_scale = vec2{ 10, 15 };
+	blocks[49].transform.m_position = vec2{ -400,3100 };
+	blocks[49].transform.m_scale = vec2{ 10, 15 };
+	blocks[50].transform.m_position = vec2{ -1650,3600 };
+	blocks[50].transform.m_scale = vec2{ 10, 15 };
+	blocks[51].transform.m_position = vec2{ -900,3600 };
+	blocks[51].transform.m_scale = vec2{ 10, 14 };
+	blocks[52].transform.m_position = vec2{ 100,2700 };
+	blocks[52].transform.m_scale = vec2{ 10, 30 };
+	blocks[53].transform.m_position = vec2{ 100,4200 };
+	blocks[53].transform.m_scale = vec2{ 10, 20 };
 	// fix doubled-up blocks for timer
 }
 
 void GameState::update(float deltaTime)
 {
+	if (track.storage == true)
+	{
+		player.spaceshiplocomotion.speed = track.store;
+		track.storage = false;
+	}
 
+	system("cls");
+	printf(" X: %f , Y: %f", player.transform.m_position.x, player.transform.m_position.y);
+	
 	
 	camera.update(deltaTime, *this);
 
@@ -169,7 +218,7 @@ void GameState::update(float deltaTime)
 	track.GoTime -= deltaTime;
 	playerLapCollision(  player, lapline[0], lapline[1],track );
 	FunGateCollision(player, lapline[2], lapline[3], track);
-
+	
 
 	if (track.GoTime > 0)
 	{
@@ -207,7 +256,7 @@ void GameState::update(float deltaTime)
 
 		player.update(deltaTime, *this);
 	}
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		playerBoostCollision(player, speedboost[i]);
 	}
@@ -219,6 +268,12 @@ void GameState::update(float deltaTime)
 	playerPickUpCollision3(player, pickups[2], track);
 	playerPickUpCollision4(player, pickups[3], track);
 	
+	for (int i = 0; i < 5; i++)
+	{
+		playerWhirlPoolCollision(player, whirlpool[i], track);
+	}
+	
+
 	for (int i = 0; i < BlocksNum; i++)
 	{
 		blocks[i].update(deltaTime, *this);
@@ -289,12 +344,16 @@ void GameState::draw()
 	if (track.GoTime < 0)
 	drawScore(d, track.laps, track.time);
 
-
+	for (int i = 0; i < 5; i++)
+	{
+		whirlpool[i].draw(cam);
+	}
+	
 	for (int i = 0; i < BlocksNum; i++)
 	{
 		blocks[i].draw(cam);
 	}
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		speedboost[i].draw(cam);
 	}

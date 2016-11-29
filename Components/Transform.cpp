@@ -273,3 +273,60 @@ void Transform::debugDrawSpeed(const mat3 & T) const
 	sfw::drawLine(K1.x, K1.y, K2.x, K2.y, MAGENTA);
 	sfw::drawLine(K3.x, K3.y, K2.x, K2.y, MAGENTA);
 }
+
+void Transform::debugDrawWhirlPool(const mat3 & T) const
+{
+	mat3 l = T * getGlobalTransform();
+	vec3 pos = l[2];
+	vec3 parentpos = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
+
+	vec3 L = l * vec3{ 1,2,1 };
+	vec3 L1 = l * vec3{ 0,2,1 };
+	vec3 L2 = l * vec3{ -1,3,1 };
+
+	vec3 T1 = l * vec3{ 1,3,1 };
+	vec3 T2 = l * vec3{ 2,4,1 };
+
+	vec3 X1 = l * vec3{1,1,1 };
+	vec3 X2 = l * vec3{ 0,0,1 };
+
+	vec3 Q1 = l * vec3{ 2,2,1 };
+	vec3 Q2 = l * vec3{ 3,1,1 };
+
+	vec3 L3 = l * vec3{ .5f,1.5f,1 };
+	vec3 L4 = l * vec3{ -1,1,1 };
+
+	vec3 L5 = l * vec3{ .5f,2.5f,1 };
+	vec3 L6 = l * vec3{ 0,4,1 };
+
+	vec3 L7 = l * vec3{ 1.5f,2.5f,1 };
+	vec3 L8 = l * vec3{ 3,3,1 };
+
+	vec3 L9 = l * vec3{ 1.5f,1.5f,1 };
+	vec3 L0 = l * vec3{ 2,0,1 };
+
+	sfw::drawLine(L.x, L.y, L7.x, L7.y, CYAN);
+	sfw::drawLine(L8.x, L8.y, L7.x, L7.y, CYAN);
+
+	sfw::drawLine(L.x, L.y, L9.x, L9.y, CYAN);
+	sfw::drawLine(L0.x, L0.y, L9.x, L9.y, CYAN);
+
+	sfw::drawLine(L.x, L.y, L5.x, L5.y, CYAN);
+	sfw::drawLine(L5.x, L5.y, L6.x, L6.y, CYAN);
+	
+	sfw::drawLine(L.x, L.y, L3.x, L3.y, CYAN);
+	sfw::drawLine(L3.x, L3.y, L4.x, L4.y, CYAN);
+
+	sfw::drawLine(L.x, L.y, L1.x, L1.y, CYAN);
+	sfw::drawLine(L2.x, L2.y, L1.x, L1.y, CYAN);
+
+	sfw::drawLine(L.x, L.y, T1.x, T1.y, CYAN);
+	sfw::drawLine(T2.x, T2.y, T1.x, T1.y, CYAN);
+
+	sfw::drawLine(L.x, L.y, X1.x, X1.y, CYAN);
+	sfw::drawLine(X2.x, X2.y, X1.x, X1.y, CYAN);
+
+	sfw::drawLine(L.x, L.y, Q1.x, Q1.y, CYAN);
+	sfw::drawLine(Q2.x, Q2.y, Q1.x, Q1.y, CYAN);
+
+}

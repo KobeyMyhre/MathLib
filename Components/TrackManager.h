@@ -12,6 +12,9 @@ public:
 	float GoTime;
 	Transform Go;
 
+	bool storage = false;
+	float store = 850.f;
+
 	bool PickedUp = false;
 	bool PickedUp2 = false;
 	bool PickedUp3 = false;

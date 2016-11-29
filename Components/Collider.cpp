@@ -143,9 +143,7 @@ CollisionData StaticResolutionBoosts(Transform & AT, Rigidbody & AR, const Colli
 	CollisionData results = ColliderCollision(AT, AC, BT, BC);
 	if (results.penetrationDepth >= 0)
 	{
-	/*vec2 dir = normal(BT.getGlobalPosition() -
-			AT.getGlobalPosition());
-		AR.addImpulse(dir * 50);*/
+	
 
 		AR.addImpulse(vec2{ 100,0 });
 
@@ -297,4 +295,23 @@ CollisionData FunGateResolution(Track & T, Transform & AT, SpaceshipLocomotion &
 	}
 
 	return results, results1;
+}
+
+CollisionData WhirlPoolResolution(Track &T, Transform & AT, SpaceshipLocomotion &AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+{
+	
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0)
+	{
+		T.store = AR.speed;
+		AR.speed = 100;
+		
+		AT.m_facing += .2f;
+		T.storage = true;
+
+	}
+
+
+
+	return results;
 }

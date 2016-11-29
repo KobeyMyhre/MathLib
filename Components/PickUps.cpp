@@ -18,7 +18,7 @@ void PickUps::draw(const mat3 & camera, Track &track)
 	
 	if (track.PickedUp == false)
 	{
-		collider.debugDrawHull(camera, transform, CYAN);
+		collider.debugDrawHull(camera, transform, WHITE);
 	}
 	
 
@@ -28,7 +28,7 @@ void PickUps::draw2(const mat3 & camera, Track &track)
 
 	if (track.PickedUp2 == false)
 	{
-		collider.debugDrawHull(camera, transform, CYAN);
+		collider.debugDrawHull(camera, transform, WHITE);
 	}
 
 
@@ -38,7 +38,7 @@ void PickUps::draw3(const mat3 & camera, Track &track)
 
 	if (track.PickedUp3 == false)
 	{
-		collider.debugDrawHull(camera, transform, CYAN);
+		collider.debugDrawHull(camera, transform, WHITE);
 	}
 
 
@@ -48,7 +48,7 @@ void PickUps::draw4(const mat3 & camera, Track &track)
 
 	if (track.PickedUp4 == false)
 	{
-		collider.debugDrawHull(camera, transform, CYAN);
+		collider.debugDrawHull(camera, transform, WHITE);
 	}
 
 

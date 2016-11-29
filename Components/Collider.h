@@ -32,3 +32,4 @@ CollisionData StaticResolutionWithEffect(Track &T,Transform & AT, Rigidbody & AR
 CollisionData LapResolution(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX);
 CollisionData DynamicResolution(Transform &AT, Rigidbody &AR, const Collider &AC,  Transform &BT, Rigidbody &BR, const Collider &BC, float bounciness = 1);
 CollisionData FunGateResolution(Track &T, Transform & AT, SpaceshipLocomotion & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX);
+CollisionData WhirlPoolResolution(Track &T, Transform &AT, SpaceshipLocomotion &AR, const Collider &AC, const Transform &BT, const Collider &BC, float bounciness);

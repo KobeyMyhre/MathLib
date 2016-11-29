@@ -6,6 +6,7 @@
 #include "PickUps.h"
 #include "MenuState.h"
 #include "SpeedBoost.h"
+#include "WhirlPool.h"
 class GameState
 {
 public:
@@ -14,10 +15,11 @@ public:
 	LapLine lapline[4];
 	Track track;
 	PickUps pickups[4];
-	SpeedBoost speedboost[2];
+	SpeedBoost speedboost[4];
+	WhirlPool whirlpool[5];
 
 	static int laps;
-	const static int BlocksNum = 46;
+	const static int BlocksNum = 54;
 	ColliderObj blocks[BlocksNum];
 	static float time;
 	//player,init,term,step,draw

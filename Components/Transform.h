@@ -39,4 +39,6 @@ public:
 	void debugDrawShip(const mat3 &T = mat3Identity()) const;
 	void debugDrawEffect(const mat3 &T = mat3Identity()) const;
 	void debugDrawSpeed(const mat3 &T = mat3Identity()) const;
+	void debugDrawWhirlPool(const mat3 &T = mat3Identity()) const;
+
 };

@@ -49,3 +49,8 @@ void playerPickUpCollision4(PlayerShip & player, PickUps & CO, Track & T)
 {
 	StaticResolutionForPickUps4(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
 }
+
+void playerWhirlPoolCollision(PlayerShip & player, WhirlPool & CO, Track &T)
+{
+	WhirlPoolResolution(T , player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
+}
