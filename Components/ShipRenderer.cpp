@@ -10,6 +10,10 @@ ShipRenderer::ShipRenderer()
 void ShipRenderer::draw(Transform & ship, const mat3 & T)
 {
 	mat3 glob = T * ship.getGlobalTransform();
+
+
+
+
 	vec3 F =  glob * vec3{0,-8,1}; // Left-side
 	vec3 F1 = glob * vec3{0,8,1 }; // Right-side
 
@@ -19,17 +23,18 @@ void ShipRenderer::draw(Transform & ship, const mat3 & T)
 	vec3 L4 = glob * vec3{ 0.5,4,1 }; //
 
 	vec3 F2 = glob * vec3{ -10,-5,1 }; //Tips
-	vec3 F3 = glob * vec3{ -10,5,1 }; // Tips
+	vec3 F3 = glob * vec3{ -10,5,1 }; // Tipsaaa
 
 	vec3 F4 = glob * vec3{ 3,-11,1 }; // Side
 	vec3 F5 = glob * vec3{ 3,11,1 }; // Side
 
-	vec3 F6 = glob * vec3{ 7,-9,1 }; // Back
-	vec3 F7 = glob * vec3{ 7, 9,1 }; // Back
+	vec3 F6 = glob * vec3{ 6,-9,1 }; // Back
+	vec3 F7 = glob * vec3{ 6, 9,1 }; // Back
 
 	vec3 F8 = glob * vec3{ 2,-8,1 }; // Left-side
 	vec3 F9 = glob * vec3{ 2,8,1 }; // Right-side
 
+	
 
 	vec3 C1 = glob * vec3{ 1,-3,1 };
 	vec3 C2 = glob * vec3{ 1, 3,1 };
@@ -52,25 +57,7 @@ void ShipRenderer::draw(Transform & ship, const mat3 & T)
 	sfw::drawLine(F7.x, F7.y, F9.x, F9.y, BLACK);
 	sfw::drawLine(F8.x, F8.y, F9.x, F9.y, BLACK);
 
-	////////////
-	//// Draw the non-aligned rectangle
-
-	/*vec3 A = glob * vec3{-12,-12, 1};
-	vec3 B = glob * vec3{-12, 12, 1 };
-	vec3 C = glob * vec3{ 12, 12, 1 };
-	vec3 D = glob * vec3{ 12, -12, 1 };
-
-	sfw::drawLine(A.x, A.y, B.x, B.y, BLACK);
-	sfw::drawLine(C.x, C.y, B.x, B.y, BLACK);
-	sfw::drawLine(C.x, C.y, D.x, D.y, BLACK);
-	sfw::drawLine(A.x, A.y, D.x, D.y, BLACK);*/
-
-	/*drawCircle((glob * circle{ 0,0,12 }), MAGENTA);
-	drawAABB((glob * AABB{ 0,0,6,6 }), CYAN);
-	drawPlane((glob * plane{ 0,0, 0,1 }), WHITE);*/
-
-	/*sfw::drawCircle(C1.x, C1.y, 2, 4, RED);
-	sfw::drawCircle(C2.x, C2.y, 2, 4, RED);*/
+	
 }
 
 void ShipRenderer::drawEffect0(Transform & planeTrans, const mat3 & T)

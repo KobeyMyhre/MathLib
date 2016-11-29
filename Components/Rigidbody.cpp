@@ -2,7 +2,7 @@
 #include "sfwdraw.h"
 Rigidbody::Rigidbody()
 {
-	drag = .4;
+	drag = 1.;
 	angularDrag = .6;
 	mass = 1;
 	force = vec2 { 0,0 };

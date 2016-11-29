@@ -143,6 +143,7 @@
     <ClCompile Include="ShipRenderer.cpp" />
     <ClCompile Include="SpaceshipController.cpp" />
     <ClCompile Include="SpaceshipLocomotion.cpp" />
+    <ClCompile Include="SpeedBoost.cpp" />
     <ClCompile Include="Tail.cpp" />
     <ClCompile Include="TrackManager.cpp" />
     <ClCompile Include="Transform.cpp" />
@@ -151,7 +152,7 @@
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="ColliderObject.h" />
-    <ClInclude Include="Depart.h" />
+    <ClInclude Include="departz.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="LapLine.h" />
     <ClInclude Include="Laps.h" />
@@ -167,6 +168,7 @@
     <ClInclude Include="ShipRenderer.h" />
     <ClInclude Include="SpaceshipController.h" />
     <ClInclude Include="SpaceshipLocomotion.h" />
+    <ClInclude Include="SpeedBoost.h" />
     <ClInclude Include="Tail.h" />
     <ClInclude Include="TrackManager.h" />
     <ClInclude Include="Transform.h" />

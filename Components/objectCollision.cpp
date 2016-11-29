@@ -11,6 +11,20 @@ void playerLapCollision(PlayerShip & player, LapLine &LL, LapLine &L2, Track &T)
 	LapResolution(T, player.transform, player.rigidbody, player.collider, LL.transform, LL.collider, L2.transform, L2.collider);
 }
 
+void playerBoostCollision(PlayerShip & player, SpeedBoost & LL)
+{
+
+	StaticResolutionBoosts( player.transform, player.rigidbody, player.collider, LL.transform, LL.collider, 1);
+}
+
+
+
+void FunGateCollision(PlayerShip & player, LapLine & LL, LapLine & L2, Track & T)
+{
+	FunGateResolution(T, player.transform, player.spaceshiplocomotion, player.collider, LL.transform, LL.collider, L2.transform, L2.collider);
+	
+}
+
 void ObjectCollision(ColliderObj & as1, ColliderObj & as2)
 {
 	if (&as1 == &as2)

@@ -1,4 +1,4 @@
-#include "Depart.h"
+#include "departz.h"
 #include "Management.h"
 #include "sfwdraw.h"
 #include <iostream>

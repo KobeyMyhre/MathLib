@@ -53,6 +53,7 @@ Collider::Collider(const vec2 * verts, int size) : Hull(verts,size)
 
 }
 
+
 void Collider::debugDraw(const mat3 & T, const Transform & trans)
 {
 	mat3 glob = T * trans.getGlobalTransform();
@@ -137,6 +138,24 @@ CollisionData StaticResolutionForPickUps4(Track &T, Transform & AT, SpaceshipLoc
 	}
 	return results;
 }
+CollisionData StaticResolutionBoosts(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
+{
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0)
+	{
+	/*vec2 dir = normal(BT.getGlobalPosition() -
+			AT.getGlobalPosition());
+		AR.addImpulse(dir * 50);*/
+
+		AR.addImpulse(vec2{ 100,0 });
+
+
+	}
+
+
+
+	return results;
+}
 CollisionData StaticResolutionWithEffect(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
 {
 	
@@ -185,11 +204,11 @@ CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Coll
 			if(T.m_lap == true )
 			{
 				if (T.laps == 0)
-					T.time += 17.f;
+					T.time += 20.f;
 				if (T.laps == 1)
-					T.time += 14.f;
+					T.time += 17.f;
 				if (T.laps == 2)
-					T.time += 11.f;
+					T.time += 14.f;
 				if (T.laps == 3)
 					T.time += 11.f;
 
@@ -242,4 +261,40 @@ CollisionData DynamicResolution(Transform & AT, Rigidbody & AR, const Collider &
 
 	}
 	return results;
+}
+
+CollisionData FunGateResolution(Track & T, Transform & AT, SpaceshipLocomotion & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX)
+{
+	CollisionData results = ColliderCollision(AT, AC, BTX, BCX);
+
+
+	if (results.penetrationDepth >= 0)
+	{
+		T.fungate = true;
+
+
+
+	}
+
+	CollisionData results1 = ColliderCollision(AT, AC, BT, BC);
+	if (results1.penetrationDepth >= 0 && T.fungate == true)
+	{
+
+
+		if (T.fungate == true)
+		{
+			T.time = INFINITY;
+			AR.speed = 1800.f;
+			
+			
+			T.fungate = false;
+		
+		}
+
+
+
+
+	}
+
+	return results, results1;
 }

@@ -41,7 +41,7 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 
 void PlayerShip::draw(const mat3 &camera)
 {
-	transform.debugDaw(camera);
+	//transform.debugDaw(camera);
 	//collider.debugDraw(camera, transform);
 	shiprender.draw(transform, camera);
 

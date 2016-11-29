@@ -13,7 +13,7 @@
 #include <iostream>
 #include "GameState.h"
 #include "MenuState.h"
-#include "Depart.h"
+#include "departz.h"
 #include "Option.h"
 #include "TrackManager.h"
 

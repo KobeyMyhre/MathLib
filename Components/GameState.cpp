@@ -17,14 +17,16 @@ void GameState::play()
 	}
 	GameOver = false;
 	track.laps = 0;
-	track.time = 40.f;
-	track.GoTime = 6.f;
+	track.time = 46.f;
+	track.GoTime = 0.f;
+
 	
 	
 	player.spaceshiplocomotion.speed = 850.f;
 	player.transform.m_position = vec2{ 250,200 };
-	player.transform.m_facing = -1.57;
-	
+	player.transform.m_facing = -1.57f;
+
+
 	track.PickedUp = false;
 	track.PickedUp2 = false;
 	track.PickedUp3 = false;
@@ -41,6 +43,23 @@ void GameState::play()
 
 	lapline[0].transform.m_position = vec2{ 600,0 };
 	lapline[1].transform.m_position = vec2{ 1000,0 };
+
+	lapline[2].transform.m_position = vec2{ 2004,3120 };
+	lapline[3].transform.m_position = vec2{ 1704,3120 };
+	lapline[2].transform.m_facing = -3.14;
+	lapline[3].transform.m_facing = -3.14;
+	lapline[2].transform.m_scale = vec2{ 30,35 };
+	lapline[3].transform.m_scale = vec2{ 30,35 };
+
+	speedboost[0].transform.m_position = vec2{ 250,2400 };
+	speedboost[1].transform.m_position = vec2{ 850,1700 };
+	
+
+	speedboost[0].transform.m_facing = -1.57f;
+	speedboost[1].transform.m_facing = -1.57f;
+	
+
+
 	pickups[0].transform.m_position = vec2{ -200,2150 };
 	pickups[1].transform.m_position = vec2{ 1300,2150 };
 	pickups[2].transform.m_position = vec2{ 1550,-800 };
@@ -58,7 +77,7 @@ void GameState::play()
 	blocks[14].transform.m_facing = -1.57;
 	blocks[15].transform.m_facing = -1.57;
 	blocks[16].transform.m_facing = -1.57;
-	blocks[17].transform.m_facing = -1.57;
+	
 	blocks[20].transform.m_facing = -1.57;
 	blocks[21].transform.m_facing = -1.57;
 	blocks[22].transform.m_facing = -1.57;
@@ -78,7 +97,8 @@ void GameState::play()
 	blocks[38].transform.m_facing = .7;
 	blocks[40].transform.m_facing = -1.57;
 	blocks[43].transform.m_facing = -1.57;
-	
+	blocks[44].transform.m_facing = -1.57;
+	blocks[45].transform.m_facing = -1.57;
 
 	blocks[0].transform.m_position = vec2{ -50,0 }; //leftside
 	blocks[1].transform.m_position = vec2{ 0,0 };
@@ -132,7 +152,9 @@ void GameState::play()
 	blocks[43].transform.m_position = vec2{ 500,500 };// rightside   
 	blocks[43].transform.m_scale = vec2{ 10,22 }; /////////////////////////////////////////////
 	
-
+	blocks[44].transform.m_position = vec2{ 1104,3170 }; // L
+	blocks[44].transform.m_scale = vec2{ 10,20 };
+	blocks[45].transform.m_position = vec2{ 1604,2770 }; //
 	// fix doubled-up blocks for timer
 }
 
@@ -146,7 +168,9 @@ void GameState::update(float deltaTime)
 	track.time -= deltaTime;
 	track.GoTime -= deltaTime;
 	playerLapCollision(  player, lapline[0], lapline[1],track );
-	
+	FunGateCollision(player, lapline[2], lapline[3], track);
+
+
 	if (track.GoTime > 0)
 	{
 		player.rigidbody.mass = 500000;
@@ -183,7 +207,10 @@ void GameState::update(float deltaTime)
 
 		player.update(deltaTime, *this);
 	}
-	
+	for (int i = 0; i < 2; i++)
+	{
+		playerBoostCollision(player, speedboost[i]);
+	}
 	
 
 	
@@ -218,9 +245,16 @@ void GameState::draw()
 	mat3 cam = camera.getCameraMatrix();
 	
 	player.draw(cam);
+
+	
+
 	lapline[0].draw(cam);
 	lapline[1].draw(cam);
-	
+	lapline[2].draw(cam);
+	lapline[3].draw(cam);
+
+
+
 	if (track.GoTime > 0)
 	{
 		track.debugDrawGo(cam);
@@ -260,7 +294,10 @@ void GameState::draw()
 	{
 		blocks[i].draw(cam);
 	}
-	
+	for (int i = 0; i < 2; i++)
+	{
+		speedboost[i].draw(cam);
+	}
 		pickups[0].draw(cam, track);
 		pickups[1].draw2(cam, track);
 		pickups[2].draw3(cam, track);

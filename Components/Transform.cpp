@@ -203,3 +203,73 @@ void Transform::debugDrawEffect(const mat3 & T) const
 	//sfw::drawLine(F1.x, F1.y, F3.x, F3.y, BLACK);
 	//sfw::drawLine(F.x, F.y, F2.x, F2.y, BLACK);
 }
+
+void Transform::debugDrawSpeed(const mat3 & T) const
+{
+	mat3 l = T * getGlobalTransform();
+	vec3 pos = l[2];
+	vec3 parentpos = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
+
+	vec3 L1 = l * vec3{ 4,1,1 };
+	vec3 L3 = l * vec3{ 1,1 ,1};
+	vec3 L2 = l * vec3{ 2.5,2 ,1};
+
+	sfw::drawLine(L1.x, L1.y, L2.x, L2.y, MAGENTA);
+	sfw::drawLine(L3.x, L3.y, L2.x, L2.y, MAGENTA);
+
+	vec3 Q1 = l * vec3{ 4,3,1 };
+	vec3 Q3 = l * vec3{ 1,3 ,1 };
+	vec3 Q2 = l * vec3{ 2.5,4 ,1 };
+
+	sfw::drawLine(Q1.x, Q1.y, Q2.x, Q2.y, MAGENTA);
+	sfw::drawLine(Q3.x, Q3.y, Q2.x, Q2.y, MAGENTA);
+
+	vec3 N1 = l * vec3{ 4,5,1 };
+	vec3 N3 = l * vec3{ 1,5 ,1 };
+	vec3 N2 = l * vec3{ 2.5,6 ,1 };
+
+	sfw::drawLine(N1.x, N1.y, N2.x, N2.y, MAGENTA);
+	sfw::drawLine(N3.x, N3.y, N2.x, N2.y, MAGENTA);
+
+	vec3 X1 = l * vec3{ 4,7,1 };
+	vec3 X3 = l * vec3{ 1,7 ,1 };
+	vec3 X2 = l * vec3{ 2.5,8 ,1 };
+
+	sfw::drawLine(X1.x, X1.y, X2.x, X2.y, MAGENTA);
+	sfw::drawLine(X3.x, X3.y, X2.x, X2.y, MAGENTA);
+
+	vec3 T1 = l * vec3{ 4,9,1 };
+	vec3 T3 = l * vec3{ 1,9 ,1 };
+	vec3 T2 = l * vec3{ 2.5,10 ,1 };
+
+	sfw::drawLine(T1.x, T1.y, T2.x, T2.y, MAGENTA);
+	sfw::drawLine(T3.x, T3.y, T2.x, T2.y, MAGENTA);
+
+	vec3 A1 = l * vec3{ 4,11,1 };
+	vec3 A3 = l * vec3{ 1,11 ,1 };
+	vec3 A2 = l * vec3{ 2.5,12 ,1 };
+
+	sfw::drawLine(A1.x, A1.y, A2.x, A2.y, MAGENTA);
+	sfw::drawLine(A3.x, A3.y, A2.x, A2.y, MAGENTA);
+
+	vec3 Y1 = l * vec3{ 4,13,1 };
+	vec3 Y3 = l * vec3{ 1,13 ,1 };
+	vec3 Y2 = l * vec3{ 2.5,14 ,1 };
+
+	sfw::drawLine(Y1.x, Y1.y, Y2.x, Y2.y, MAGENTA);
+	sfw::drawLine(Y3.x, Y3.y, Y2.x, Y2.y, MAGENTA);
+
+	vec3 p1 = l * vec3{ 4,15,1 };
+	vec3 p3 = l * vec3{ 1,15 ,1 };
+	vec3 p2 = l * vec3{ 2.5,16 ,1 };
+
+	sfw::drawLine(p1.x, p1.y, p2.x, p2.y, MAGENTA);
+	sfw::drawLine(p3.x, p3.y, p2.x, p2.y, MAGENTA);
+
+	vec3 K1 = l * vec3{ 4,17,1 };
+	vec3 K3 = l * vec3{ 1,17 ,1 };
+	vec3 K2 = l * vec3{ 2.5,18 ,1 };
+
+	sfw::drawLine(K1.x, K1.y, K2.x, K2.y, MAGENTA);
+	sfw::drawLine(K3.x, K3.y, K2.x, K2.y, MAGENTA);
+}

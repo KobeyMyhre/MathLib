@@ -5,16 +5,19 @@
 #include "LapLine.h"
 #include "PickUps.h"
 #include "MenuState.h"
+#include "SpeedBoost.h"
 class GameState
 {
 public:
 	PlayerShip player;
 	Camera camera;
-	LapLine lapline[2];
+	LapLine lapline[4];
 	Track track;
 	PickUps pickups[4];
+	SpeedBoost speedboost[2];
+
 	static int laps;
-	const static int BlocksNum = 44;
+	const static int BlocksNum = 46;
 	ColliderObj blocks[BlocksNum];
 	static float time;
 	//player,init,term,step,draw

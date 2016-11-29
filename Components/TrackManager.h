@@ -6,6 +6,7 @@ class Track
 {
 public:
 	bool m_lap = false;
+	bool fungate = false;
 	int laps = 0;
 	float time;
 	float GoTime;
