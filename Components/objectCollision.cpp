@@ -6,9 +6,13 @@ void playerObjectCollision(PlayerShip & player, ColliderObj &CO, Track &T)
 	//StaticResolution(player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
 	StaticResolutionWithEffect(T,player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
 }
+void playerMattCollision(PlayerShip & player, ColliderObj & CO, Track & T)
+{
+	StaticResolution(player.transform, player.rigidbody, player.collider, CO.transform, CO.collider, 1);
+}
 void playerLapCollision(PlayerShip & player, LapLine &LL, LapLine &L2, Track &T)
 {
-	LapResolution(T, player.transform, player.rigidbody, player.collider, LL.transform, LL.collider, L2.transform, L2.collider);
+	LapResolution(T, player.transform, player.rigidbody, player.collider, LL.transform, LL.collider, L2.transform, L2.collider ,1);
 }
 
 void playerBoostCollision(PlayerShip & player, SpeedBoost & LL)
@@ -48,6 +52,16 @@ void playerPickUpCollision3(PlayerShip & player, PickUps & CO, Track & T)
 void playerPickUpCollision4(PlayerShip & player, PickUps & CO, Track & T)
 {
 	StaticResolutionForPickUps4(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
+}
+
+void playerPickUpCollision5(PlayerShip & player, PickUps & CO, Track & T)
+{
+	StaticResolutionForPickUps5(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
+}
+
+void playerPickUpCollision6(PlayerShip & player, PickUps & CO, Track & T)
+{
+	StaticResolutionForPickUps6(T, player.transform, player.spaceshiplocomotion, player.collider, CO.transform, CO.collider, 1);
 }
 
 void playerWhirlPoolCollision(PlayerShip & player, WhirlPool & CO, Track &T)

@@ -26,10 +26,12 @@ CollisionData StaticResolutionForPickUps(Track &T,Transform &AT,SpaceshipLocomot
 CollisionData StaticResolutionForPickUps2(Track &T, Transform &AT, SpaceshipLocomotion &AS, const Collider &AC, Transform &BT, const Collider &BC, float bounciness);
 CollisionData StaticResolutionForPickUps3(Track &T, Transform &AT, SpaceshipLocomotion &AS, const Collider &AC, Transform &BT, const Collider &BC, float bounciness);
 CollisionData StaticResolutionForPickUps4(Track &T, Transform &AT, SpaceshipLocomotion &AS, const Collider &AC, Transform &BT, const Collider &BC, float bounciness);
+CollisionData StaticResolutionForPickUps5(Track &T, Transform &AT, SpaceshipLocomotion &AS, const Collider &AC, Transform &BT, const Collider &BC, float bounciness);
+CollisionData StaticResolutionForPickUps6(Track &T, Transform &AT, SpaceshipLocomotion &AS, const Collider &AC, Transform &BT, const Collider &BC, float bounciness);
 CollisionData StaticResolutionBoosts(Transform &AT, Rigidbody &AR, const Collider &AC, const Transform &BT, const Collider &BC, float bounciness);
 
 CollisionData StaticResolutionWithEffect(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness);
-CollisionData LapResolution(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX);
+CollisionData LapResolution(Track &T,Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX, float bounciness);
 CollisionData DynamicResolution(Transform &AT, Rigidbody &AR, const Collider &AC,  Transform &BT, Rigidbody &BR, const Collider &BC, float bounciness = 1);
 CollisionData FunGateResolution(Track &T, Transform & AT, SpaceshipLocomotion & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX);
 CollisionData WhirlPoolResolution(Track &T, Transform &AT, SpaceshipLocomotion &AR, const Collider &AC, const Transform &BT, const Collider &BC, float bounciness);

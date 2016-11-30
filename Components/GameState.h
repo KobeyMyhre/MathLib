@@ -14,12 +14,12 @@ public:
 	Camera camera;
 	LapLine lapline[4];
 	Track track;
-	PickUps pickups[4];
+	PickUps pickups[6];
 	SpeedBoost speedboost[4];
 	WhirlPool whirlpool[5];
 
 	static int laps;
-	const static int BlocksNum = 54;
+	const static int BlocksNum = 55;
 	ColliderObj blocks[BlocksNum];
 	static float time;
 	//player,init,term,step,draw
@@ -31,7 +31,12 @@ public:
 	bool Red ;
 	bool Yellow ;
 	bool Green ;
-	
+	//H		H	IIIIIIIIII
+	//H		H		II
+	//HHHHHHH		II	
+	//H		H		II
+	//H		H		II
+	//			 IIIIIIIII
 	
 
 	void play();

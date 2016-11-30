@@ -19,7 +19,8 @@ public:
 	void draw2(const mat3 &camera, Track &track);
 	void draw3(const mat3 &camera, Track &track);
 	void draw4(const mat3 &camera, Track &track);
-
+	void draw5(const mat3 &camera, Track &track);
+	void draw6(const mat3 &camera, Track &track);
 
 
 };

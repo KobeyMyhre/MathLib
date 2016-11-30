@@ -138,6 +138,26 @@ CollisionData StaticResolutionForPickUps4(Track &T, Transform & AT, SpaceshipLoc
 	}
 	return results;
 }
+CollisionData StaticResolutionForPickUps5(Track & T, Transform & AT, SpaceshipLocomotion & AS, const Collider & AC, Transform & BT, const Collider & BC, float bounciness)
+{
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0 && T.PickedUp5 == false)
+	{
+		AS.speed += 100;
+		T.PickedUp5 = true;
+	}
+	return results;
+}
+CollisionData StaticResolutionForPickUps6(Track & T, Transform & AT, SpaceshipLocomotion & AS, const Collider & AC, Transform & BT, const Collider & BC, float bounciness)
+{
+	CollisionData results = ColliderCollision(AT, AC, BT, BC);
+	if (results.penetrationDepth >= 0 && T.PickedUp6 == false)
+	{
+		AS.speed += 100;
+		T.PickedUp6 = true;
+	}
+	return results;
+}
 CollisionData StaticResolutionBoosts(Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, float bounciness)
 {
 	CollisionData results = ColliderCollision(AT, AC, BT, BC);
@@ -175,7 +195,7 @@ CollisionData StaticResolutionWithEffect(Track &T,Transform & AT, Rigidbody & AR
 	
 	return results;
 }
-CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX)
+CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Collider & AC, const Transform & BT, const Collider & BC, const Transform & BTX, const Collider & BCX, float bounciness)
 {
 	
 	
@@ -189,40 +209,44 @@ CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Coll
 	if (results.penetrationDepth >= 0)
 	{
 		T.m_lap = true;
-		
+		T.MattsGapingButthole = true;
 		
 		
 	}
 	
 	CollisionData results1 = ColliderCollision(AT, AC, BT, BC);
-	if (results1.penetrationDepth >= 0 && T.m_lap == true)
+	if (results1.penetrationDepth > 0 && T.m_lap == true)
 	{
 		
 			
 			if(T.m_lap == true )
 			{
 				if (T.laps == 0)
-					T.time += 20.f;
+					T.time += 54.f;
 				if (T.laps == 1)
-					T.time += 17.f;
+					T.time += 50.f;
 				if (T.laps == 2)
-					T.time += 14.f;
+					T.time += 46.f;
 				if (T.laps == 3)
 					T.time += 11.f;
 
 				T.laps++;
 				
 				T.m_lap = false;
+				T.MattsGapingButthole = false;
 				T.PickedUp = false;
 				T.PickedUp2 = false;
 				T.PickedUp3 = false;
 				T.PickedUp4 = false;
+				T.PickedUp5 = false;
+				T.PickedUp6 = false;
 			}
 
 		
 		
 
 	}
+
 	
 	return results,results1;
 }

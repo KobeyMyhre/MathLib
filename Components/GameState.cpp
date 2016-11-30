@@ -17,9 +17,9 @@ void GameState::play()
 	}
 	GameOver = false;
 	track.laps = 0;
-	track.time = INFINITY; // 46.f
-	track.GoTime = 0.f; // 6.f
-	
+	track.time = 64.f; // 46.f
+	track.GoTime = 6.f; // 6.f
+	//marting 3min
 	
 	
 
@@ -43,7 +43,9 @@ void GameState::play()
 	track.PickedUp2 = false;
 	track.PickedUp3 = false;
 	track.PickedUp4 = false;
-	
+	track.PickedUp5 = false;
+	track.PickedUp6 = false;
+	track.MattsGapingButthole = false;
 	movement = false;
 	
 	Red = false;
@@ -80,6 +82,8 @@ void GameState::play()
 	pickups[1].transform.m_position = vec2{ 1300,2150 };
 	pickups[2].transform.m_position = vec2{ 1550,-800 };
 	pickups[3].transform.m_position = vec2{ 350,1750 };
+	pickups[4].transform.m_position = vec2{ -850,3200 };
+	pickups[5].transform.m_position = vec2{ -10,3350 };
 
 	blocks[1].transform.m_facing = -1.57; // 90 degree angle
 	blocks[5].transform.m_facing = .7;
@@ -93,7 +97,7 @@ void GameState::play()
 	blocks[14].transform.m_facing = -1.57;
 	blocks[15].transform.m_facing = -1.57;
 	blocks[16].transform.m_facing = -1.57;
-	
+	blocks[17].transform.m_facing = -1.57;
 	blocks[20].transform.m_facing = -1.57;
 	blocks[21].transform.m_facing = -1.57;
 	blocks[22].transform.m_facing = -1.57;
@@ -196,6 +200,7 @@ void GameState::play()
 	blocks[52].transform.m_scale = vec2{ 10, 30 };
 	blocks[53].transform.m_position = vec2{ 100,4200 };
 	blocks[53].transform.m_scale = vec2{ 10, 20 };
+	blocks[54].transform.m_position = vec2{ 750,0 };
 	// fix doubled-up blocks for timer
 }
 
@@ -206,17 +211,18 @@ void GameState::update(float deltaTime)
 		player.spaceshiplocomotion.speed = track.store;
 		track.storage = false;
 	}
-
-	system("cls");
-	printf(" X: %f , Y: %f", player.transform.m_position.x, player.transform.m_position.y);
-	
+	// X/Y POSITION TOOL
+	/*system("cls");
+	printf(" X: %f , Y: %f", player.transform.m_position.x, player.transform.m_position.y);*/
+	//system("cls");
+	//printf("%f", player.spaceshiplocomotion.speed);
 	
 	camera.update(deltaTime, *this);
 
 	track.Effect = false;
 	track.time -= deltaTime;
 	track.GoTime -= deltaTime;
-	playerLapCollision(  player, lapline[0], lapline[1],track );
+	playerLapCollision(  player, lapline[0], lapline[1],track);
 	FunGateCollision(player, lapline[2], lapline[3], track);
 	
 
@@ -261,12 +267,15 @@ void GameState::update(float deltaTime)
 		playerBoostCollision(player, speedboost[i]);
 	}
 	
-
+	
 	
 	playerPickUpCollision(player, pickups[0], track);
 	playerPickUpCollision2(player, pickups[1], track);
 	playerPickUpCollision3(player, pickups[2], track);
 	playerPickUpCollision4(player, pickups[3], track);
+	playerPickUpCollision5(player, pickups[4], track);
+	playerPickUpCollision6(player, pickups[5], track);
+	
 	
 	for (int i = 0; i < 5; i++)
 	{
@@ -274,14 +283,21 @@ void GameState::update(float deltaTime)
 	}
 	
 
-	for (int i = 0; i < BlocksNum; i++)
+	for (int i = 0; i < (BlocksNum - 1); i++)
 	{
 		blocks[i].update(deltaTime, *this);
 	}
-	for (int i = 0; i < BlocksNum; i++)
+	for (int i = 0; i < (BlocksNum - 1); i++)
 	{
 		playerObjectCollision(player, blocks[i], track);
 	}
+
+	if (track.MattsGapingButthole == false)
+	{
+		playerMattCollision(player, blocks[54], track);
+	}
+	
+
 	if (track.time <= 0.f)
 	{
 		GameOver = true;
@@ -349,10 +365,11 @@ void GameState::draw()
 		whirlpool[i].draw(cam);
 	}
 	
-	for (int i = 0; i < BlocksNum; i++)
+	for (int i = 0; i < (BlocksNum - 1); i++)
 	{
 		blocks[i].draw(cam);
 	}
+	
 	for (int i = 0; i < 4; i++)
 	{
 		speedboost[i].draw(cam);
@@ -361,6 +378,8 @@ void GameState::draw()
 		pickups[1].draw2(cam, track);
 		pickups[2].draw3(cam, track);
 		pickups[3].draw4(cam, track);
+		pickups[4].draw5(cam, track);
+		pickups[5].draw6(cam, track);
 	
 }
 

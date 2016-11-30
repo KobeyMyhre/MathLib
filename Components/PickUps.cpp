@@ -53,3 +53,26 @@ void PickUps::draw4(const mat3 & camera, Track &track)
 
 
 }
+
+void PickUps::draw5(const mat3 & camera, Track &track)
+{
+
+	if (track.PickedUp5 == false)
+	{
+		collider.debugDrawHull(camera, transform, WHITE);
+	}
+
+
+}
+
+
+void PickUps::draw6(const mat3 & camera, Track &track)
+{
+
+	if (track.PickedUp6 == false)
+	{
+		collider.debugDrawHull(camera, transform, WHITE);
+	}
+
+
+}

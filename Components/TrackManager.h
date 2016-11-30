@@ -19,6 +19,10 @@ public:
 	bool PickedUp2 = false;
 	bool PickedUp3 = false;
 	bool PickedUp4 = false;
+	bool PickedUp5 = false;
+	bool PickedUp6 = false;
+
+	bool MattsGapingButthole = false;
 
 	bool Effect = false;
 	int Success = -1;
