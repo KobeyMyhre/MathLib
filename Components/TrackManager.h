@@ -22,7 +22,7 @@ public:
 	bool PickedUp5 = false;
 	bool PickedUp6 = false;
 
-	bool MattsGapingButthole = false;
+	bool Barrier = false;
 
 	bool Effect = false;
 	int Success = -1;

@@ -17,9 +17,9 @@ void GameState::play()
 	}
 	GameOver = false;
 	track.laps = 0;
-	track.time = 64.f; // 46.f
+	track.time = 66.f; // 46.f
 	track.GoTime = 6.f; // 6.f
-	//marting 3min
+
 	
 	
 
@@ -45,7 +45,7 @@ void GameState::play()
 	track.PickedUp4 = false;
 	track.PickedUp5 = false;
 	track.PickedUp6 = false;
-	track.MattsGapingButthole = false;
+	track.Barrier = false;
 	movement = false;
 	
 	Red = false;
@@ -254,13 +254,13 @@ void GameState::update(float deltaTime)
 		
 	}
 		
-
+	player.update(deltaTime, *this);
 	
 	if (movement == true)
 	{
 		player.rigidbody.mass = 1;
 
-		player.update(deltaTime, *this);
+		
 	}
 	for (int i = 0; i < 4; i++)
 	{
@@ -292,7 +292,7 @@ void GameState::update(float deltaTime)
 		playerObjectCollision(player, blocks[i], track);
 	}
 
-	if (track.MattsGapingButthole == false)
+	if (track.Barrier == false)
 	{
 		playerMattCollision(player, blocks[54], track);
 	}

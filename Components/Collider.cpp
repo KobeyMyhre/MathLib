@@ -165,7 +165,7 @@ CollisionData StaticResolutionBoosts(Transform & AT, Rigidbody & AR, const Colli
 	{
 	
 
-		AR.addImpulse(vec2{ 100,0 });
+		AR.addImpulse(vec2{ 500,0 });
 
 
 	}
@@ -209,7 +209,7 @@ CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Coll
 	if (results.penetrationDepth >= 0)
 	{
 		T.m_lap = true;
-		T.MattsGapingButthole = true;
+		T.Barrier = true;
 		
 		
 	}
@@ -233,7 +233,7 @@ CollisionData LapResolution(Track &T, Transform & AT, Rigidbody & AR, const Coll
 				T.laps++;
 				
 				T.m_lap = false;
-				T.MattsGapingButthole = false;
+				T.Barrier = false;
 				T.PickedUp = false;
 				T.PickedUp2 = false;
 				T.PickedUp3 = false;
@@ -330,7 +330,7 @@ CollisionData WhirlPoolResolution(Track &T, Transform & AT, SpaceshipLocomotion 
 		T.store = AR.speed;
 		AR.speed = 100;
 		
-		AT.m_facing += .2f;
+		AT.m_facing += .4f;
 		T.storage = true;
 
 	}
